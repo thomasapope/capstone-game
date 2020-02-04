@@ -1,7 +1,9 @@
 # capstone-game
 A survival defense game.
 
-At night hordes of enemies come to attack your community and steal your children. You must stop them by any means neccesary. 
+Humanity has fallen. We messed up and things went south. The last survivors now live out their lives in small communities striving to survive against the abominations created by radiation.
+
+At night hordes of mutant animals come to attack your community and steal your children. You must stop them by any means neccesary. 
 
 Maintain and upgrade buildings, manage your resources, and use whatever weapons are at your disposal to defend yourself and your community.
 
