@@ -1,7 +1,7 @@
 # capstone-game
 A survival defense game.
 
-Humanity has fallen. We messed up and things went south. The last survivors now live out their lives in small communities striving to survive against the abominations created by radiation.
+Humanity has fallen. The last survivors have built primitive communities among the ruins of our past. Nature is no longer mans best friend.
 
 At night hordes of mutant animals come to attack your community and steal your children. You must stop them by any means neccesary. 
 
@@ -14,7 +14,6 @@ Maintain and upgrade buildings, manage your resources, and use whatever weapons 
 - Discord
 - GitHub
 
-Viewpoint: Birds eye or isometric view
 
 ## Planned Features:
 - Base defense
@@ -29,3 +28,5 @@ Viewpoint: Birds eye or isometric view
 - Should not feel like a tower defense game.
 - Gameplay should be designed to induce a healthy bit of panic.
 - Collaboration with teamates should be neccesary to succeed.
+- Most weapons are fairly primitive, but occasionally a rare relic of fallen humanity can be found.
+- Setting is dark night in the ruins of a city. Most lighting is from lamps, torches, and campfires.
