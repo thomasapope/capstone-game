@@ -19,21 +19,23 @@ public class Enemy : Creature
     }
 
    // Update is called once per frame
-    protected override void Update()
+    protected override void FixedUpdate()
     {
         // Update the inputVector for movement
-        // inputVector.x = Input.GetAxis("Horizontal");
-        // inputVector.z = Input.GetAxis("Vertical");
         inputVector = target.position - transform.position;
-        // Debug.Log(direction);
-
-        // float angle = Mathf.Atan2(direction.y, direction.z) * Mathf.Rad2Deg;
-        // // rb.rotation = angle;
-
-        // inputVector = direction;
-
+        
         // Call the update method in the Creature class.
         // Done after input is retrieved.
-        base.Update();
+        base.FixedUpdate();
+    }
+
+
+    void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.name == "Player")
+        {
+            //Debug.Log("Collision!");
+            Destroy(this.gameObject);
+        }
     }
 }

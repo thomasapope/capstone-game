@@ -26,8 +26,9 @@ public abstract class Creature : MonoBehaviour
     }
     
     
-    protected virtual void Update()
-    // Runs every frame. Virtual so that subclasses can override it.
+    protected virtual void FixedUpdate()
+    // For physics processes only.
+    // Virtual so that subclasses can override it.
     {
         Move();
     }
