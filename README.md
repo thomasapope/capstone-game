@@ -23,6 +23,9 @@ Maintain and upgrade buildings, manage your resources, and use whatever weapons 
 - Resource management (Points of some sort, Ammo)
 
 
+## Technical Notes:
+- Players and enemies inherit from a base "Creature" class, which holds code for moving, health, and other shared behaviors.
+
 ## Notes:
 - The focus should be on the players as the heros of the game.
 - Should not feel like a tower defense game.
