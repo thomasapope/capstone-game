@@ -13,8 +13,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-       inputVector = new Vector3 (Input.GetAxisRaw("Horizontal") * speed, rb.velocity.y, Input.GetAxisRaw("Vertical") * speed).normalized * 8;
-    //    Vector3 direction = focus.position - transform.position;
+       inputVector = new Vector3 (Input.GetAxisRaw("Horizontal"), rb.velocity.y, Input.GetAxisRaw("Vertical")).normalized * speed;
+       transform.LookAt(transform.position + new Vector3(inputVector.x, 0, inputVector.z));
        rb.velocity = inputVector;
     }
 
