@@ -18,9 +18,11 @@ public abstract class Creature : MonoBehaviour
     public float speed = 10f;
 
 
-    void Start()
+    protected virtual void Start()
     {
         rb = this.GetComponent<Rigidbody>();
+
+        Initialize();
     }
     
     
@@ -31,7 +33,8 @@ public abstract class Creature : MonoBehaviour
     }
 
 
-    void Move() {
+    void Move() 
+    {
         // Logic necessary for moving the creature.
         // Uses the inputVector given it by the subclass and moves based on it.
         // This allows us to create movement behavior once and reuse it for 
@@ -44,4 +47,7 @@ public abstract class Creature : MonoBehaviour
 
         rb.velocity = velocity;
     }
+
+    // Initialize method must be overriden to update variables such as speed and health.
+    public abstract void Initialize();
 }

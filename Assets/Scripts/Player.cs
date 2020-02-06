@@ -10,6 +10,10 @@ using UnityEngine;
 
 public class Player : Creature
 {
+    public override void Initialize()
+    {
+        speed = 10f;
+    }
 
     // Update is called once per frame
     protected override void Update()
