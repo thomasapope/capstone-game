@@ -64,7 +64,10 @@ public abstract class Creature : MonoBehaviour
     // most or all players and enemies.
     void Move() 
     {
-        Vector3 move = (transform.right * inputVector.x + transform.forward * inputVector.z).normalized;
+        // Vector3 move = (transform.right * inputVector.x + transform.forward * inputVector.z).normalized;
+        Vector3 move = new Vector3(inputVector.x, 0, inputVector.z).normalized;
+
+        transform.LookAt(transform.position + new Vector3(inputVector.x, 0, inputVector.z));
 
         controller.Move(move * speed * Time.deltaTime);
 
