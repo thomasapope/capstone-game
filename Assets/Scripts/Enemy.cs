@@ -34,7 +34,7 @@ public class Enemy : Creature
     {
         if (hit.gameObject.name == "Player")
         {
-            Destroy(gameObject);
+            hp--;
         }
     }
 }

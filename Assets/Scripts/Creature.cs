@@ -11,47 +11,59 @@ using UnityEngine;
 
 public abstract class Creature : MonoBehaviour
 {
+    // Component References
     private CharacterController controller;
+    private LayerMask groundMask;
     public Transform groundCheck;
 
     protected Vector3 inputVector;
-    Vector3 velocity;
+    private Vector3 velocity; // Used for gravity
 
+    // Movement Stats
     public float speed = 10f;
-    public float gravity = -9.8f;
     public bool usesGravity = true;
+    public float gravity = -9.8f;
     public float groundDistance = 0.4f;
-    public LayerMask groundMask;
 
-    bool isGrounded;
+    private bool isGrounded;
+
+    // Combat Stats
+    public float hp = 1;
 
 
     protected virtual void Start()
     {
-        // Get the CharacterController at runtime
-        controller = this.GetComponent<CharacterController>();
+        controller = this.GetComponent<CharacterController>(); // Get the CharacterController at runtime
+        groundMask = LayerMask.NameToLayer("Ground"); // Get the layermask for the ground
 
+        // Run Initialize method as defined in subclass
         Initialize();
     }
     
     
     protected virtual void Update()
-    // For physics processes only.
-    // Virtual so that subclasses can override it.
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
         Move();
+        CheckIfDead();
     }
 
 
+    private void CheckIfDead()
+    {
+        if (hp <= 0)
+        {
+            OnDeath();
+        }
+    }
+
+    // Logic necessary for moving the creature.
+    // Uses the inputVector given it by the subclass and moves based on it.
+    // This allows us to create movement behavior once and reuse it for 
+    // most or all players and enemies.
     void Move() 
     {
-        // Logic necessary for moving the creature.
-        // Uses the inputVector given it by the subclass and moves based on it.
-        // This allows us to create movement behavior once and reuse it for 
-        // most or all players and enemies.
-
         Vector3 move = (transform.right * inputVector.x + transform.forward * inputVector.z).normalized;
 
         controller.Move(move * speed * Time.deltaTime);
@@ -62,19 +74,26 @@ public abstract class Creature : MonoBehaviour
         }
     }
 
+
+    // Adds a downward force to the creature
     void Gravity()
     {
-        
+
+        // Make sure gravity doesn't increase infinitely.
         if (isGrounded && velocity.y < 0)
         {
             velocity.y = -2f;
         }
         
-        // Adds a downward force to the creature
         velocity.y += gravity * Time.deltaTime;
 
-
         controller.Move(velocity * Time.deltaTime);
+    }
+
+    protected virtual void OnDeath()
+    {
+        // What happens when something dies
+        Destroy(gameObject);
     }
 
     // Initialize method must be overriden to update variables such as speed and health.
