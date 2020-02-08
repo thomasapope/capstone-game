@@ -226,7 +226,7 @@ GameObject:
   - component: {fileID: 145883447}
   - component: {fileID: 145883446}
   - component: {fileID: 145883445}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -922,7 +922,7 @@ PrefabInstance:
     - target: {fileID: 904692277821601854, guid: 13f8fb30e0c6b7a4cbf7630804f35286,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.5
+      value: 7.84
       objectReference: {fileID: 0}
     - target: {fileID: 904692277821601854, guid: 13f8fb30e0c6b7a4cbf7630804f35286,
         type: 3}
@@ -973,6 +973,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1979969953140674658, guid: 13f8fb30e0c6b7a4cbf7630804f35286,
+        type: 3}
+      propertyPath: groundMask.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 8205218139876009303, guid: 13f8fb30e0c6b7a4cbf7630804f35286,
+        type: 3}
+      propertyPath: m_SkinWidth
+      value: 0.08
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 13f8fb30e0c6b7a4cbf7630804f35286, type: 3}
@@ -1166,6 +1176,11 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 517472247}
+    - target: {fileID: 8516002812758349075, guid: 77547354c75c2d6449ccbd75b588c63c,
+        type: 3}
+      propertyPath: groundMask.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
     - target: {fileID: 8516002812758349086, guid: 77547354c75c2d6449ccbd75b588c63c,
         type: 3}
       propertyPath: m_UseGravity

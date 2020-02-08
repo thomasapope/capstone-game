@@ -19,23 +19,22 @@ public class Enemy : Creature
     }
 
    // Update is called once per frame
-    protected override void FixedUpdate()
+    protected override void Update()
     {
         // Update the inputVector for movement
         inputVector = target.position - transform.position;
         
         // Call the update method in the Creature class.
         // Done after input is retrieved.
-        base.FixedUpdate();
+        base.Update();
     }
 
 
-    void OnCollisionEnter(Collision col)
+    void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (col.gameObject.name == "Player")
+        if (hit.gameObject.name == "Player")
         {
-            //Debug.Log("Collision!");
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
 }

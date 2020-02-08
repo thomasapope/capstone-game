@@ -11,25 +11,36 @@ using UnityEngine;
 
 public abstract class Creature : MonoBehaviour
 {
-    public Rigidbody rb;
+    private CharacterController controller;
+    public Transform groundCheck;
 
     protected Vector3 inputVector;
+    Vector3 velocity;
 
     public float speed = 10f;
+    public float gravity = -9.8f;
+    public bool usesGravity = true;
+    public float groundDistance = 0.4f;
+    public LayerMask groundMask;
+
+    bool isGrounded;
 
 
     protected virtual void Start()
     {
-        rb = this.GetComponent<Rigidbody>();
+        // Get the CharacterController at runtime
+        controller = this.GetComponent<CharacterController>();
 
         Initialize();
     }
     
     
-    protected virtual void FixedUpdate()
+    protected virtual void Update()
     // For physics processes only.
     // Virtual so that subclasses can override it.
     {
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+
         Move();
     }
 
@@ -41,12 +52,29 @@ public abstract class Creature : MonoBehaviour
         // This allows us to create movement behavior once and reuse it for 
         // most or all players and enemies.
 
-        Vector3 velocity = new Vector3 (inputVector.x, rb.velocity.y, inputVector.z);
-        velocity = velocity.normalized * speed;
-       
-        transform.LookAt(transform.position + new Vector3(inputVector.x, 0, inputVector.z));
+        Vector3 move = (transform.right * inputVector.x + transform.forward * inputVector.z).normalized;
 
-        rb.velocity = velocity;
+        controller.Move(move * speed * Time.deltaTime);
+
+        if (usesGravity) 
+        {
+            Gravity();
+        }
+    }
+
+    void Gravity()
+    {
+        
+        if (isGrounded && velocity.y < 0)
+        {
+            velocity.y = -2f;
+        }
+        
+        // Adds a downward force to the creature
+        velocity.y += gravity * Time.deltaTime;
+
+
+        controller.Move(velocity * Time.deltaTime);
     }
 
     // Initialize method must be overriden to update variables such as speed and health.
