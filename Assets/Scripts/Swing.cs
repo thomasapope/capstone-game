@@ -13,7 +13,7 @@ public class Swing : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && anim.GetCurrentAnimatorStateInfo(0).IsName("DefaultState"))
         {
             Debug.Log("Swing!");
             anim.SetTrigger("swing");
