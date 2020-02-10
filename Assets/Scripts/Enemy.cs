@@ -32,7 +32,7 @@ public class Enemy : Creature
 
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (hit.gameObject.name == "Player")
+        if (hit.gameObject.name == "sword")
         {
             hp--;
         }
