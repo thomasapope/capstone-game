@@ -17,12 +17,12 @@ public abstract class Creature : MonoBehaviour
     public Transform groundCheck;
 
     protected Vector3 inputVector;
-    private Vector3 velocity; // Used for gravity
+    public Vector3 velocity; // Used for gravity
 
     // Movement Stats
     public float speed = 10f;
     public bool usesGravity = true;
-    public float gravity = -9.8f;
+    public float gravity = -20f;
     public float groundDistance = 0.4f;
 
     private bool isGrounded;
@@ -34,7 +34,8 @@ public abstract class Creature : MonoBehaviour
     protected virtual void Start()
     {
         controller = this.GetComponent<CharacterController>(); // Get the CharacterController at runtime
-        groundMask = LayerMask.NameToLayer("Ground"); // Get the layermask for the ground
+        //groundMask = LayerMask.NameToLayer("Ground"); // Get the layermask for the ground
+        groundMask = 8;
 
         // Run Initialize method as defined in subclass
         Initialize();
@@ -43,7 +44,9 @@ public abstract class Creature : MonoBehaviour
     
     protected virtual void Update()
     {
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        RaycastHit hit;
+        //isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        isGrounded = Physics.SphereCast(transform.position, groundDistance, Vector3.down, out hit, 1.4f);
 
         Move();
         CheckIfDead();

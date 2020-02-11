@@ -483,7 +483,7 @@ GameObject:
   - component: {fileID: 299925616}
   - component: {fileID: 299925618}
   - component: {fileID: 299925617}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -674,6 +674,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 443552434}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &494158734 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 583958578335881556, guid: 13f8fb30e0c6b7a4cbf7630804f35286,
+    type: 3}
+  m_PrefabInstance: {fileID: 733828202}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &524368420
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -762,7 +768,7 @@ PrefabInstance:
     - target: {fileID: 904692277821601854, guid: 13f8fb30e0c6b7a4cbf7630804f35286,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.003113
+      value: 16.23
       objectReference: {fileID: 0}
     - target: {fileID: 904692277821601854, guid: 13f8fb30e0c6b7a4cbf7630804f35286,
         type: 3}
@@ -824,6 +830,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1979969953140674658, guid: 13f8fb30e0c6b7a4cbf7630804f35286,
+        type: 3}
+      propertyPath: gravity
+      value: -20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1979969953140674658, guid: 13f8fb30e0c6b7a4cbf7630804f35286,
+        type: 3}
+      propertyPath: groundCheck
+      value: 
+      objectReference: {fileID: 494158734}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 13f8fb30e0c6b7a4cbf7630804f35286, type: 3}
 --- !u!4 &733828203 stripped
@@ -1557,7 +1573,7 @@ MonoBehaviour:
   waves:
   - name: Wave One
     enemy: {fileID: 8516002812758349075, guid: 77547354c75c2d6449ccbd75b588c63c, type: 3}
-    count: 2
+    count: 20
     rate: 1
   - name: Wave Two
     enemy: {fileID: 8516002812758349075, guid: 77547354c75c2d6449ccbd75b588c63c, type: 3}
