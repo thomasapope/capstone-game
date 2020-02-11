@@ -7,6 +7,10 @@ Humanity has fallen. The last survivors have built primitive communities among t
 
 You play as the protectors of a community under siege. You must fight off the mutant hordes, maintain and upgrade your buildings, and find a way to escape to somewhere safer.
 
+## Maps:
+- Elementary
+  - Your community has settled down among the delapidated ruins of an old elementary school. Survive the hordes while finding a way to repair one of the vehicles in the parking lot.
+
 
 ## Tools:
 - Unity
