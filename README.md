@@ -1,11 +1,12 @@
 # capstone-game
 A survival defense game.
 
-Humanity has fallen. The last survivors have built primitive communities among the ruins of our past. Nature is no longer mans best friend.
+## Setting / Story:
 
-At night hordes of mutant animals come to attack your community and steal your children. You must stop them by any means neccesary. 
+Humanity has fallen. The last survivors have built primitive communities among the ruins of our past. Nature is no longer mans best friend. At night hordes of mutant animals come to attack communities to kidnap and enslave their children.
 
-Maintain and upgrade buildings, manage your resources, and use whatever weapons are at your disposal to defend yourself and your community.
+You play as the protectors of a community under siege. You must fight off the mutant hordes, maintain and upgrade your buildings, and find a way to escape to somewhere safer.
+
 
 ## Tools:
 - Unity
@@ -16,11 +17,13 @@ Maintain and upgrade buildings, manage your resources, and use whatever weapons 
 
 
 ## Planned Features:
-- Base defense
-- Upgradeable buildings
-- Upgradeable characters
+- Community defense
+- Upgradeable buildings that give perks to players
+- Upgradeable characters (mostly through upgrading the community
 - Score tracking (Waves survived, enemies killed)
 - Resource management (Points of some sort, Ammo)
+- Story mode
+- Endless horde mode
 
 
 ## Technical Notes:
