@@ -28,13 +28,4 @@ public class Enemy : Creature
         // Done after input is retrieved.
         base.Update();
     }
-
-
-    void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        if (hit.gameObject.name == "sword")
-        {
-            hp--;
-        }
-    }
 }

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 904692277821601854}
   - component: {fileID: 8205218139876009303}
   - component: {fileID: 1979969953140674658}
+  - component: {fileID: 8700727739945719276}
   - component: {fileID: 1777304386541677010}
   - component: {fileID: 2055514771053805115}
   - component: {fileID: 6628930071334772469}
@@ -68,11 +69,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groundCheck: {fileID: 583958578335881556}
+  velocity: {x: 0, y: 0, z: 0}
   speed: 10
   usesGravity: 1
   gravity: -9.8
   groundDistance: 0.4
-  hp: 1
+  MAX_HEALTH: 100
+  stats: {fileID: 0}
+--- !u!114 &8700727739945719276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 904692277821601987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 151c09d2a11cea94e8aef4424d84af49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MAX_HEALTH: 100
 --- !u!33 &1777304386541677010
 MeshFilter:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 /*
     Creature.cs
@@ -28,14 +29,27 @@ public abstract class Creature : MonoBehaviour
     private bool isGrounded;
 
     // Combat Stats
-    public float hp = 1;
+    // [SerializeField]
+    // private int MAX_HEALTH = 100;
+
+    public Health stats;
+
+    // public int hp { get; private set; }
+
+
+    // Initialize method must be overriden to update variables such as speed and health.
+    public abstract void Initialize();
 
 
     protected virtual void Start()
     {
         controller = this.GetComponent<CharacterController>(); // Get the CharacterController at runtime
-        //groundMask = LayerMask.NameToLayer("Ground"); // Get the layermask for the ground
-        groundMask = 8;
+        groundMask = LayerMask.NameToLayer("Ground"); // Get the layermask for the ground
+        //groundMask = 8;
+        
+        // hp = MAX_HEALTH;
+        // OnHealthAdded(this);
+        stats = gameObject.GetComponent<Health>();
 
         // Run Initialize method as defined in subclass
         Initialize();
@@ -48,18 +62,12 @@ public abstract class Creature : MonoBehaviour
         //isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
         isGrounded = Physics.SphereCast(transform.position, groundDistance, Vector3.down, out hit, 1.4f);
 
+
+
         Move();
-        CheckIfDead();
+        // CheckIfDead();
     }
 
-
-    private void CheckIfDead()
-    {
-        if (hp <= 0)
-        {
-            OnDeath();
-        }
-    }
 
     // Logic necessary for moving the creature.
     // Uses the inputVector given it by the subclass and moves based on it.
@@ -84,7 +92,6 @@ public abstract class Creature : MonoBehaviour
     // Adds a downward force to the creature
     void Gravity()
     {
-
         // Make sure gravity doesn't increase infinitely.
         if (isGrounded && velocity.y < 0)
         {
@@ -96,12 +103,54 @@ public abstract class Creature : MonoBehaviour
         controller.Move(velocity * Time.deltaTime);
     }
 
+
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.gameObject.name == "sword")
+        {
+            stats.ModifyHealth(-10);
+            Debug.Log("Sword hit");
+        }
+        if (hit.gameObject.name == "EnemyAttack")
+        {
+            stats.ModifyHealth(-1);
+            Debug.Log("Enemy hit");
+        }
+    }
+
+
+    // private void OnDisable() 
+    // {
+    //     OnHealthRemoved(this);
+    // }
+
+
+    // #region Health and Death Code
+
+    // public static event Action<Creature> OnHealthAdded = delegate {};
+    // public static event Action<Creature> OnHealthRemoved = delegate {};
+    // public event Action<float> OnHealthChanged = delegate { };
+
+
+    // public void ModifyHealth(int amount)
+    // {
+    //     hp += amount;
+
+    //     float hpPercent = (float)hp / MAX_HEALTH;
+    //     OnHealthChanged(hpPercent); // update health bar
+
+    //     if (hp <= 0) // check if dead
+    //     {
+    //         OnDeath();
+    //     }
+    // }
+
+
     protected virtual void OnDeath()
     {
         // What happens when something dies
         Destroy(gameObject);
     }
 
-    // Initialize method must be overriden to update variables such as speed and health.
-    public abstract void Initialize();
+    // #endregion
 }
