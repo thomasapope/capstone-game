@@ -23,7 +23,8 @@ public class GameStats : MonoBehaviour
 
     void Update()
     {
-        scoreLabel.text = "Kills: " + score + "\n" + 
+        scoreLabel.text = "Wave: " + (WaveSpawner.nextWave + 1) + "\n" + 
+                            "Kills: " + score + "\n" + 
                             "Damage: " + damage;
     }
     

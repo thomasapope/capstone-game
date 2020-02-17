@@ -4,7 +4,7 @@ using UnityEngine;
 public class WaveSpawner : MonoBehaviour 
 {
     public Transform player;
-    public enum SpawnState { SPAWNING, WAITING, COUNTING }
+    public enum SpawnState { SPAWNING, WAITING, COUNTING, COMPLETE}
 
     [System.Serializable]
     public class Wave 
@@ -16,16 +16,19 @@ public class WaveSpawner : MonoBehaviour
     }
 
     public Wave[] waves;
-    private int nextWave = 0;
+    // private int nextWave = 0;
+    public static int nextWave {get; private set;} = 0;
 
     public Transform[] spawnPoints;
 
-    public float timeBetweenWaves = 5f;
+    public float timeBetweenWaves = 2f;
     private float waveCountdown;
 
     private float searchCountdown = 1f;
 
     private SpawnState state = SpawnState.COUNTING;
+
+    public static bool complete = false;
 
 
     void Start() 
@@ -64,7 +67,7 @@ public class WaveSpawner : MonoBehaviour
                 StartCoroutine(SpawnWave(waves[nextWave]));
             }
         } 
-        else 
+        else if (state != SpawnState.COMPLETE)
         {
             waveCountdown -= Time.deltaTime;
         }
@@ -78,10 +81,15 @@ public class WaveSpawner : MonoBehaviour
         state = SpawnState.COUNTING;
         waveCountdown = timeBetweenWaves;
 
-        if (nextWave + 1 > waves.Length - 1)
+        // All Waves Completed
+        if (nextWave + 1 > waves.Length - 1) 
         {
-            Debug.Log("All Waves Complete! Looping...");
-            nextWave = 0;
+            // Debug.Log("All Waves Complete! Looping...");
+            // nextWave = 0;
+            // Go into complete state
+            Debug.Log("All Waves Complete!");
+            complete = true;
+            state = SpawnState.COMPLETE;
         }
         else 
         {
