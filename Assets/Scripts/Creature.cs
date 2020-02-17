@@ -132,6 +132,7 @@ public abstract class Creature : MonoBehaviour
         if (hit.gameObject.name == "sword")
         {
             stats.ModifyHealth(-10);
+            GameStats.damage += 10;
             Debug.Log("Sword hit");
             
             hitTime = 0;
@@ -147,40 +148,4 @@ public abstract class Creature : MonoBehaviour
         }
 
     }
-
-
-    // private void OnDisable() 
-    // {
-    //     OnHealthRemoved(this);
-    // }
-
-
-    // #region Health and Death Code
-
-    // public static event Action<Creature> OnHealthAdded = delegate {};
-    // public static event Action<Creature> OnHealthRemoved = delegate {};
-    // public event Action<float> OnHealthChanged = delegate { };
-
-
-    // public void ModifyHealth(int amount)
-    // {
-    //     hp += amount;
-
-    //     float hpPercent = (float)hp / MAX_HEALTH;
-    //     OnHealthChanged(hpPercent); // update health bar
-
-    //     if (hp <= 0) // check if dead
-    //     {
-    //         OnDeath();
-    //     }
-    // }
-
-
-    protected virtual void OnDeath()
-    {
-        // What happens when something dies
-        Destroy(gameObject);
-    }
-
-    // #endregion
 }

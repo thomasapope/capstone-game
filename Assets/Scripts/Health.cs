@@ -45,6 +45,11 @@ public class Health : MonoBehaviour
     protected virtual void OnDeath()
     {
         // What happens when something dies
+        // if(gameObject.name == "Enemy")
+        // {
+        //     GameStats.score++;
+        //     // Debug.Log("Score!");
+        // }
         Destroy(gameObject);
     }
 

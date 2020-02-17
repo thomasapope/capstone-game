@@ -28,4 +28,16 @@ public class Enemy : Creature
         // Done after input is retrieved.
         base.Update();
     }
+
+
+    private void OnDisable()
+    {
+        GameStats.score++; // Add one kill to the score
+    }
+    // protected override void OnDeath() 
+    // {
+    //     GameStats.score++;
+    //     Debug.Log("Score!");
+    //     base.OnDeath();
+    // }
 }
