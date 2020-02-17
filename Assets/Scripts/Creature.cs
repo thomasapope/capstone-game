@@ -28,6 +28,11 @@ public abstract class Creature : MonoBehaviour
 
     private bool isGrounded;
 
+    private float hitTime = 1f;
+    Renderer rend;
+    private Material defMat;
+    public static Material hitMat;
+
     // Combat Stats
     // [SerializeField]
     // private int MAX_HEALTH = 100;
@@ -50,6 +55,11 @@ public abstract class Creature : MonoBehaviour
         // hp = MAX_HEALTH;
         // OnHealthAdded(this);
         stats = gameObject.GetComponent<Health>();
+        rend = GetComponent<Renderer> ();
+        defMat = rend.material;
+
+        if (hitMat == null)
+            hitMat = Resources.Load<Material>("HitMat");
 
         // Run Initialize method as defined in subclass
         Initialize();
@@ -62,6 +72,19 @@ public abstract class Creature : MonoBehaviour
         //isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
         isGrounded = Physics.SphereCast(transform.position, groundDistance, Vector3.down, out hit, 1.4f);
 
+        if (hitTime < 1)
+        {
+            hitTime += Time.deltaTime;
+        }
+        else
+        {
+            if (rend.material != defMat)
+            {
+                rend.material = defMat;
+            }
+        }
+        
+        
 
 
         Move();
@@ -110,12 +133,19 @@ public abstract class Creature : MonoBehaviour
         {
             stats.ModifyHealth(-10);
             Debug.Log("Sword hit");
+            
+            hitTime = 0;
+            rend.material = hitMat;
         }
         if (hit.gameObject.name == "EnemyAttack")
         {
             stats.ModifyHealth(-1);
             Debug.Log("Enemy hit");
+            
+            hitTime = 0;
+            rend.material = hitMat;
         }
+
     }
 
 

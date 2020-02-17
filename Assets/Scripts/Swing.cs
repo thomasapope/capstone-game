@@ -15,7 +15,7 @@ public class Swing : MonoBehaviour
     {
         if (Input.GetMouseButton(0) && anim.GetCurrentAnimatorStateInfo(0).IsName("DefaultState"))
         {
-            Debug.Log("Swing!");
+            //Debug.Log("Swing!");
             anim.SetTrigger("swing");
         }
     }
