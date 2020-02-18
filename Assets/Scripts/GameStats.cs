@@ -6,8 +6,6 @@ using System;
 
 public class GameStats : MonoBehaviour
 {
-    public static event Action<int> OnScoreChanged = delegate {};
-
     public static int score { get; set; }
     public static float damage { get; set; }
 
@@ -27,12 +25,4 @@ public class GameStats : MonoBehaviour
                             "Kills: " + score + "\n" + 
                             "Damage: " + damage;
     }
-    
-    public static void ModifyScore(int score)
-    {
-        GameStats.score += score;
-
-        OnScoreChanged(GameStats.score);
-    }
-    
 }
