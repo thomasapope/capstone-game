@@ -22,9 +22,8 @@ You play as the protectors of a community under siege. You must fight off the mu
 
 ## Planned Features:
 - Community defense
-- Upgradeable buildings that give perks to players
-- Upgradeable characters (mostly through upgrading the community
-- Score tracking (Waves survived, enemies killed)
+- Upgradeable characters
+- ~~Score tracking (Waves survived, enemies killed)~~
 - Resource management (Points of some sort, Ammo)
 - Story mode
 - Endless horde mode
