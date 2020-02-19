@@ -88,7 +88,7 @@ public abstract class Creature : MonoBehaviour
     // most or all players and enemies.
     void Move() 
     {
-        movementInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
+        movementInput = new Vector3(inputVector.x, 0, inputVector.z).normalized;
 
         Vector3 forward = mainCameraTransform.forward;
         Vector3 right = mainCameraTransform.right;
