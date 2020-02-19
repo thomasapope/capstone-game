@@ -30,13 +30,15 @@ public class GameManager : MonoBehaviour
         {
             gameHasEnded = true;
             Debug.Log("GAME OVER");
-            Invoke("Restart", restartDelay);
+
+            //Returns user to Main Menu
+            Invoke("ReturnToMenu", restartDelay);
         }
     }
 
 
-    public static void Restart()
+    public static void ReturnToMenu()
     {
-		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+		SceneManager.LoadScene("MainMenu");
     }
 }
