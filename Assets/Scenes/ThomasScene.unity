@@ -7592,18 +7592,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 662500987}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &668321474 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8700727739945719276, guid: 13f8fb30e0c6b7a4cbf7630804f35286,
-    type: 3}
-  m_PrefabInstance: {fileID: 1275983779}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 151c09d2a11cea94e8aef4424d84af49, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!43 &677700660
 Mesh:
   m_ObjectHideFlags: 0
@@ -13782,7 +13770,12 @@ PrefabInstance:
         type: 3}
       propertyPath: stats
       value: 
-      objectReference: {fileID: 668321474}
+      objectReference: {fileID: 0}
+    - target: {fileID: 1979969953140674658, guid: 13f8fb30e0c6b7a4cbf7630804f35286,
+        type: 3}
+      propertyPath: gravity
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8205218139876009303, guid: 13f8fb30e0c6b7a4cbf7630804f35286,
         type: 3}
       propertyPath: m_SkinWidth
