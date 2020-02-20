@@ -83,12 +83,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8516002812758349087}
-  - component: {fileID: 8516002812758349075}
-  - component: {fileID: 2019427072419258583}
   - component: {fileID: 4740041239677629620}
   - component: {fileID: 975180335997042682}
   - component: {fileID: 1181257593105893433}
   - component: {fileID: 9209881830126342956}
+  - component: {fileID: 8516002812758349075}
+  - component: {fileID: 2019427072419258583}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -112,39 +112,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8516002812758349075
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8516002812758349074}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20280b19d0327e942975bdbbf5fa088b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  groundCheck: {fileID: 5620664013337317294}
-  velocity: {x: 0, y: 0, z: 0}
-  speed: 10
-  usesGravity: 1
-  gravity: -9.8
-  groundDistance: 0.4
-  stats: {fileID: 0}
-  target: {fileID: 0}
---- !u!114 &2019427072419258583
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8516002812758349074}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 151c09d2a11cea94e8aef4424d84af49, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MAX_HEALTH: 100
 --- !u!143 &4740041239677629620
 CharacterController:
   m_ObjectHideFlags: 0
@@ -223,3 +190,33 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8516002812758349075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8516002812758349074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20280b19d0327e942975bdbbf5fa088b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpeed: 10
+  usesGravity: 1
+  gravity: 10
+  stats: {fileID: 0}
+  target: {fileID: 0}
+--- !u!114 &2019427072419258583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8516002812758349074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 151c09d2a11cea94e8aef4424d84af49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MAX_HEALTH: 100
