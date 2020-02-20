@@ -14,8 +14,6 @@ public abstract class Creature : MonoBehaviour
 {
     // Component References
     private CharacterController controller;
-    private Transform mainCameraTransform = null;
-
 
     // Movement Stats
     public float movementSpeed = 10f;
@@ -50,7 +48,6 @@ public abstract class Creature : MonoBehaviour
     protected virtual void Start()
     {
         controller = this.GetComponent<CharacterController>(); // Get the CharacterController at runtime
-        mainCameraTransform = Camera.main.transform;
 
         stats = gameObject.GetComponent<Health>();
         rend = GetComponent<Renderer> ();
@@ -82,29 +79,28 @@ public abstract class Creature : MonoBehaviour
     }
 
 
+    void LateUpdate()
+    {
+
+    }
+
+
     // Logic necessary for moving the creature.
     // Uses the inputVector given it by the subclass and moves based on it.
     // This allows us to create movement behavior once and reuse it for 
     // most or all players and enemies.
+    float targetSpeed;
     void Move() 
     {
         movementInput = new Vector3(inputVector.x, 0, inputVector.z).normalized;
-
-        Vector3 forward = mainCameraTransform.forward;
-        Vector3 right = mainCameraTransform.right;
-
-        forward.y = 0f;
-        right.y = 0f;
-
 
         if (movementInput != Vector3.zero)
         {
             moveDirection = new Vector3(movementInput.x, 0, movementInput.z).normalized;
         }
-        // Vector3 desiredMoveDirection = (forward * movementInput.y + right * movementInput.x).normalized;
-        
 
-        float targetSpeed = movementSpeed * movementInput.magnitude;
+        targetSpeed = movementSpeed * movementInput.magnitude;
+        // targetSpeed = movementSpeed * moveDirection.magnitude;
         currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref speedSmoothVelocity, speedSmoothTime);
 
         Rotation(currentSpeed); // Rotation
