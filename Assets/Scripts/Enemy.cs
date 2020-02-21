@@ -22,7 +22,8 @@ public class Enemy : Creature
     protected override void Update()
     {
         // Update the inputVector for movement
-        inputVector = target.position - transform.position;
+        // inputVector = target.position - transform.position;
+        movementInput = target.position - transform.position;
         
         // Call the update method in the Creature class.
         // Done after input is retrieved.

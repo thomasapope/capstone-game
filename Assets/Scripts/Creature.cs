@@ -10,6 +10,8 @@ using System;
     as is, but to be inherited from.
 */
 
+[RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(Health))]
 public abstract class Creature : MonoBehaviour
 {
     // Component References
@@ -17,16 +19,20 @@ public abstract class Creature : MonoBehaviour
 
     // Movement Stats
     public float movementSpeed = 10f;
-    // private float currentSpeed;
-    // private float speedSmoothVelocity;
     private float speedSmoothTime = 0.1f;
     private float rotationSpeed = 0.08f;
-    
+
     public bool usesGravity = true;
     public float gravity = 10f;
 
-    // private bool isGrounded;
+    protected Vector3 movementInput; // Input direction received from subclass
+    private Vector3 moveDirection; // The desired movement direction
 
+    private Vector3 targetVelocity; // The velocity we're aiming for
+    private Vector3 velocity; // The current velocity
+    private Vector3 smoothVelocity; // Used for velocity smoothing
+    
+    // Other Stats
     private float hitTime = 1f;
     Renderer rend;
     private Material defMat;
@@ -35,14 +41,7 @@ public abstract class Creature : MonoBehaviour
     public Health stats;
 
 
-    protected Vector3 inputVector;
-    private Vector3 movementInput;
-    private Vector3 lookDirection;
-    private Vector3 moveDirection; // the current movement direction and speed
-
-    private Vector3 targetVelocity;
-    private Vector3 velocity;
-    private Vector3 smoothVelocity;
+    // protected Vector3 inputVector; 
 
 
     // Initialize method must be overriden to update variables such as speed and health.
@@ -83,28 +82,15 @@ public abstract class Creature : MonoBehaviour
     }
 
 
-    void LateUpdate()
-    {
-
-    }
-
-
     // Logic necessary for moving the creature.
-    // Uses the inputVector given provided by the subclass and moves based on it.
-    // This allows us to create movement behavior once and reuse it for 
-    // most or all players and enemies.
-    // float targetSpeed;
     void Move() 
     {
-        movementInput = new Vector3(inputVector.x, 0, inputVector.z).normalized;
+        movementInput.Normalize();
 
         if (movementInput != Vector3.zero)
         {
             moveDirection = new Vector3(movementInput.x, 0, movementInput.z).normalized;
         }
-
-        // targetSpeed = movementSpeed * movementInput.magnitude;
-        // currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref speedSmoothVelocity, speedSmoothTime);
 
         if (moveDirection != Vector3.zero)
         {
@@ -114,7 +100,6 @@ public abstract class Creature : MonoBehaviour
 
         Rotation(); // Rotation
 
-        // controller.Move(moveDirection * currentSpeed * Time.deltaTime);
         controller.Move(velocity * Time.deltaTime);
 
         if (usesGravity) 
@@ -141,7 +126,6 @@ public abstract class Creature : MonoBehaviour
     {
         if (movementInput != Vector3.zero)
         {
-            // transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(moveDirection), rotationSpeed);
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(velocity), rotationSpeed);
         }
     }

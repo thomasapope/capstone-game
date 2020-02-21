@@ -19,10 +19,10 @@ public class Player : Creature
     protected override void Update()
     {
         // Update the inputVector for movement
-        // inputVector.x = Input.GetAxis("Horizontal");
-        // inputVector.z = Input.GetAxis("Vertical");
-        inputVector.x = Input.GetAxisRaw("Horizontal");
-        inputVector.z = Input.GetAxisRaw("Vertical");
+        // inputVector.x = Input.GetAxisRaw("Horizontal");
+        // inputVector.z = Input.GetAxisRaw("Vertical");
+        movementInput.x = Input.GetAxisRaw("Horizontal");
+        movementInput.z = Input.GetAxisRaw("Vertical");
 
         // Call the update method in the Creature class.
         // Done after input is retrieved.
