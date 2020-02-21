@@ -5,7 +5,7 @@ public class LevelComplete : MonoBehaviour
 {
    public void LoadNextLevel()
    {
-       // For now, just restart the level
-		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+       // Sends back to Main Menu
+		SceneManager.LoadScene("MainMenu");
    }
 }
