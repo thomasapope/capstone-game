@@ -15,7 +15,7 @@ public class Enemy : Creature
 
     public override void Initialize()
     {
-        speed = 4f;
+        movementSpeed = 4f;
     }
 
    // Update is called once per frame

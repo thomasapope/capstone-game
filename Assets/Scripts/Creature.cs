@@ -14,32 +14,31 @@ public abstract class Creature : MonoBehaviour
 {
     // Component References
     private CharacterController controller;
-    private LayerMask groundMask;
-    public Transform groundCheck;
-
-    protected Vector3 inputVector;
-    public Vector3 velocity; // Used for gravity
 
     // Movement Stats
-    public float speed = 10f;
+    public float movementSpeed = 10f;
+    private float currentSpeed;
+    private float speedSmoothVelocity;
+    private float speedSmoothTime = 0.2f;
+    private float rotationSpeed = 0.03f;
+    
     public bool usesGravity = true;
-    public float gravity = -20f;
-    public float groundDistance = 0.4f;
+    public float gravity = 10f;
 
-    private bool isGrounded;
+    // private bool isGrounded;
 
     private float hitTime = 1f;
     Renderer rend;
     private Material defMat;
     public static Material hitMat;
 
-    // Combat Stats
-    // [SerializeField]
-    // private int MAX_HEALTH = 100;
-
     public Health stats;
 
-    // public int hp { get; private set; }
+
+    protected Vector3 inputVector;
+    private Vector3 movementInput;
+    private Vector3 lookDirection;
+    private Vector3 moveDirection; // the current movement direction and speed
 
 
     // Initialize method must be overriden to update variables such as speed and health.
@@ -49,11 +48,7 @@ public abstract class Creature : MonoBehaviour
     protected virtual void Start()
     {
         controller = this.GetComponent<CharacterController>(); // Get the CharacterController at runtime
-        groundMask = LayerMask.NameToLayer("Ground"); // Get the layermask for the ground
-        //groundMask = 8;
-        
-        // hp = MAX_HEALTH;
-        // OnHealthAdded(this);
+
         stats = gameObject.GetComponent<Health>();
         rend = GetComponent<Renderer> ();
         defMat = rend.material;
@@ -68,10 +63,6 @@ public abstract class Creature : MonoBehaviour
     
     protected virtual void Update()
     {
-        RaycastHit hit;
-        //isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-        isGrounded = Physics.SphereCast(transform.position, groundDistance, Vector3.down, out hit, 1.4f);
-
         if (hitTime < 1)
         {
             hitTime += Time.deltaTime;
@@ -84,11 +75,13 @@ public abstract class Creature : MonoBehaviour
             }
         }
         
-        
-
-
         Move();
-        // CheckIfDead();
+    }
+
+
+    void LateUpdate()
+    {
+
     }
 
 
@@ -96,14 +89,23 @@ public abstract class Creature : MonoBehaviour
     // Uses the inputVector given it by the subclass and moves based on it.
     // This allows us to create movement behavior once and reuse it for 
     // most or all players and enemies.
+    float targetSpeed;
     void Move() 
     {
-        // Vector3 move = (transform.right * inputVector.x + transform.forward * inputVector.z).normalized;
-        Vector3 move = new Vector3(inputVector.x, 0, inputVector.z).normalized;
+        movementInput = new Vector3(inputVector.x, 0, inputVector.z).normalized;
 
-        transform.LookAt(transform.position + new Vector3(inputVector.x, 0, inputVector.z));
+        if (movementInput != Vector3.zero)
+        {
+            moveDirection = new Vector3(movementInput.x, 0, movementInput.z).normalized;
+        }
 
-        controller.Move(move * speed * Time.deltaTime);
+        targetSpeed = movementSpeed * movementInput.magnitude;
+        // targetSpeed = movementSpeed * moveDirection.magnitude;
+        currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref speedSmoothVelocity, speedSmoothTime);
+
+        Rotation(currentSpeed); // Rotation
+
+        controller.Move(moveDirection * currentSpeed * Time.deltaTime);
 
         if (usesGravity) 
         {
@@ -115,15 +117,25 @@ public abstract class Creature : MonoBehaviour
     // Adds a downward force to the creature
     void Gravity()
     {
-        // Make sure gravity doesn't increase infinitely.
-        if (isGrounded && velocity.y < 0)
+        Vector3 gravityVector = Vector3.zero;
+        if (!controller.isGrounded)
         {
-            velocity.y = -2f;
+            gravityVector.y -= gravity;
         }
         
-        velocity.y += gravity * Time.deltaTime;
+        controller.Move(gravityVector * Time.deltaTime);
+    }
 
-        controller.Move(velocity * Time.deltaTime);
+
+    void Rotation(float speed)
+    {
+        if (movementInput != Vector3.zero)
+        {
+            // Vector3 rotation = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            // transform.LookAt(transform.position + rotation);
+
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(moveDirection), rotationSpeed);
+        }
     }
 
 
