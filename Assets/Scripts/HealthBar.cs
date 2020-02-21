@@ -33,12 +33,8 @@ public class HealthBar : MonoBehaviour
 
     private void Start()
     {
-        // GetComponentInParent<Health>().OnHealthChanged += HandleHealthChanged;
-        // Creature p = GetComponentInParent<Player>().OnHealthChanged += HandleHealthChanged;
-        // Creature p = gameObject.GetComponent<Creature>();
-        // p.OnHealthChanged += HandleHealthChanged;
-
-        //transform.root.gameObject.GetComponent<Creature>().OnHealthChanged += HandleHealthChanged;
+        // Get healthbar foreground. Not necessary, but removes an warning from the console.
+        foregroundImage = transform.GetChild(1).GetComponent<Image>();
     }
 
 
