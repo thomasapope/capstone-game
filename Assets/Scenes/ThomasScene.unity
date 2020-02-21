@@ -4484,8 +4484,8 @@ GameObject:
   - component: {fileID: 426369017}
   - component: {fileID: 426369016}
   - component: {fileID: 426369015}
-  - component: {fileID: 426369014}
   - component: {fileID: 426369019}
+  - component: {fileID: 426369014}
   m_Layer: 5
   m_Name: HealthBar Canvas
   m_TagString: Untagged

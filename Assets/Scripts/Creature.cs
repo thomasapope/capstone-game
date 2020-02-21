@@ -17,10 +17,10 @@ public abstract class Creature : MonoBehaviour
 
     // Movement Stats
     public float movementSpeed = 10f;
-    private float currentSpeed;
-    private float speedSmoothVelocity;
-    private float speedSmoothTime = 0.2f;
-    private float rotationSpeed = 0.03f;
+    // private float currentSpeed;
+    // private float speedSmoothVelocity;
+    private float speedSmoothTime = 0.1f;
+    private float rotationSpeed = 0.08f;
     
     public bool usesGravity = true;
     public float gravity = 10f;
@@ -39,6 +39,10 @@ public abstract class Creature : MonoBehaviour
     private Vector3 movementInput;
     private Vector3 lookDirection;
     private Vector3 moveDirection; // the current movement direction and speed
+
+    private Vector3 targetVelocity;
+    private Vector3 velocity;
+    private Vector3 smoothVelocity;
 
 
     // Initialize method must be overriden to update variables such as speed and health.
@@ -86,10 +90,10 @@ public abstract class Creature : MonoBehaviour
 
 
     // Logic necessary for moving the creature.
-    // Uses the inputVector given it by the subclass and moves based on it.
+    // Uses the inputVector given provided by the subclass and moves based on it.
     // This allows us to create movement behavior once and reuse it for 
     // most or all players and enemies.
-    float targetSpeed;
+    // float targetSpeed;
     void Move() 
     {
         movementInput = new Vector3(inputVector.x, 0, inputVector.z).normalized;
@@ -99,13 +103,19 @@ public abstract class Creature : MonoBehaviour
             moveDirection = new Vector3(movementInput.x, 0, movementInput.z).normalized;
         }
 
-        targetSpeed = movementSpeed * movementInput.magnitude;
-        // targetSpeed = movementSpeed * moveDirection.magnitude;
-        currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref speedSmoothVelocity, speedSmoothTime);
+        // targetSpeed = movementSpeed * movementInput.magnitude;
+        // currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref speedSmoothVelocity, speedSmoothTime);
 
-        Rotation(currentSpeed); // Rotation
+        if (moveDirection != Vector3.zero)
+        {
+            targetVelocity = movementSpeed * movementInput;
+            velocity = Vector3.SmoothDamp(velocity, targetVelocity, ref smoothVelocity, speedSmoothTime);
+        }
 
-        controller.Move(moveDirection * currentSpeed * Time.deltaTime);
+        Rotation(); // Rotation
+
+        // controller.Move(moveDirection * currentSpeed * Time.deltaTime);
+        controller.Move(velocity * Time.deltaTime);
 
         if (usesGravity) 
         {
@@ -127,14 +137,12 @@ public abstract class Creature : MonoBehaviour
     }
 
 
-    void Rotation(float speed)
+    void Rotation()
     {
         if (movementInput != Vector3.zero)
         {
-            // Vector3 rotation = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-            // transform.LookAt(transform.position + rotation);
-
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(moveDirection), rotationSpeed);
+            // transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(moveDirection), rotationSpeed);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(velocity), rotationSpeed);
         }
     }
 
