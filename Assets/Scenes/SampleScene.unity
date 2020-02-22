@@ -916,16 +916,21 @@ PrefabInstance:
       propertyPath: groundCheck
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1979969953140674658, guid: 13f8fb30e0c6b7a4cbf7630804f35286,
+        type: 3}
+      propertyPath: attackAnimator
+      value: 
+      objectReference: {fileID: 2122349305}
+    - target: {fileID: 1979969953140674658, guid: 13f8fb30e0c6b7a4cbf7630804f35286,
+        type: 3}
+      propertyPath: attackLayers.m_Bits
+      value: 2048
+      objectReference: {fileID: 0}
     - target: {fileID: 4379403751807128725, guid: 13f8fb30e0c6b7a4cbf7630804f35286,
         type: 3}
       propertyPath: attackAnimator
       value: 
       objectReference: {fileID: 2122349305}
-    - target: {fileID: 4379403751807128725, guid: 13f8fb30e0c6b7a4cbf7630804f35286,
-        type: 3}
-      propertyPath: enemyLayers.m_Bits
-      value: 2048
-      objectReference: {fileID: 0}
     - target: {fileID: 8709219995521138045, guid: 13f8fb30e0c6b7a4cbf7630804f35286,
         type: 3}
       propertyPath: m_RootOrder

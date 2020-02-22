@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 /*
     Enemy.cs
@@ -9,25 +10,45 @@ using UnityEngine;
 */
 
 
+[RequireComponent(typeof(NavMeshAgent))]
+// [RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(Health))]
 public class Enemy : Creature
 {
     public Transform target;
+    private UnityEngine.AI.NavMeshAgent agent;
 
-    public override void Initialize()
+
+    protected virtual void Start()
     {
-        movementSpeed = 4f;
+        base.Start();
+
+        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
     }
 
-   // Update is called once per frame
+
     protected override void Update()
     {
-        // Update the inputVector for movement
-        // inputVector = target.position - transform.position;
-        movementInput = target.position - transform.position;
-        
-        // Call the update method in the Creature class.
-        // Done after input is retrieved.
+        float distance = Vector3.Distance(target.position, transform.position);
+
+        agent.SetDestination(target.position);
+
+        if (distance <= agent.stoppingDistance)
+        {
+            // Attack
+            //hitting = true;
+            FaceTarget();
+        }
+
         base.Update();
+    }
+
+
+    private void FaceTarget()
+    {
+        Vector3 direction = (target.position - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3 (direction.x, 0, direction.z));
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * agent.angularSpeed);
     }
 
 
@@ -35,10 +56,4 @@ public class Enemy : Creature
     {
         GameStats.score++; // Add one kill to the score
     }
-    // protected override void OnDeath() 
-    // {
-    //     GameStats.score++;
-    //     Debug.Log("Score!");
-    //     base.OnDeath();
-    // }
 }

@@ -6,66 +6,61 @@ using System;
 /*
     Creature.cs
 
-    The superclass of all creatures and players. This is not meant to be used
+    The superclass of all living creatures. This is not meant to be used
     as is, but to be inherited from.
 */
 
-[RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(Health))]
 public abstract class Creature : MonoBehaviour
 {
     // Component References
-    private CharacterController controller;
-
-    // Movement Stats
-    public float movementSpeed = 10f;
-    private float speedSmoothTime = 0.1f;
-    private float rotationSpeed = 0.08f;
-
-    public bool usesGravity = true;
-    public float gravity = 10f;
-
-    protected Vector3 movementInput; // Input direction received from subclass
-    private Vector3 moveDirection; // The desired movement direction
-
-    private Vector3 targetVelocity; // The velocity we're aiming for
-    private Vector3 velocity; // The current velocity
-    private Vector3 smoothVelocity; // Used for velocity smoothing
+    public Health stats;
+    Renderer rend;
     
     // Other Stats
     private float hitTime = 1f;
-    Renderer rend;
     private Material defMat;
     public static Material hitMat;
 
-    public Health stats;
+    // Attack variables
+    protected bool hitting;
+    protected int attackDamage = 10;
 
+    public Animator attackAnimator;
+    public Transform attackPoint;
+    public float attackRange = 0.5f;
+    public LayerMask attackLayers; // The layers this creature can deal damage to
 
-    // protected Vector3 inputVector; 
+    public float attackRate = 2f;
 
-
-    // Initialize method must be overriden to update variables such as speed and health.
-    public abstract void Initialize();
+    private float nextAttackTime = 0f;
 
 
     protected virtual void Start()
     {
-        controller = this.GetComponent<CharacterController>(); // Get the CharacterController at runtime
-
         stats = gameObject.GetComponent<Health>();
         rend = GetComponent<Renderer> ();
         defMat = rend.material;
 
         if (hitMat == null)
             hitMat = Resources.Load<Material>("HitMat");
-
-        // Run Initialize method as defined in subclass
-        Initialize();
     }
     
     
     protected virtual void Update()
     {
+        // Attacking
+        if (Time.time >= nextAttackTime)
+        {
+            if (hitting)
+            {
+                // Debug.Log("Hitting");
+                Attack();
+                nextAttackTime = Time.time + 1f / attackRate;
+            }
+        }
+
+        // Hit feedback
         if (hitTime < 1)
         {
             hitTime += Time.deltaTime;
@@ -77,57 +72,36 @@ public abstract class Creature : MonoBehaviour
                 rend.material = defMat;
             }
         }
+    }
+
+
+    void Attack()
+    {
+        hitting = false;
+
+        if (attackAnimator != null)
+        {
+            attackAnimator.SetTrigger("swing");
+        }
+
+        Collider[] hits = Physics.OverlapSphere(attackPoint.position, attackRange, attackLayers);
         
-        Move();
-    }
+        if(hits.Length == 0) return;
 
-
-    // Logic necessary for moving the creature.
-    void Move() 
-    {
-        movementInput.Normalize();
-
-        if (movementInput != Vector3.zero)
+        foreach (Collider enemy in hits)
         {
-            moveDirection = new Vector3(movementInput.x, 0, movementInput.z).normalized;
-        }
-
-        if (moveDirection != Vector3.zero)
-        {
-            targetVelocity = movementSpeed * movementInput;
-            velocity = Vector3.SmoothDamp(velocity, targetVelocity, ref smoothVelocity, speedSmoothTime);
-        }
-
-        Rotation(); // Rotation
-
-        controller.Move(velocity * Time.deltaTime);
-
-        if (usesGravity) 
-        {
-            Gravity();
+            enemy.GetComponent<Creature>().TakeDamage(attackDamage);
         }
     }
 
 
-    // Adds a downward force to the creature
-    void Gravity()
+    public void TakeDamage(int damage)
     {
-        Vector3 gravityVector = Vector3.zero;
-        if (!controller.isGrounded)
-        {
-            gravityVector.y -= gravity;
-        }
+        Debug.Log(name + " took " + damage + " damage!");
+        stats.ModifyHealth(damage * -1);
         
-        controller.Move(gravityVector * Time.deltaTime);
-    }
-
-
-    void Rotation()
-    {
-        if (movementInput != Vector3.zero)
-        {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(velocity), rotationSpeed);
-        }
+        hitTime = 0;
+        rend.material = hitMat;
     }
 
 
@@ -135,7 +109,7 @@ public abstract class Creature : MonoBehaviour
     {
         if (hit.gameObject.name == "sword")
         {
-            stats.ModifyHealth(-10);
+            // stats.ModifyHealth(-10);
             GameStats.damage += 10;
             Debug.Log("Sword hit");
             
@@ -144,12 +118,19 @@ public abstract class Creature : MonoBehaviour
         }
         if (hit.gameObject.name == "EnemyAttack")
         {
-            stats.ModifyHealth(-1);
+            // stats.ModifyHealth(-1);
             Debug.Log("Enemy hit");
             
             hitTime = 0;
             rend.material = hitMat;
         }
 
+    }
+
+    
+    void OnDrawGizmosSelected()
+    {
+        if (attackPoint == null) return;
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 }

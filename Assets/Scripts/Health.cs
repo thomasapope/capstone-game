@@ -21,16 +21,10 @@ public class Health : MonoBehaviour
     }
 
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-            ModifyHealth(-10);
-    }
-
-
     public void ModifyHealth(int amount)
     {
         hp += amount;
+        // Debug.Log("I took " + amount + " damage!");
 
         float hpPercent = (float)hp / MAX_HEALTH;
         OnHealthChanged(hpPercent); // update health bar
@@ -44,12 +38,7 @@ public class Health : MonoBehaviour
 
     protected virtual void OnDeath()
     {
-        // What happens when something dies
-        // if(gameObject.name == "Enemy")
-        // {
-        //     GameStats.score++;
-        //     // Debug.Log("Score!");
-        // }
+        Debug.Log("I Died!");
         Destroy(gameObject);
     }
 
