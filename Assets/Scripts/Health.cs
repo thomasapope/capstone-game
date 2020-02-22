@@ -26,13 +26,14 @@ public class Health : MonoBehaviour
         hp += amount;
         // Debug.Log("I took " + amount + " damage!");
 
-        float hpPercent = (float)hp / MAX_HEALTH;
-        OnHealthChanged(hpPercent); // update health bar
+        // float hpPercent = (float)hp / MAX_HEALTH;
+        // OnHealthChanged(hpPercent); // update health bar
 
-        if (hp <= 0) // check if dead
-        {
-            OnDeath();
-        }
+        // if (hp <= 0) // check if dead
+        // {
+        //     OnDeath();
+        // }
+        UpdateHealthBar();
     }
 
 
@@ -46,5 +47,31 @@ public class Health : MonoBehaviour
     private void OnDisable()
     {
         OnHealthRemoved(this);
+    }
+
+
+    private void UpdateHealthBar()
+    {
+        float hpPercent = (float)hp / MAX_HEALTH;
+        OnHealthChanged(hpPercent); // update health bar
+
+        if (hp <= 0) // check if dead
+        {
+            OnDeath();
+        }
+    }
+
+
+    public int health 
+    {
+        get 
+        { 
+            return hp; 
+        }
+        set 
+        { 
+            hp = value;
+            UpdateHealthBar();
+        }
     }
 }

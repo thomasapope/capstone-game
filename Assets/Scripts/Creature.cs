@@ -17,12 +17,10 @@ public abstract class Creature : MonoBehaviour
     public Health stats;
     Renderer rend;
     
-    // Other Stats
-    private float hitTime = 1f;
-    private Material defMat;
-    public static Material hitMat;
 
-    // Attack variables
+    // Stats
+    // public float health;
+
     protected bool hitting;
     protected int attackDamage = 10;
 
@@ -30,11 +28,13 @@ public abstract class Creature : MonoBehaviour
     public Transform attackPoint;
     public float attackRange = 0.5f;
     public LayerMask attackLayers; // The layers this creature can deal damage to
-
     public float attackRate = 2f;
-
     private float nextAttackTime = 0f;
 
+    // Other Stats
+    private float hitTime = 1f;
+    private Material defMat;
+    public static Material hitMat;
 
     protected virtual void Start()
     {
@@ -132,5 +132,11 @@ public abstract class Creature : MonoBehaviour
     {
         if (attackPoint == null) return;
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+    }
+
+    public int health 
+    {
+        get { return stats.health; }
+        set { stats.health = value; }
     }
 }

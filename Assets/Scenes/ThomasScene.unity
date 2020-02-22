@@ -13280,6 +13280,12 @@ Transform:
   m_Father: {fileID: 482812704}
   m_RootOrder: 45
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1241626242 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1745544553, guid: 5c57c515b01f67441838df42178a3447,
+    type: 3}
+  m_PrefabInstance: {fileID: 1529454983}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1252277349
 GameObject:
   m_ObjectHideFlags: 0
@@ -13761,6 +13767,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 904692277821601987, guid: 13f8fb30e0c6b7a4cbf7630804f35286,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 1979969953140674658, guid: 13f8fb30e0c6b7a4cbf7630804f35286,
         type: 3}
       propertyPath: groundMask.m_Bits
@@ -13775,6 +13786,16 @@ PrefabInstance:
         type: 3}
       propertyPath: gravity
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1979969953140674658, guid: 13f8fb30e0c6b7a4cbf7630804f35286,
+        type: 3}
+      propertyPath: attackAnimator
+      value: 
+      objectReference: {fileID: 1241626242}
+    - target: {fileID: 1979969953140674658, guid: 13f8fb30e0c6b7a4cbf7630804f35286,
+        type: 3}
+      propertyPath: attackLayers.m_Bits
+      value: 2048
       objectReference: {fileID: 0}
     - target: {fileID: 8205218139876009303, guid: 13f8fb30e0c6b7a4cbf7630804f35286,
         type: 3}
