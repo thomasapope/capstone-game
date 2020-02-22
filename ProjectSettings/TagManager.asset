@@ -15,9 +15,9 @@ TagManager:
   - 
   - 
   - Ground
-  - 
-  - 
-  - 
+  - Player
+  - Obstacle
+  - Enemy
   - 
   - 
   - 
