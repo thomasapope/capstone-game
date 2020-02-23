@@ -1199,7 +1199,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 128309713}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 361980be0531acc48a4394506efe47fa, type: 2}
   m_CullingMode: 0
@@ -1614,6 +1614,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   restartDelay: 1
   completeLevelUI: {fileID: 128309713}
+  gameUI: {fileID: 389228385}
 --- !u!43 &166756901
 Mesh:
   m_ObjectHideFlags: 0

@@ -5,9 +5,10 @@ public class GameManager : MonoBehaviour
 {
     bool gameHasEnded = false;
 
-    public float restartDelay = 1f;
+    public float restartDelay = 3f;
 
     public GameObject completeLevelUI;
+    public GameObject gameUI;
     
 
     public void CompleteLevel()
@@ -15,7 +16,10 @@ public class GameManager : MonoBehaviour
         if (WaveSpawner.complete)
         {
             Debug.Log("YOU WON!");
+            gameUI.SetActive(false);
             completeLevelUI.SetActive(true);
+            EndGame();
+
         }
         else 
         {
@@ -36,8 +40,8 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public static void ReturnToMenu()
+    public void ReturnToMenu()
     {
-		SceneManager.LoadScene("MainMenu");
+		SceneManager.LoadScene("Menu");
     }
 }
