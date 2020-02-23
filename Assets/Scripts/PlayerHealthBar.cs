@@ -7,16 +7,17 @@ public class PlayerHealthBar : MonoBehaviour
 {
     public Slider slider;
     private GameObject player;
-    private Health healthScript;
+    // private Health healthScript;
+    private Player playerScript;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        healthScript = player.GetComponent<Health>();
+        playerScript = player.GetComponent<Player>();
     }
     
     void Update()
     {
-        slider.value = healthScript.hp;
+        slider.value = playerScript.health;
     }
 }
