@@ -32,8 +32,8 @@ public class Player : Creature
     // public override void Initialize()
     protected virtual void Start()
     {
-        movementSpeed = 10f;
-        attackDamage = 35;
+        // movementSpeed = 10f;
+        // attackDamage = 35;
 
         controller = GetComponent<CharacterController>(); // Get the CharacterController at runtime
         

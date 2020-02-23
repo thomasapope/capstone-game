@@ -25,7 +25,7 @@ public abstract class Creature : MonoBehaviour
     public int hp;
 
     protected bool hitting;
-    protected int attackDamage = 10;
+    public int attackDamage = 10;
 
     public Animator attackAnimator;
     public Transform attackPoint;
