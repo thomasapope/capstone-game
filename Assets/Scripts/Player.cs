@@ -13,6 +13,7 @@ public class Player : Creature
 {
     // Component References
     private CharacterController controller;
+    private Camera cam;
 
     // Movement Stats
     public float movementSpeed = 10f;
@@ -35,7 +36,8 @@ public class Player : Creature
         // movementSpeed = 10f;
         // attackDamage = 35;
 
-        controller = GetComponent<CharacterController>(); // Get the CharacterController at runtime
+        controller = GetComponent<CharacterController>();
+        cam = Camera.main;
         
         base.Start();
     }
@@ -99,9 +101,17 @@ public class Player : Creature
 
     void Rotation()
     {
-        if (movementInput != Vector3.zero)
-        {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(velocity), rotationSpeed);
-        }
+    	Plane playerPlane = new Plane(Vector3.up, transform.position);
+    	Ray ray = cam.ScreenPointToRay (Input.mousePosition);
+        
+    	float hitdist = 0.0f;
+    	if (playerPlane.Raycast (ray, out hitdist)) 
+		{
+        	Vector3 targetPoint = ray.GetPoint(hitdist);
+ 
+        	Quaternion targetRotation = Quaternion.LookRotation(targetPoint - transform.position);
+ 
+        	transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed);
+		}
     }
 }
