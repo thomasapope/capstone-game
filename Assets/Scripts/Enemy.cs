@@ -23,12 +23,15 @@ public class Enemy : Creature
     {
         base.Start();
 
+        attackRate = .5f;
+
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
     }
 
 
     protected override void Update()
     {
+        if (!target) return;
         float distance = Vector3.Distance(target.position, transform.position);
 
         agent.SetDestination(target.position);
@@ -36,7 +39,7 @@ public class Enemy : Creature
         if (distance <= agent.stoppingDistance)
         {
             // Attack
-            //hitting = true;
+            hitting = true;
             FaceTarget();
         }
 

@@ -65,6 +65,9 @@ public class CameraController : MonoBehaviour
         mouse.y -= Input.GetAxis("Mouse Y") * rotationSpeed;
         mouse.y = Mathf.Clamp(mouse.y, -35, 60);
 
+        // if (!target.gameObject.activeInHierarchy) return;
+        if(!target) return;
+
         transform.LookAt(target);
 
         if (Input.GetKey(KeyCode.LeftShift))
