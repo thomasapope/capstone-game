@@ -38,8 +38,8 @@ public class CameraController : MonoBehaviour
 
     void Start()
     {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        // Cursor.visible = false;
+        // Cursor.lockState = CursorLockMode.Locked;
     }
 
 
@@ -64,6 +64,9 @@ public class CameraController : MonoBehaviour
         mouse.x += Input.GetAxis("Mouse X") * rotationSpeed;
         mouse.y -= Input.GetAxis("Mouse Y") * rotationSpeed;
         mouse.y = Mathf.Clamp(mouse.y, -35, 60);
+
+        // if (!target.gameObject.activeInHierarchy) return;
+        if(!target) return;
 
         transform.LookAt(target);
 

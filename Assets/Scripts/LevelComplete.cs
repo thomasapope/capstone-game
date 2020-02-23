@@ -7,5 +7,6 @@ public class LevelComplete : MonoBehaviour
    {
        // Sends back to Main Menu
 		SceneManager.LoadScene("MainMenu");
+      Debug.Log("Loading main menu");
    }
 }
