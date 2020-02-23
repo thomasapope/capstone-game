@@ -19,7 +19,10 @@ public abstract class Creature : MonoBehaviour
     
 
     // Stats
-    // public float health;
+    [SerializeField]
+    private int MAX_HEALTH = 100;
+
+    public int hp;
 
     protected bool hitting;
     protected int attackDamage = 10;
@@ -44,6 +47,18 @@ public abstract class Creature : MonoBehaviour
 
         if (hitMat == null)
             hitMat = Resources.Load<Material>("HitMat");
+    }
+
+    // Delegates
+    public static event Action<Creature> OnHealthAdded = delegate {};
+    public static event Action<Creature> OnHealthRemoved = delegate {};
+    public event Action<float> OnHealthChanged = delegate {};
+
+
+    private void OnEnable()
+    {
+        hp = MAX_HEALTH;
+        OnHealthAdded(this);
     }
     
     
@@ -104,27 +119,36 @@ public abstract class Creature : MonoBehaviour
         rend.material = hitMat;
     }
 
-
-    void OnControllerColliderHit(ControllerColliderHit hit)
+    
+    public void ModifyHealth(int amount)
     {
-        if (hit.gameObject.name == "sword")
-        {
-            // stats.ModifyHealth(-10);
-            GameStats.damage += 10;
-            Debug.Log("Sword hit");
-            
-            hitTime = 0;
-            rend.material = hitMat;
-        }
-        if (hit.gameObject.name == "EnemyAttack")
-        {
-            // stats.ModifyHealth(-1);
-            Debug.Log("Enemy hit");
-            
-            hitTime = 0;
-            rend.material = hitMat;
-        }
+        hp += amount;
+        UpdateHealthBar();
+    }
 
+
+    protected virtual void OnDeath()
+    {
+        Debug.Log("I Died!");
+        Destroy(gameObject);
+    }
+
+
+    private void UpdateHealthBar()
+    {
+        float hpPercent = (float)hp / MAX_HEALTH;
+        OnHealthChanged(hpPercent); // update health bar
+
+        if (hp <= 0) // check if dead
+        {
+            OnDeath();
+        }
+    }
+
+    
+    protected virtual void OnDisable()
+    {
+        OnHealthRemoved(this);
     }
 
     
@@ -136,7 +160,7 @@ public abstract class Creature : MonoBehaviour
 
     public int health 
     {
-        get { return stats.health; }
-        set { stats.health = value; }
+        get { return hp; }
+        set { hp = value; }
     }
 }

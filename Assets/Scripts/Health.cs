@@ -24,15 +24,6 @@ public class Health : MonoBehaviour
     public void ModifyHealth(int amount)
     {
         hp += amount;
-        // Debug.Log("I took " + amount + " damage!");
-
-        // float hpPercent = (float)hp / MAX_HEALTH;
-        // OnHealthChanged(hpPercent); // update health bar
-
-        // if (hp <= 0) // check if dead
-        // {
-        //     OnDeath();
-        // }
         UpdateHealthBar();
     }
 

@@ -52,8 +52,9 @@ public class Enemy : Creature
     }
 
 
-    private void OnDisable()
+    protected override void OnDisable()
     {
         GameStats.score++; // Add one kill to the score
+        base.OnDisable();
     }
 }

@@ -15,13 +15,15 @@ public class HealthBar : MonoBehaviour
 
     private Camera mainCamera;
 
-    private Health health;
+    // private Health health;
+    private Creature creature;
 
     
-    public void SetHealth(Health health) 
+    // public void SetHealth(Health health) 
+    public void SetCreature(Creature creature) 
     {
-        this.health = health;
-        health.OnHealthChanged += HandleHealthChanged;
+        this.creature = creature;
+        creature.OnHealthChanged += HandleHealthChanged;
     }
 
 
@@ -64,7 +66,7 @@ public class HealthBar : MonoBehaviour
     {
         transform.LookAt(Camera.main.transform);
         //transform.Rotate(0, 180, 0);
-        transform.position = health.transform.position + Vector3.up * positionOffset;
+        transform.position = creature.transform.position + Vector3.up * positionOffset;
         //transform.position = Camera.main.WorldToScreenPoint(health.transform.position + Vector3.up * positionOffset);
         //transform.position = Camera.main.WorldToScreenPoint(health.transform.position);
         // transform.position = health.transform.position;
@@ -73,6 +75,6 @@ public class HealthBar : MonoBehaviour
 
     private void OnDestroy() 
     {
-        health.OnHealthChanged -= HandleHealthChanged;
+        creature.OnHealthChanged -= HandleHealthChanged;
     }
 }
