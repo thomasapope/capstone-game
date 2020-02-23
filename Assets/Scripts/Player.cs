@@ -43,7 +43,8 @@ public class Player : Creature
     // Update is called once per frame
     protected override void Update()
     {
-        hitting = Input.GetKeyDown(KeyCode.Space);
+        // hitting = Input.GetKeyDown(KeyCode.Space);
+        hitting = Input.GetMouseButton(0); // Get attack input
 
         // Call the update method in the Creature class.
         base.Update();
