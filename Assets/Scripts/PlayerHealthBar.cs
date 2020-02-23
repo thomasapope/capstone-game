@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class PlayerHealthBar : MonoBehaviour
 {
     public Slider slider;
+    public Gradient gradient;
+    public Image fill;
     private GameObject player;
     // private Health healthScript;
     private Player playerScript;
@@ -19,5 +21,6 @@ public class PlayerHealthBar : MonoBehaviour
     void Update()
     {
         slider.value = playerScript.health;
+        fill.color = gradient.Evaluate(slider.normalizedValue);
     }
 }
