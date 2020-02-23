@@ -117,7 +117,6 @@ GameObject:
   - component: {fileID: 6628930071334772469}
   - component: {fileID: 8205218139876009303}
   - component: {fileID: 1979969953140674658}
-  - component: {fileID: 8700727739945719276}
   - component: {fileID: 4379403751807128725}
   m_Layer: 9
   m_Name: Player
@@ -236,6 +235,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 0}
+  MAX_HEALTH: 100
+  hp: 0
   attackAnimator: {fileID: 0}
   attackPoint: {fileID: 8709219995521138045}
   attackRange: 0.5
@@ -246,19 +247,6 @@ MonoBehaviour:
   movementSpeed: 10
   usesGravity: 1
   gravity: -9.8
---- !u!114 &8700727739945719276
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 904692277821601987}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 151c09d2a11cea94e8aef4424d84af49, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MAX_HEALTH: 100
 --- !u!114 &4379403751807128725
 MonoBehaviour:
   m_ObjectHideFlags: 0

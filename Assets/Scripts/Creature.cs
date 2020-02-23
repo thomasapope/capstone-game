@@ -10,11 +10,11 @@ using System;
     as is, but to be inherited from.
 */
 
-[RequireComponent(typeof(Health))]
+// [RequireComponent(typeof(Health))]
 public abstract class Creature : MonoBehaviour
 {
     // Component References
-    public Health stats;
+    // public Health stats;
     Renderer rend;
     
 
@@ -41,7 +41,7 @@ public abstract class Creature : MonoBehaviour
 
     protected virtual void Start()
     {
-        stats = gameObject.GetComponent<Health>();
+        // stats = gameObject.GetComponent<Health>();
         rend = GetComponent<Renderer> ();
         defMat = rend.material;
 
@@ -113,7 +113,7 @@ public abstract class Creature : MonoBehaviour
     public void TakeDamage(int damage)
     {
         Debug.Log(name + " took " + damage + " damage!");
-        stats.ModifyHealth(damage * -1);
+        ModifyHealth(damage * -1);
         
         hitTime = 0;
         rend.material = hitMat;

@@ -12,7 +12,7 @@ using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
 // [RequireComponent(typeof(CharacterController))]
-[RequireComponent(typeof(Health))]
+// [RequireComponent(typeof(Health))]
 public class Enemy : Creature
 {
     public Transform target;

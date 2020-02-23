@@ -45,7 +45,6 @@ GameObject:
   - component: {fileID: 9209881830126342956}
   - component: {fileID: 2691773500010221366}
   - component: {fileID: 8516002812758349075}
-  - component: {fileID: 2019427072419258583}
   m_Layer: 11
   m_Name: Enemy
   m_TagString: Enemy
@@ -182,6 +181,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 0}
+  MAX_HEALTH: 100
+  hp: 0
   attackAnimator: {fileID: 0}
   attackPoint: {fileID: 6462658205227437547}
   attackRange: 0.5
@@ -190,19 +191,6 @@ MonoBehaviour:
     m_Bits: 512
   attackRate: 2
   target: {fileID: 0}
---- !u!114 &2019427072419258583
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8516002812758349074}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 151c09d2a11cea94e8aef4424d84af49, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MAX_HEALTH: 100
 --- !u!1 &8659539007234259362
 GameObject:
   m_ObjectHideFlags: 0
