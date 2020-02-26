@@ -142,7 +142,7 @@ MonoBehaviour:
   attackRate: 2
   movementSpeed: 10
   usesGravity: 1
-  gravity: -9.8
+  gravity: 9.8
 --- !u!1 &1892742292719236045
 GameObject:
   m_ObjectHideFlags: 0

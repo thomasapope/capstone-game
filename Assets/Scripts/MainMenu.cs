@@ -15,7 +15,7 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame ()
     {
-        SceneManager.LoadScene("ThomasScene");
+        SceneManager.LoadScene("SchoolScene");
     }
 
     public void QuitGame () 
