@@ -38,9 +38,17 @@ public abstract class Creature : MonoBehaviour
     private float hitTime = 1f;
     private Material defMat;
     public static Material hitMat;
+    
+    // Delegates
+    public static event Action<Creature> OnHealthAdded = delegate {};
+    public static event Action<Creature> OnHealthRemoved = delegate {};
+    public event Action<float> OnHealthChanged = delegate {};
+
 
     protected virtual void Start()
     {
+        hp = MAX_HEALTH;
+
         // stats = gameObject.GetComponent<Health>();
         rend = GetComponent<Renderer> ();
         defMat = rend.material;
@@ -49,15 +57,9 @@ public abstract class Creature : MonoBehaviour
             hitMat = Resources.Load<Material>("HitMat");
     }
 
-    // Delegates
-    public static event Action<Creature> OnHealthAdded = delegate {};
-    public static event Action<Creature> OnHealthRemoved = delegate {};
-    public event Action<float> OnHealthChanged = delegate {};
-
 
     private void OnEnable()
     {
-        hp = MAX_HEALTH;
         OnHealthAdded(this);
     }
     
@@ -129,11 +131,6 @@ public abstract class Creature : MonoBehaviour
     }
 
 
-    protected virtual void OnDeath()
-    {
-        Debug.Log("I Died!");
-        Destroy(gameObject);
-    }
 
 
     private void UpdateHealthBar()
@@ -147,7 +144,14 @@ public abstract class Creature : MonoBehaviour
         }
     }
 
+
+    protected virtual void OnDeath()
+    {
+        Debug.Log(gameObject.name + " died!");
+        Destroy(gameObject);
+    }
     
+
     protected virtual void OnDisable()
     {
         OnHealthRemoved(this);

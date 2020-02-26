@@ -24,28 +24,28 @@ public class HealthBarController : MonoBehaviour
 
 
     // private void AddHealthBar(Health health) 
-    private void AddHealthBar(Creature health) 
+    private void AddHealthBar(Creature creature) 
     {
-        if (healthBars.ContainsKey(health) == false)
+        if (healthBars.ContainsKey(creature) == false)
         {
             var healthBar = Instantiate(healthBarPrefab, transform);
-            healthBars.Add(health, healthBar);
-            healthBar.SetCreature(health);
+            healthBars.Add(creature, healthBar);
+            healthBar.SetCreature(creature);
             healthBar.SetCamera(mainCamera);
         }
     }
 
 
     // private void RemoveHealthBar(Health health) 
-    private void RemoveHealthBar(Creature health) 
+    private void RemoveHealthBar(Creature creature) 
     {
-        if (healthBars.ContainsKey(health))
+        if (healthBars.ContainsKey(creature))
         {
-            if (healthBars[health])
+            if (healthBars[creature])
             {
-                Destroy(healthBars[health].gameObject);
+                Destroy(healthBars[creature].gameObject);
             }
-            healthBars.Remove(health);
+            healthBars.Remove(creature);
         }
     }
 }
