@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 /*
     Player.cs
@@ -11,6 +12,8 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class Player : Creature
 {
+    // Object pickup event
+    public event Action OnItemPickUp;
     // Component References
     private CharacterController controller;
     private Camera cam;
@@ -30,6 +33,10 @@ public class Player : Creature
     private Vector3 velocity; // The current velocity
     private Vector3 smoothVelocity; // Used for velocity smoothing
 
+    // Picked Up Items
+    public List<Interactable> pickedUpItems;
+    public LayerMask interactableLayer;
+
     // public override void Initialize()
     protected virtual void Start()
     {
@@ -45,6 +52,8 @@ public class Player : Creature
     // Update is called once per frame
     protected override void Update()
     {
+        //Check for interactable
+        CheckForInteractable();
         // hitting = Input.GetKeyDown(KeyCode.Space);
         hitting = Input.GetMouseButton(0); // Get attack input
 
@@ -56,6 +65,7 @@ public class Player : Creature
         movementInput.z = Input.GetAxisRaw("Vertical");
 
         Move();
+        
     }
 
 
@@ -113,5 +123,26 @@ public class Player : Creature
  
         	transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed);
 		}
+    }
+
+    void CheckForInteractable()
+    {
+        if(Input.GetMouseButtonUp(1)){
+            //Debug.Log("Hit Button");
+            Collider[] hits = Physics.OverlapSphere(attackPoint.position, 4, interactableLayer);
+        
+            if(hits.Length == 0) return;
+
+            foreach (Collider item in hits)
+            {
+                PickUpItem(item.GetComponent<Interactable>());
+            }
+        }
+    }
+    // Add Interactable to PickedUp List.
+    void PickUpItem(Interactable item) 
+    {
+        OnItemPickUp();
+        pickedUpItems.Add(item);
     }
 }
