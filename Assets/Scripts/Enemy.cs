@@ -18,6 +18,9 @@ public class Enemy : Creature
     public Transform target;
     private UnityEngine.AI.NavMeshAgent agent;
 
+    public float refreshTime = 5f;
+    private float timeTilRefresh;
+
 
     protected virtual void Start()
     {
@@ -31,7 +34,20 @@ public class Enemy : Creature
 
     protected override void Update()
     {
-        if (!target) return;
+        // Find Target
+        if (!target) FindTarget();
+
+        if (timeTilRefresh < 0) // A timer to keep this from getting calculated every frame
+        {
+            FindTarget();
+
+            timeTilRefresh = refreshTime;
+        }
+        else
+        {
+            timeTilRefresh -= Time.deltaTime;
+        }
+
         float distance = Vector3.Distance(target.position, transform.position);
 
         agent.SetDestination(target.position);
@@ -44,6 +60,34 @@ public class Enemy : Creature
         }
 
         base.Update();
+    }
+
+
+    private void FindTarget()
+    {
+        // Finds the closest target. 
+        // Should not be executed every frame as it is resource intensive.
+
+        float minDistance = 1000f;
+        Transform closest = transform;
+        foreach (GameObject g in GameManager.targetRefs)
+        {
+            float dist = Vector3.Distance(transform.position, g.transform.position);
+            if (dist < minDistance) 
+            {
+                minDistance = dist;
+                closest = g.transform;
+            }
+        }
+        if (closest)
+        {
+            // Debug.Log(closest.gameObject.name);
+            target = closest;
+        }
+        else 
+        {
+            return;
+        }
     }
 
 

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -9,6 +11,22 @@ public class GameManager : MonoBehaviour
 
     public GameObject completeLevelUI;
     public GameObject gameUI;
+
+    // public static GameObject[] playerRef;
+    public static GameObject playerRef;
+    public static List<GameObject> targetRefs;
+
+    private void Start()
+    {
+        // playerRef = GameObject.FindGameObjectsWithTag("Player").ToList();
+        playerRef = GameObject.FindWithTag("Player");
+        targetRefs = new List<GameObject>(GameObject.FindGameObjectsWithTag("Target"));
+        targetRefs.Add(playerRef);
+        foreach (GameObject o in targetRefs)
+        {
+            Debug.Log(o.name);
+        }
+    }
     
 
     public void CompleteLevel()
