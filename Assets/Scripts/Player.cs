@@ -17,6 +17,8 @@ public class Player : Creature
     // Component References
     private CharacterController controller;
     private Camera cam;
+    [SerializeField]
+    private Transform weaponPoint;
 
     // Movement Stats
     public float movementSpeed = 10f;
@@ -37,6 +39,21 @@ public class Player : Creature
     public List<Interactable> pickedUpItems;
     public LayerMask interactableLayer;
 
+
+    // Weapons
+    [System.Serializable]
+    public class Weapon
+    {
+        public string name;
+        public GameObject prefab;
+    }
+
+    private int currentWeapon = 0;
+    public Weapon[] weapons;
+
+    
+
+
     // public override void Initialize()
     protected virtual void Start()
     {
@@ -45,6 +62,8 @@ public class Player : Creature
 
         controller = GetComponent<CharacterController>();
         cam = Camera.main;
+
+        LoadWeapon(currentWeapon);
         
         base.Start();
     }
@@ -144,5 +163,15 @@ public class Player : Creature
     {
         OnItemPickUp();
         pickedUpItems.Add(item);
+    }
+
+
+    void LoadWeapon(int weaponIndex)
+    {
+        if (weaponPoint.childCount != 0)
+        {
+            // Debug.Log(weaponPoint.GetChild(0).name);
+            // Destroy(weaponPoint.GetChild(0).gameObject);
+        }
     }
 }

@@ -70,11 +70,11 @@ public class CameraController : MonoBehaviour
 
         transform.LookAt(target);
 
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            target.rotation = Quaternion.Euler(mouse.y, mouse.x, 0);
-        }
-        else
+        // if (Input.GetKey(KeyCode.LeftShift))
+        // {
+        //     target.rotation = Quaternion.Euler(mouse.y, mouse.x, 0);
+        // }
+        // else
         {
             transform.position = target.position - offset * currentZoom;
             transform.LookAt(target.position + Vector3.up * pitch);

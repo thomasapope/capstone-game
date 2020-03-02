@@ -81,17 +81,17 @@ public abstract class Creature : MonoBehaviour
         }
 
         // Hit feedback
-        if (hitTime < 1)
-        {
-            hitTime += Time.deltaTime;
-        }
-        else
-        {
-            if (rend.material != defMat)
-            {
-                rend.material = defMat;
-            }
-        }
+        // if (hitTime < 1)
+        // {
+        //     hitTime += Time.deltaTime;
+        // }
+        // else
+        // {
+        //     if (rend.material != defMat)
+        //     {
+        //         rend.material = defMat;
+        //     }
+        // }
     }
 
 
