@@ -160,7 +160,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 2.9
+  m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -189,7 +189,8 @@ MonoBehaviour:
   attackLayers:
     serializedVersion: 2
     m_Bits: 512
-  attackRate: 2
+  attackRate: 0.5
+  attackDelay: 0.5
   startingPoint: {fileID: 0}
   target: {fileID: 0}
   carryPoint: {fileID: 5620664013337317294}
@@ -218,7 +219,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8659539007234259362}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.989}
+  m_LocalPosition: {x: 0, y: 0, z: 1.73}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8516002812758349087}

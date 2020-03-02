@@ -31,7 +31,7 @@ public class Enemy : Creature
     {
         base.Start();
 
-        attackRate = .5f;
+        // attackRate = .5f;
 
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
     }

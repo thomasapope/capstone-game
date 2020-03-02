@@ -141,9 +141,14 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   attackRate: 2
+  attackDelay: 0
   movementSpeed: 10
   usesGravity: 1
   gravity: 9.8
+  pickedUpItems: []
+  interactableLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &9184803921306215388
 MonoBehaviour:
   m_ObjectHideFlags: 0

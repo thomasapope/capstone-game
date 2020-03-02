@@ -33,6 +33,9 @@ public abstract class Creature : MonoBehaviour
     public LayerMask attackLayers; // The layers this creature can deal damage to
     public float attackRate = 2f;
     private float nextAttackTime = 0f;
+    public float attackDelay = .2f;
+
+    public event System.Action OnAttack;
 
     // Other Stats
     private float hitTime = 1f;
@@ -109,7 +112,22 @@ public abstract class Creature : MonoBehaviour
         foreach (Collider enemy in hits)
         {
             // Debug.Log(enemy.name);
-            enemy.GetComponent<Creature>().TakeDamage(attackDamage);
+            // Creature enemyCreature = enemy.GetComponent<Creature>().TakeDamage(attackDamage);
+            StartCoroutine(DoDamage(enemy, attackDelay));
+            // enemy.GetComponent<Creature>().TakeDamage(attackDamage);
+
+            IEnumerator DoDamage(Collider creature, float delay)
+            {
+                yield return new WaitForSeconds(delay);
+
+                if (OnAttack != null)
+                {
+                    OnAttack();
+                }
+
+                creature.GetComponent<Creature>().TakeDamage(attackDamage);
+                // creature.TakeDamage(attackDamage);
+            }
         }
     }
 
