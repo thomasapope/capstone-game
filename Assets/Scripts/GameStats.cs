@@ -23,6 +23,7 @@ public class GameStats : MonoBehaviour
     {
         scoreLabel.text = "Wave: " + (WaveSpawner.nextWave + 1) + "\n" + 
                             "Kills: " + score + "\n" + 
-                            "Damage: " + damage;
+                            "Damage: " + damage + "\n" + 
+                            "Children Left: " + GameManager.numOfChildren;
     }
 }

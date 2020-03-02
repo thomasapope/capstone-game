@@ -140,6 +140,7 @@ public class WaveSpawner : MonoBehaviour
         Debug.Log("Spawning Enemy: " + _enemy.name);
 
         Enemy enemy = Instantiate<Enemy>(_enemy, _sp.position, _sp.rotation);
+        enemy.startingPoint = _sp;
         enemy.target = player;
     }
 
