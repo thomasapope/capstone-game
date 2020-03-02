@@ -36745,7 +36745,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1547960902}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: ChildrenTargetPoint
   m_TagString: Target
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
