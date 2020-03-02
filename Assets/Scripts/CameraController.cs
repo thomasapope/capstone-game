@@ -34,7 +34,7 @@ public class CameraController : MonoBehaviour
 
     public float pitch = 2f;
 
-    private float currentZoom = 10f;
+    private float currentZoom = 5f;
 
     void Start()
     {
@@ -43,12 +43,12 @@ public class CameraController : MonoBehaviour
     }
 
 
-    void Update()
-    {
+    // void Update()
+    // {
         // Zooming
-        currentZoom -= Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
-        currentZoom = Mathf.Clamp(currentZoom, minZoom, maxZoom);
-    }
+        // currentZoom -= Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
+        // currentZoom = Mathf.Clamp(currentZoom, minZoom, maxZoom);
+    // }
 
 
     void LateUpdate()

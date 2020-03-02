@@ -19,6 +19,8 @@ public class Player : Creature
     private Camera cam;
     [SerializeField]
     private Transform weaponPoint;
+    // [SerializeField]
+    // private Animator animator;
 
     // Movement Stats
     public float movementSpeed = 10f;
@@ -50,6 +52,7 @@ public class Player : Creature
 
     private int currentWeapon = 0;
     public Weapon[] weapons;
+    private bool weaponIsSwitching = false;
 
     
 
@@ -63,7 +66,7 @@ public class Player : Creature
         controller = GetComponent<CharacterController>();
         cam = Camera.main;
 
-        LoadWeapon(currentWeapon);
+        // SwitchWeapon(currentWeapon);
         
         base.Start();
     }
@@ -75,6 +78,8 @@ public class Player : Creature
         CheckForInteractable();
         // hitting = Input.GetKeyDown(KeyCode.Space);
         hitting = Input.GetMouseButton(0); // Get attack input
+
+        //WeaponSelection();
 
         // Call the update method in the Creature class.
         base.Update();
@@ -166,12 +171,5 @@ public class Player : Creature
     }
 
 
-    void LoadWeapon(int weaponIndex)
-    {
-        if (weaponPoint.childCount != 0)
-        {
-            // Debug.Log(weaponPoint.GetChild(0).name);
-            // Destroy(weaponPoint.GetChild(0).gameObject);
-        }
-    }
+    
 }
