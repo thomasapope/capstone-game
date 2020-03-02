@@ -5143,7 +5143,7 @@ Transform:
   m_LocalScale: {x: 244.4125, y: 1, z: 294.5126}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &150061581
 GameObject:
@@ -15697,7 +15697,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: fccc49bf3e108b94c8202230c83d6e92, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: fccc49bf3e108b94c8202230c83d6e92, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -17214,7 +17214,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 65.256004, y: -50.161003, z: -23.569}
 --- !u!1001 &712143744
 PrefabInstance:
@@ -20600,7 +20600,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 73c2999be80b3be4e816d348fea624e1, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 73c2999be80b3be4e816d348fea624e1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -23062,7 +23062,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: fccc49bf3e108b94c8202230c83d6e92, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: fccc49bf3e108b94c8202230c83d6e92, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -42334,8 +42334,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectUI: {fileID: 1747626664}
-  itemName: Banana
-  itemDescription: Big ASS Banana
+  itemName: Test Item
+  itemDescription: Test Item Description
 --- !u!65 &1851092440
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -47392,7 +47392,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2399591685287118125
 GameObject:
