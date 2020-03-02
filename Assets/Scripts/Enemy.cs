@@ -17,6 +17,7 @@ public class Enemy : Creature
 {
     public Transform startingPoint;
     public Transform target;
+    public Transform carryPoint;
     private UnityEngine.AI.NavMeshAgent agent;
 
     public enum MindState { CHASING, FLEEING }
@@ -61,13 +62,24 @@ public class Enemy : Creature
 
         agent.SetDestination(target.position);
 
+        // Check if enemy is close to target
         if (distance <= agent.stoppingDistance)
         {
-            if (target.gameObject.name == "Kid")
+            // Check if target is the kid target point
+            if (target.gameObject.name == "KidTargetPoint")
             {
+                if (GameManager.numOfChildren < 1) // Make sure they can't pick up a child if there aren't any
+                {
+                    FindTarget();
+                    return;
+                }
+
                 Debug.Log("They're taking the children!!!");
                 state = MindState.FLEEING;
-                target.SetParent(transform);
+                GameObject child = Instantiate(GameManager.childPrefab, carryPoint.position, target.rotation);
+                child.transform.SetParent(transform); // Pick up child
+                GameManager.numOfChildren--;
+                // target.SetParent(transform);
             }
 
             // Attack
@@ -83,13 +95,14 @@ public class Enemy : Creature
     {
         // Finds a new target for the enemy. 
         // Should not be executed every frame as it is resource intensive.
-        if (state == MindState.FLEEING) {
-            target = startingPoint;
-            return;
-        }
-        
         if (state == MindState.CHASING)
         {
+            if (GameManager.numOfChildren < 1)
+            {
+                target = GameManager.playerRef.transform;
+                return;
+            }
+
             float minDistance = 1000f;
             Transform closest = transform;
             foreach (GameObject g in GameManager.targetRefs)
@@ -131,10 +144,17 @@ public class Enemy : Creature
         {
             // Debug.Log("Your enemies have dropped a child!!!");
             // Debug.Log(target.name);
+            // Transform kid = transform.GetChild(0).gameObject.GetComponentInChildren<Transform>();
+            // if (kid.CompareTag("Target"))
+            // {
+            //     kid.SetParent(null);
+            // }
+
+
             Transform[] children = GetComponentsInChildren<Transform>();
             foreach (Transform child in children)
             {
-                if (child.CompareTag("Target"))
+                if (child.CompareTag("holdable"))
                 {
                     child.SetParent(null);
                 }

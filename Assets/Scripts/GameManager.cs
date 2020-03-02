@@ -16,12 +16,20 @@ public class GameManager : MonoBehaviour
     public static GameObject playerRef;
     public static List<GameObject> targetRefs;
 
+    public static GameObject childPrefab;
+
+    // public static enum AIState {}
+
+    public static int numOfChildren = 3;
+
     private void Start()
     {
         // playerRef = GameObject.FindGameObjectsWithTag("Player").ToList();
         playerRef = GameObject.FindWithTag("Player");
         targetRefs = new List<GameObject>(GameObject.FindGameObjectsWithTag("Target"));
         targetRefs.Add(playerRef);
+        childPrefab = (GameObject)Resources.Load("ChildPrefab");
+
         foreach (GameObject o in targetRefs)
         {
             Debug.Log(o.name);
@@ -37,7 +45,6 @@ public class GameManager : MonoBehaviour
             gameUI.SetActive(false);
             completeLevelUI.SetActive(true);
             EndGame();
-
         }
         else 
         {
