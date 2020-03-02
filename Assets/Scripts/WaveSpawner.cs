@@ -142,6 +142,7 @@ public class WaveSpawner : MonoBehaviour
         Enemy enemy = Instantiate<Enemy>(_enemy, _sp.position, _sp.rotation);
         enemy.startingPoint = _sp;
         enemy.target = player;
+        enemy.transform.rotation = Quaternion.LookRotation(new Vector3 (player.position.x, 0, player.position.z));
     }
 
 }
