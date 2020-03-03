@@ -98,7 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 1
   target: {fileID: 0}
-  offset: {x: 0, y: -1.4, z: 0.7}
+  offset: {x: 0, y: -1.4, z: -0.7}
   zoomSpeed: 4
   minZoom: 5
   maxZoom: 15
