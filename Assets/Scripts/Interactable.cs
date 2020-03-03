@@ -14,7 +14,6 @@ public class Interactable : MonoBehaviour
     {
         pickedUp = false;
         player = GameObject.FindObjectOfType<Player>();
-        player.OnItemPickUp += PickUpObject;
     }
 
 
@@ -33,6 +32,5 @@ public class Interactable : MonoBehaviour
     void PickUpObject()
     {
         pickedUp = true;
-        gameObject.SetActive(false);
     }
 }

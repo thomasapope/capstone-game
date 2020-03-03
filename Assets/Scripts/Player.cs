@@ -12,8 +12,6 @@ using System;
 [RequireComponent(typeof(CharacterController))]
 public class Player : Creature
 {
-    // Object pickup event
-    public event Action OnItemPickUp;
     // Component References
     private CharacterController controller;
     private Camera cam;
@@ -135,14 +133,21 @@ public class Player : Creature
 
             foreach (Collider item in hits)
             {
-                PickUpItem(item.GetComponent<Interactable>());
+                GameObject objectToDestroy = item.gameObject;
+                Interactable interactableItem = item.GetComponent<Interactable>();
+                PickUpItem(interactableItem);
+                objectToDestroy.SetActive(false);
+
             }
         }
     }
     // Add Interactable to PickedUp List.
     void PickUpItem(Interactable item) 
     {
-        OnItemPickUp();
         pickedUpItems.Add(item);
+        // foreach(int i in pickedUpItems)
+        // {
+
+        // }
     }
 }
