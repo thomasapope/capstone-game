@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efbaa2ae820211342bf980fbedbc2c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectUI: {fileID: 0}
+  objectUI: {fileID: 5235756399727885612}
   itemName: Child
   itemDescription: Awwww, It's a baby!
 --- !u!1001 &6203324661002821748
@@ -299,6 +299,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed264041f2bc99b4883e87eebef52ae9, type: 3}
+--- !u!1 &5235756399727885612 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2215637275901713752, guid: ed264041f2bc99b4883e87eebef52ae9,
+    type: 3}
+  m_PrefabInstance: {fileID: 6203324661002821748}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &5235756399727885613 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2215637275901713753, guid: ed264041f2bc99b4883e87eebef52ae9,
