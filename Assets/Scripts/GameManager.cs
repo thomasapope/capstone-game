@@ -30,10 +30,10 @@ public class GameManager : MonoBehaviour
         targetRefs.Add(playerRef);
         childPrefab = (GameObject)Resources.Load("ChildPrefab");
 
-        foreach (GameObject o in targetRefs)
-        {
-            Debug.Log(o.name);
-        }
+        // foreach (GameObject o in targetRefs)
+        // {
+        //     Debug.Log(o.name);
+        // }
     }
     
 

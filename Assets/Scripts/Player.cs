@@ -15,6 +15,10 @@ public class Player : Creature
     // Component References
     private CharacterController controller;
     private Camera cam;
+    [SerializeField]
+    private Transform weaponPoint;
+    // [SerializeField]
+    // private Animator animator;
 
     // Movement Stats
     public float movementSpeed = 10f;
@@ -35,6 +39,22 @@ public class Player : Creature
     public List<Interactable> pickedUpItems;
     public LayerMask interactableLayer;
 
+
+    // Weapons
+    [System.Serializable]
+    public class Weapon
+    {
+        public string name;
+        public GameObject prefab;
+    }
+
+    private int currentWeapon = 0;
+    public Weapon[] weapons;
+    private bool weaponIsSwitching = false;
+
+    
+
+
     // public override void Initialize()
     protected virtual void Start()
     {
@@ -43,6 +63,8 @@ public class Player : Creature
 
         controller = GetComponent<CharacterController>();
         cam = Camera.main;
+
+        // SwitchWeapon(currentWeapon);
         
         base.Start();
     }
@@ -54,6 +76,8 @@ public class Player : Creature
         CheckForInteractable();
         // hitting = Input.GetKeyDown(KeyCode.Space);
         hitting = Input.GetMouseButton(0); // Get attack input
+
+        //WeaponSelection();
 
         // Call the update method in the Creature class.
         base.Update();
@@ -126,7 +150,7 @@ public class Player : Creature
     void CheckForInteractable()
     {
         if(Input.GetMouseButtonUp(1)){
-            //Debug.Log("Hit Button");
+            // Debug.Log("Hit Button");
             Collider[] hits = Physics.OverlapSphere(attackPoint.position, 4, interactableLayer);
         
             if(hits.Length == 0) return;
@@ -150,4 +174,7 @@ public class Player : Creature
 
         // }
     }
+
+
+    
 }

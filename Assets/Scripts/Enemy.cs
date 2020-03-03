@@ -66,7 +66,8 @@ public class Enemy : Creature
         if (distance <= agent.stoppingDistance)
         {
             // Check if target is the kid target point
-            if (target.gameObject.name == "KidTargetPoint")
+            // if (target.gameObject.name == "KidTargetPoint")
+            if (target.CompareTag("Target"))
             {
                 if (GameManager.numOfChildren < 1) // Make sure they can't pick up a child if there aren't any
                 {
