@@ -36560,16 +36560,6 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 573273955}
-    - target: {fileID: 4402445102961030034, guid: 1937ee040e8149741970743bb0d85ca7,
-        type: 3}
-      propertyPath: offset.y
-      value: -1.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4402445102961030034, guid: 1937ee040e8149741970743bb0d85ca7,
-        type: 3}
-      propertyPath: offset.z
-      value: 0.7
-      objectReference: {fileID: 0}
     - target: {fileID: 6171667499130585084, guid: 1937ee040e8149741970743bb0d85ca7,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -152,7 +152,7 @@ public class Player : Creature
     void CheckForInteractable()
     {
         if(Input.GetMouseButtonUp(1)){
-            //Debug.Log("Hit Button");
+            // Debug.Log("Hit Button");
             Collider[] hits = Physics.OverlapSphere(attackPoint.position, 4, interactableLayer);
         
             if(hits.Length == 0) return;
