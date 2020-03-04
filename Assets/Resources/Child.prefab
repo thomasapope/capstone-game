@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3689221774433860705
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9052512512516247757}
+  m_Layer: 0
+  m_Name: Target
+  m_TagString: Target
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9052512512516247757
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3689221774433860705}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4119752691816221645}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4119752691816221644
 GameObject:
   m_ObjectHideFlags: 0
@@ -13,8 +43,9 @@ GameObject:
   - component: {fileID: 4119752691816221646}
   - component: {fileID: 451555348973886637}
   - component: {fileID: 3538057327454809325}
+  - component: {fileID: 1432957862278533281}
   m_Layer: 12
-  m_Name: ChildPrefab
+  m_Name: Child
   m_TagString: holdable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,6 +63,7 @@ Transform:
   m_LocalScale: {x: 1.07486, y: 1.07486, z: 1.07486}
   m_Children:
   - {fileID: 5235756399727885613}
+  - {fileID: 9052512512516247757}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -102,7 +134,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4119752691816221644}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: efbaa2ae820211342bf980fbedbc2c47, type: 3}
   m_Name: 
@@ -110,6 +142,22 @@ MonoBehaviour:
   objectUI: {fileID: 5235756399727885612}
   itemName: Child
   itemDescription: Awwww, It's a baby!
+--- !u!114 &1432957862278533281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4119752691816221644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33d7cb4ec9d38b449b50e5da31d961cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectUI: {fileID: 5235756399727885612}
+  itemName: Child
+  itemDescription: Awwww, It's a baby!
+  targetRef: {fileID: 3689221774433860705}
 --- !u!1001 &6203324661002821748
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -121,11 +169,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ItemCanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 2215637275901713752, guid: ed264041f2bc99b4883e87eebef52ae9,
-        type: 3}
-      propertyPath: m_Layer
-      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2215637275901713753, guid: ed264041f2bc99b4883e87eebef52ae9,
         type: 3}
@@ -235,12 +278,12 @@ PrefabInstance:
     - target: {fileID: 2215637276737005988, guid: ed264041f2bc99b4883e87eebef52ae9,
         type: 3}
       propertyPath: m_Layer
-      value: 12
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2215637277388947881, guid: ed264041f2bc99b4883e87eebef52ae9,
         type: 3}
       propertyPath: m_Layer
-      value: 12
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2215637277388947883, guid: ed264041f2bc99b4883e87eebef52ae9,
         type: 3}
@@ -270,7 +313,7 @@ PrefabInstance:
     - target: {fileID: 2215637277405961520, guid: ed264041f2bc99b4883e87eebef52ae9,
         type: 3}
       propertyPath: m_Layer
-      value: 12
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2215637277405961522, guid: ed264041f2bc99b4883e87eebef52ae9,
         type: 3}

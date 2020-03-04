@@ -169,6 +169,7 @@ public class Player : Creature
     void PickUpItem(Interactable item) 
     {
         pickedUpItems.Add(item);
+        item.PickUpObject();
         // foreach(int i in pickedUpItems)
         // {
 

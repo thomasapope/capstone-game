@@ -17,7 +17,7 @@ public class Enemy : Creature
 {
     public Transform startingPoint;
     public Transform target;
-    public Transform carryPoint;
+    // public Transform carryPoint;
     private UnityEngine.AI.NavMeshAgent agent;
 
     public enum MindState { CHASING, FLEEING }
@@ -77,10 +77,17 @@ public class Enemy : Creature
 
                 Debug.Log("They're taking the children!!!");
                 state = MindState.FLEEING;
-                GameObject child = Instantiate(GameManager.childPrefab, carryPoint.position, target.rotation);
-                child.transform.SetParent(transform); // Pick up child
+                // GameObject child = Instantiate(GameManager.childPrefab, carryPoint.position, target.rotation);
+                // child.transform.SetParent(transform); // Pick up child
                 GameManager.numOfChildren--;
+
+                PickUpObject(target.transform.parent.gameObject.GetComponent<Interactable>());
+
                 // target.SetParent(transform);
+            }
+            if (target.CompareTag("SpawnPoint")) 
+            {
+
             }
 
             // Attack
