@@ -16,6 +16,7 @@ public abstract class Creature : MonoBehaviour
     // Component References
     // public Health stats;
     Renderer rend;
+    protected Animator animator;
     
 
     // Stats
@@ -55,6 +56,7 @@ public abstract class Creature : MonoBehaviour
         // stats = gameObject.GetComponent<Health>();
         rend = GetComponent<Renderer> ();
         defMat = rend.material;
+        animator = GetComponent<Animator>();
 
         if (hitMat == null)
             hitMat = Resources.Load<Material>("HitMat");
@@ -186,5 +188,21 @@ public abstract class Creature : MonoBehaviour
     {
         get { return hp; }
         set { hp = value; }
+    }
+
+    // For animation
+    public void Hit(){
+    }
+
+    public void Shoot(){
+    }
+
+    public void FootR(){
+    }
+
+    public void FootL(){
+    }
+
+    public void Land(){
     }
 }
