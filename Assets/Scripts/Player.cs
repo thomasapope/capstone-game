@@ -17,6 +17,7 @@ public class Player : Creature
     private Camera cam;
     [SerializeField]
     private Transform weaponPoint;
+
     // [SerializeField]
     // private Animator animator;
 
@@ -76,6 +77,13 @@ public class Player : Creature
         CheckForInteractable();
         // hitting = Input.GetKeyDown(KeyCode.Space);
         hitting = Input.GetMouseButton(0); // Get attack input
+        if (hitting)
+        {
+            animator.SetInteger("Weapon", 0);
+            animator.SetInteger("AttackSide", 1);
+            animator.SetInteger("Action", 2);
+            animator.SetTrigger("AttackTrigger");
+        }
 
         //WeaponSelection();
 
@@ -85,6 +93,11 @@ public class Player : Creature
         // Update the inputVector for movement
         movementInput.x = Input.GetAxisRaw("Horizontal");
         movementInput.z = Input.GetAxisRaw("Vertical");
+
+        // if (movementInput != Vector3.zero)
+        // {
+        //     animator.SetBool("Moving", true);
+        // }
 
         Move();
         
@@ -110,6 +123,13 @@ public class Player : Creature
         Rotation(); // Rotation
 
         controller.Move(velocity * Time.deltaTime);
+
+        animator.SetBool("Moving", true);
+        // animator.SetFloat("Velocity Z", velocity.magnitude);
+        
+        animator.SetFloat("Velocity X", transform.InverseTransformDirection(velocity).x);
+        animator.SetFloat("Velocity Z", transform.InverseTransformDirection(velocity).z);
+        // animator.SetBool("Strafing", true);
 
         if (usesGravity) 
         {
