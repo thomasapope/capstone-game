@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Interactable : MonoBehaviour
 {
-    bool pickedUp = false;
+    public bool pickedUp = false;
     // Player player;
     public GameObject objectUI;
     public string itemName;
@@ -34,6 +34,6 @@ public class Interactable : MonoBehaviour
     public virtual void PickUpObject()
     {
         pickedUp = true;
-        // Debug.Log(pickedUp);
+        Debug.Log(pickedUp);
     }
 }

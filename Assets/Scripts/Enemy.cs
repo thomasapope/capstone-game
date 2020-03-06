@@ -65,11 +65,9 @@ public class Enemy : Creature
         // Check if enemy is close to target
         if (distance <= agent.stoppingDistance)
         {
-            // Check if target is the kid target point
-            // if (target.gameObject.name == "KidTargetPoint")
             if (target.CompareTag("Target"))
             {
-                if (GameManager.numOfChildren < 1) // Make sure they can't pick up a child if there aren't any
+                if (GameManager.numOfChildren < 1 || target.parent.gameObject.GetComponent<Interactable>().pickedUp == true)
                 {
                     FindTarget();
                     return;
