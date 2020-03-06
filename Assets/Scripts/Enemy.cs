@@ -20,7 +20,7 @@ public class Enemy : Creature
     public enum MindState { CHASING, FLEEING }
     private MindState state = MindState.CHASING;
 
-    public float refreshTime = 5f;
+    public float refreshTime = 3f;
     private float timeTilRefresh;
 
 
@@ -94,10 +94,23 @@ public class Enemy : Creature
         // Should not be executed every frame as it is resource intensive.
         if (state == MindState.CHASING)
         {
-            if (GameManager.numOfChildren < 1)
+            if (target)
             {
-                target = GameManager.playerRef.transform;
-                return;
+                if(!target.gameObject.activeInHierarchy)
+                {
+                    target = GameManager.playerRef.transform;
+                    return;
+                }
+
+
+                if (target.CompareTag("Target"))
+                {
+                    if (target.GetComponent<Interactable>().pickedUp)
+                    {
+                        target = GameManager.playerRef.transform;
+                        return;
+                    }
+                }
             }
 
             float minDistance = 1000f;

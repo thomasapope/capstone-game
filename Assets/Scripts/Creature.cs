@@ -42,6 +42,7 @@ public abstract class Creature : MonoBehaviour
     [HideInInspector]
     public bool isCarryingItem = false;
     public Interactable item;
+    public float pickupDistance = 4f;
     
     // Delegates
     public event System.Action OnAttack;

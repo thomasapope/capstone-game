@@ -172,23 +172,46 @@ public class Player : Creature
                 return;
             }
 
-            Collider[] hits = Physics.OverlapSphere(attackPoint.position, 4, interactableLayer);
-        
-            if(hits.Length == 0) return;
+            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
 
-            foreach (Collider item in hits)
+            if (Physics.Raycast(ray, out hit, 100))
             {
-                GameObject objectToDestroy = item.gameObject;
-                Interactable interactableItem = item.GetComponent<Interactable>();
+                Interactable interactable = hit.collider.GetComponent<Interactable>();
 
-                if (!isCarryingItem) { // Make sure not to pick up more than one item
-                    if (!interactableItem.pickedUp)
+                if (interactable)
+                {
+                    // SetFocus(interactable);
+                    if (Vector3.Distance(interactable.transform.position, transform.position) < pickupDistance)
                     {
-                        PickUpObject(interactableItem);
+                        if (!isCarryingItem) { // Make sure not to pick up more than one item
+                            if (!interactable.pickedUp)
+                            {
+                                PickUpObject(interactable);
+                            }
+                        }
                     }
                 }
-
             }
+
+            // Collider[] hits = Physics.OverlapSphere(attackPoint.position, 4, interactableLayer);
+        
+            // if(hits.Length == 0) return;
+
+            // foreach (Collider item in hits)
+            // {
+            //     GameObject objectToDestroy = item.gameObject;
+            //     Interactable interactableItem = item.GetComponent<Interactable>();
+
+            //     if (!isCarryingItem) { // Make sure not to pick up more than one item
+            //         if (!interactableItem.pickedUp)
+            //         {
+            //             PickUpObject(interactableItem);
+            //         }
+            //     }
+
+            // }
         }
     }
+
 }

@@ -9,6 +9,8 @@ public class Interactable : MonoBehaviour
     public GameObject objectUI;
     public string itemName;
     public string itemDescription;
+
+    public float radius = .5f;
     
 
     void Update()
@@ -35,4 +37,11 @@ public class Interactable : MonoBehaviour
     {
         pickedUp = false;
     }
+
+
+    // void OnDrawGizmosSelected()
+    // {
+    //     Gizmos.color = Color.yellow;
+    //     Gizmos.DrawWireSphere(transform.position, radius);
+    // }
 }
