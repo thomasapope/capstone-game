@@ -7,7 +7,7 @@ public class WeaponSwitching : MonoBehaviour
     
     void Start()
     {
-        // SelectWeapon();
+        SelectWeapon();
     }
 
 
@@ -37,19 +37,6 @@ public class WeaponSwitching : MonoBehaviour
     }
 
 
-    // void SwitchWeapon(int weaponIndex)
-    // {
-    //     // if (weaponPoint.childCount != 0)
-    //     {
-    //         // Debug.Log(weaponPoint.GetChild(0).name);
-    //         // Destroy(weaponPoint.GetChild(0).gameObject);
-
-    //         // GameObject weapon = Instantiate(weapons[currentWeapon].prefab, weaponPoint.position, transform.rotation);
-    //         // weapon.transform.SetParent(weaponPoint);
-    //     }
-    // }
-
-
     void SelectWeapon()
     {
         int i = 0;
@@ -58,7 +45,6 @@ public class WeaponSwitching : MonoBehaviour
             if (i == selectedWeapon)
             {
                 weapon.gameObject.SetActive(true);
-                // if (GameManager.playerRef) Debug.Log("There is a playerref");
                 GameManager.playerRef.GetComponent<Player>().attackAnimator = weapon.gameObject.GetComponent<Animator>();
             }
             else 
@@ -68,26 +54,5 @@ public class WeaponSwitching : MonoBehaviour
 
             i++;
         }
-
-        // float w = Input.GetAxis("Mouse ScrollWheel");
-        // if (w > 0f) // if scrollwheel has moved up
-        // {
-        //     currentWeapon = (currentWeapon + 1) % weapons.Length;
-        //     weaponIsSwitching = true;
-        // }
-        // else if (w < 0f) // if scrollwheel has moved down
-        // {
-        //     currentWeapon--;
-        //     if (currentWeapon < 0) currentWeapon = weapons.Length - 1;
-        //     weaponIsSwitching = true;
-        // }
-
-        // if (weaponIsSwitching) 
-        // {
-        //     // Debug.Log("Number of weapons: " + weapons.Length);
-        //     Debug.Log("Switching to: " + currentWeapon);
-        //     SwitchWeapon(currentWeapon);
-        //     weaponIsSwitching = false;
-        // }
     }
 }

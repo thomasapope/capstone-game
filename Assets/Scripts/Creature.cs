@@ -14,35 +14,38 @@ using System;
 public abstract class Creature : MonoBehaviour
 {
     // Component References
-    // public Health stats;
     Renderer rend;
+    protected Animator animator;
+    [HideInInspector]
+    public Animator attackAnimator;
+    public Transform attackPoint;
+    public Transform carryPoint;
+    public LayerMask attackLayers; // The layers this creature can deal damage to
     
 
     // Stats
     [SerializeField]
     private int MAX_HEALTH = 100;
 
+    [HideInInspector]
     public int hp;
 
     protected bool hitting;
-    public int attackDamage = 10;
 
-    public Animator attackAnimator;
-    public Transform attackPoint;
     public float attackRange = 0.5f;
-    public LayerMask attackLayers; // The layers this creature can deal damage to
-    public float attackRate = 2f;
+    public float attackRate = 2f; // Times per second this creature can attack
     private float nextAttackTime = 0f;
     public float attackDelay = .2f;
-
-    public event System.Action OnAttack;
+    public int attackDamage = 10;
 
     // Other Stats
-    private float hitTime = 1f;
-    private Material defMat;
-    public static Material hitMat;
+    [HideInInspector]
+    public bool isCarryingItem = false;
+    public Interactable item;
+    public float pickupDistance = 4f;
     
     // Delegates
+    public event System.Action OnAttack;
     public static event Action<Creature> OnHealthAdded = delegate {};
     public static event Action<Creature> OnHealthRemoved = delegate {};
     public event Action<float> OnHealthChanged = delegate {};
@@ -52,12 +55,7 @@ public abstract class Creature : MonoBehaviour
     {
         hp = MAX_HEALTH;
 
-        // stats = gameObject.GetComponent<Health>();
-        rend = GetComponent<Renderer> ();
-        defMat = rend.material;
-
-        if (hitMat == null)
-            hitMat = Resources.Load<Material>("HitMat");
+        animator = GetComponent<Animator>();
     }
 
 
@@ -74,24 +72,10 @@ public abstract class Creature : MonoBehaviour
         {
             if (hitting)
             {
-                // Debug.Log("Hitting");
                 Attack();
                 nextAttackTime = Time.time + 1f / attackRate;
             }
         }
-
-        // Hit feedback
-        // if (hitTime < 1)
-        // {
-        //     hitTime += Time.deltaTime;
-        // }
-        // else
-        // {
-        //     if (rend.material != defMat)
-        //     {
-        //         rend.material = defMat;
-        //     }
-        // }
     }
 
 
@@ -99,7 +83,7 @@ public abstract class Creature : MonoBehaviour
     {
         hitting = false;
 
-        if (attackAnimator != null)
+        if (attackAnimator)
         {
             attackAnimator.SetTrigger("swing");
         }
@@ -137,8 +121,8 @@ public abstract class Creature : MonoBehaviour
         Debug.Log(name + " took " + damage + " damage!");
         ModifyHealth(damage * -1);
         
-        hitTime = 0;
-        rend.material = hitMat;
+        // hitTime = 0;
+        // rend.material = hitMat;
     }
 
     
@@ -147,8 +131,6 @@ public abstract class Creature : MonoBehaviour
         hp += amount;
         UpdateHealthBar();
     }
-
-
 
 
     private void UpdateHealthBar()
@@ -160,6 +142,38 @@ public abstract class Creature : MonoBehaviour
         {
             OnDeath();
         }
+    }
+
+
+    protected void PickUpObject(Interactable obj)
+    {
+        item = obj;
+        // Debug.Log("Picked up a " + obj.gameObject.name);
+        isCarryingItem = true;
+        obj.transform.SetParent(carryPoint);
+        obj.transform.position = carryPoint.position;
+        obj.OnPickUp();
+    }
+
+
+    protected void DropObject()
+    {
+
+        item.transform.SetParent(null);
+        item.OnDrop();
+
+        item = null;
+        isCarryingItem = false;
+
+        
+        // Transform[] children = GetComponentsInChildren<Transform>();
+        // foreach (Transform child in children)
+        // {
+        //     if (child.CompareTag("holdable"))
+        //     {
+        //         child.SetParent(null);
+        //     }
+        // }
     }
 
 
@@ -186,5 +200,21 @@ public abstract class Creature : MonoBehaviour
     {
         get { return hp; }
         set { hp = value; }
+    }
+
+    // For animation
+    public void Hit(){
+    }
+
+    public void Shoot(){
+    }
+
+    public void FootR(){
+    }
+
+    public void FootL(){
+    }
+
+    public void Land(){
     }
 }

@@ -17,14 +17,19 @@ public class Player : Creature
     private Camera cam;
     [SerializeField]
     private Transform weaponPoint;
+
     // [SerializeField]
     // private Animator animator;
 
     // Movement Stats
+    public float RUNNING_SPEED = 10f;
+    public float CARRYING_SPEED = 6f;
+    [HideInInspector]
     public float movementSpeed = 10f;
     private float speedSmoothTime = 0.1f;
     private float rotationSpeed = 0.08f;
 
+    [HideInInspector]
     public bool usesGravity = true;
     public float gravity = 10f;
 
@@ -35,8 +40,6 @@ public class Player : Creature
     private Vector3 velocity; // The current velocity
     private Vector3 smoothVelocity; // Used for velocity smoothing
 
-    // Picked Up Items
-    public List<Interactable> pickedUpItems;
     public LayerMask interactableLayer;
 
 
@@ -48,19 +51,11 @@ public class Player : Creature
         public GameObject prefab;
     }
 
-    private int currentWeapon = 0;
     public Weapon[] weapons;
-    private bool weaponIsSwitching = false;
-
-    
 
 
-    // public override void Initialize()
     protected virtual void Start()
     {
-        // movementSpeed = 10f;
-        // attackDamage = 35;
-
         controller = GetComponent<CharacterController>();
         cam = Camera.main;
 
@@ -74,10 +69,17 @@ public class Player : Creature
     {
         //Check for interactable
         CheckForInteractable();
-        // hitting = Input.GetKeyDown(KeyCode.Space);
-        hitting = Input.GetMouseButton(0); // Get attack input
 
-        //WeaponSelection();
+        if (!isCarryingItem) // Make sure the player can't attack while carrying an item
+            hitting = Input.GetMouseButton(0); // Get attack input
+
+        if (hitting)
+        {
+            animator.SetInteger("Weapon", 0);
+            animator.SetInteger("AttackSide", 1);
+            animator.SetInteger("Action", 2);
+            animator.SetTrigger("AttackTrigger");
+        }
 
         // Call the update method in the Creature class.
         base.Update();
@@ -101,6 +103,14 @@ public class Player : Creature
             moveDirection = new Vector3(movementInput.x, 0, movementInput.z).normalized;
         }
 
+        // Determine movement speed
+        if (isCarryingItem)
+            movementSpeed = CARRYING_SPEED; // Move slower when carrying something
+        else
+            movementSpeed = RUNNING_SPEED;
+
+
+
         if (moveDirection != Vector3.zero)
         {
             targetVelocity = movementSpeed * movementInput;
@@ -110,6 +120,11 @@ public class Player : Creature
         Rotation(); // Rotation
 
         controller.Move(velocity * Time.deltaTime);
+
+        animator.SetBool("Moving", true);
+        
+        animator.SetFloat("Velocity X", transform.InverseTransformDirection(velocity).x);
+        animator.SetFloat("Velocity Z", transform.InverseTransformDirection(velocity).z);
 
         if (usesGravity) 
         {
@@ -150,31 +165,53 @@ public class Player : Creature
     void CheckForInteractable()
     {
         if(Input.GetMouseButtonUp(1)){
-            // Debug.Log("Hit Button");
-            Collider[] hits = Physics.OverlapSphere(attackPoint.position, 4, interactableLayer);
-        
-            if(hits.Length == 0) return;
-
-            foreach (Collider item in hits)
+            // Drop the carried item if there is one
+            if (isCarryingItem)
             {
-                GameObject objectToDestroy = item.gameObject;
-                Interactable interactableItem = item.GetComponent<Interactable>();
-                PickUpItem(interactableItem);
-                objectToDestroy.SetActive(false);
-
+                DropObject();
+                return;
             }
+
+            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, 100))
+            {
+                Interactable interactable = hit.collider.GetComponent<Interactable>();
+
+                if (interactable)
+                {
+                    // SetFocus(interactable);
+                    if (Vector3.Distance(interactable.transform.position, transform.position) < pickupDistance)
+                    {
+                        if (!isCarryingItem) { // Make sure not to pick up more than one item
+                            if (!interactable.pickedUp)
+                            {
+                                PickUpObject(interactable);
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Collider[] hits = Physics.OverlapSphere(attackPoint.position, 4, interactableLayer);
+        
+            // if(hits.Length == 0) return;
+
+            // foreach (Collider item in hits)
+            // {
+            //     GameObject objectToDestroy = item.gameObject;
+            //     Interactable interactableItem = item.GetComponent<Interactable>();
+
+            //     if (!isCarryingItem) { // Make sure not to pick up more than one item
+            //         if (!interactableItem.pickedUp)
+            //         {
+            //             PickUpObject(interactableItem);
+            //         }
+            //     }
+
+            // }
         }
     }
-    // Add Interactable to PickedUp List.
-    void PickUpItem(Interactable item) 
-    {
-        pickedUpItems.Add(item);
-        // foreach(int i in pickedUpItems)
-        // {
 
-        // }
-    }
-
-
-    
 }
