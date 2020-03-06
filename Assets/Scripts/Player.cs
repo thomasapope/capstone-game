@@ -49,9 +49,9 @@ public class Player : Creature
         public GameObject prefab;
     }
 
-    private int currentWeapon = 0;
+    // private int currentWeapon = 0;
     public Weapon[] weapons;
-    private bool weaponIsSwitching = false;
+    // private bool weaponIsSwitching = false;
 
     
 
@@ -170,6 +170,14 @@ public class Player : Creature
     void CheckForInteractable()
     {
         if(Input.GetMouseButtonUp(1)){
+            if (isCarryingItem)
+            {
+                // Debug.Log("dropping");
+                DropObject();
+                pickedUpItems.RemoveAt(0);
+                return;
+            }
+
             // Debug.Log("Hit Button");
             Collider[] hits = Physics.OverlapSphere(attackPoint.position, 4, interactableLayer);
         
@@ -179,17 +187,26 @@ public class Player : Creature
             {
                 GameObject objectToDestroy = item.gameObject;
                 Interactable interactableItem = item.GetComponent<Interactable>();
-                PickUpItem(interactableItem);
-                objectToDestroy.SetActive(false);
+
+                if (!isCarryingItem) {
+                    if (!interactableItem.pickedUp)
+                    {
+                        PickUpItem(interactableItem);
+                        // objectToDestroy.SetActive(false);
+                    }
+                }
 
             }
         }
     }
+
+
     // Add Interactable to PickedUp List.
     void PickUpItem(Interactable item) 
     {
         pickedUpItems.Add(item);
-        item.PickUpObject();
+        // item.PickUpObject();
+        PickUpObject(item);
         // foreach(int i in pickedUpItems)
         // {
 

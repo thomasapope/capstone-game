@@ -142,17 +142,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fba7f51ae63b1da4a8550d2f518a18c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MAX_HEALTH: 100
-  hp: 0
-  attackDamage: 50
   attackAnimator: {fileID: 0}
   attackPoint: {fileID: 8709219995521138045}
-  attackRange: 2
+  carryPoint: {fileID: 4080394848943033608}
   attackLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2048
+  MAX_HEALTH: 100
+  hp: 0
+  attackRange: 2
   attackRate: 2
   attackDelay: 0
+  attackDamage: 50
   weaponPoint: {fileID: 583958578335881556}
   movementSpeed: 10
   usesGravity: 1

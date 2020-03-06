@@ -31,9 +31,16 @@ public class Interactable : MonoBehaviour
         
     }
 
-    public virtual void PickUpObject()
+    public virtual void OnPickUp()
     {
         pickedUp = true;
-        Debug.Log(pickedUp);
+        // Debug.Log(pickedUp);
+        // objectUI.SetActive(false);
+    }
+
+
+    public virtual void OnDrop()
+    {
+        pickedUp = false;
     }
 }

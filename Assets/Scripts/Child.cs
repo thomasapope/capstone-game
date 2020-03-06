@@ -13,10 +13,18 @@ public class Child : Interactable
         // Debug.Log(targetRef.name);
     }
 
-    public override void PickUpObject()
+    public override void OnPickUp()
     {
-        base.PickUpObject();
+        base.OnPickUp();
 
         targetRef.SetActive(false);
+    }
+    
+
+    public override void OnDrop()
+    {
+        base.OnDrop();
+
+        targetRef.SetActive(true);
     }
 }

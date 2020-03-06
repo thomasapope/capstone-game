@@ -41,6 +41,9 @@ public abstract class Creature : MonoBehaviour
     // private float hitTime = 1f;
     // private Material defMat;
     // public static Material hitMat;
+    // [HideInInspector]
+    public bool isCarryingItem = false;
+    public Interactable item;
     
     // Delegates
     public event System.Action OnAttack;
@@ -163,15 +166,33 @@ public abstract class Creature : MonoBehaviour
 
     protected void PickUpObject(Interactable obj)
     {
-        Debug.Log("Picked up a " + obj.gameObject.name);
+        item = obj;
+        // Debug.Log("Picked up a " + obj.gameObject.name);
+        isCarryingItem = true;
         obj.transform.SetParent(carryPoint);
-        obj.PickUpObject();
+        obj.transform.position = carryPoint.position;
+        obj.OnPickUp();
     }
 
 
-    protected void DropObject(Interactable obj)
+    protected void DropObject()
     {
 
+        item.transform.SetParent(null);
+        item.OnDrop();
+
+        item = null;
+        isCarryingItem = false;
+
+        
+        // Transform[] children = GetComponentsInChildren<Transform>();
+        // foreach (Transform child in children)
+        // {
+        //     if (child.CompareTag("holdable"))
+        //     {
+        //         child.SetParent(null);
+        //     }
+        // }
     }
 
 

@@ -67,7 +67,7 @@ public class Enemy : Creature
         {
             if (target.CompareTag("Target"))
             {
-                if (GameManager.numOfChildren < 1 || target.parent.gameObject.GetComponent<Interactable>().pickedUp == true)
+                if (/*GameManager.numOfChildren < 1 || */target.parent.gameObject.GetComponent<Interactable>().pickedUp == true)
                 {
                     FindTarget();
                     return;
@@ -79,7 +79,7 @@ public class Enemy : Creature
                 // child.transform.SetParent(transform); // Pick up child
                 GameManager.numOfChildren--;
 
-                PickUpObject(target.transform.parent.gameObject.GetComponent<Interactable>());
+                PickUpObject(target.parent.gameObject.GetComponent<Interactable>());
 
                 // target.SetParent(transform);
             }
@@ -148,7 +148,7 @@ public class Enemy : Creature
         // Unparent child if carrying
         if (state == MindState.FLEEING)
         {
-            // Debug.Log("Your enemies have dropped a child!!!");
+            Debug.Log("Your enemies have dropped a child!!!");
             // Debug.Log(target.name);
             // Transform kid = transform.GetChild(0).gameObject.GetComponentInChildren<Transform>();
             // if (kid.CompareTag("Target"))
@@ -156,15 +156,16 @@ public class Enemy : Creature
             //     kid.SetParent(null);
             // }
 
+            DropObject();
 
-            Transform[] children = GetComponentsInChildren<Transform>();
-            foreach (Transform child in children)
-            {
-                if (child.CompareTag("holdable"))
-                {
-                    child.SetParent(null);
-                }
-            }
+            // Transform[] children = GetComponentsInChildren<Transform>();
+            // foreach (Transform child in children)
+            // {
+            //     if (child.CompareTag("holdable"))
+            //     {
+            //         child.SetParent(null);
+            //     }
+            // }
 
             // target.SetParent(null);
             // target.parent = null;

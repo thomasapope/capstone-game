@@ -42,7 +42,6 @@ GameObject:
   - component: {fileID: 4119752691816221647}
   - component: {fileID: 4119752691816221646}
   - component: {fileID: 451555348973886637}
-  - component: {fileID: 3538057327454809325}
   - component: {fileID: 1432957862278533281}
   m_Layer: 12
   m_Name: Child
@@ -60,7 +59,7 @@ Transform:
   m_GameObject: {fileID: 4119752691816221644}
   m_LocalRotation: {x: -0, y: 0.99749887, z: -0, w: 0.07068225}
   m_LocalPosition: {x: 2, y: 0.5, z: 7}
-  m_LocalScale: {x: 1.07486, y: 1.07486, z: 1.07486}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 5235756399727885613}
   - {fileID: 9052512512516247757}
@@ -127,21 +126,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3538057327454809325
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4119752691816221644}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efbaa2ae820211342bf980fbedbc2c47, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectUI: {fileID: 5235756399727885612}
-  itemName: Child
-  itemDescription: Awwww, It's a baby!
 --- !u!114 &1432957862278533281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,6 +138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33d7cb4ec9d38b449b50e5da31d961cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickedUp: 0
   objectUI: {fileID: 5235756399727885612}
   itemName: Child
   itemDescription: Awwww, It's a baby!
