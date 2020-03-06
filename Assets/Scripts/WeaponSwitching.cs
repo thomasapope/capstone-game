@@ -58,6 +58,7 @@ public class WeaponSwitching : MonoBehaviour
             if (i == selectedWeapon)
             {
                 weapon.gameObject.SetActive(true);
+                // Debug.Log("Weapon: " + weapon.gameObject.name + " Ref: " + GameManager.playerRef.name);
                 // if (GameManager.playerRef) Debug.Log("There is a playerref");
                 GameManager.playerRef.GetComponent<Player>().attackAnimator = weapon.gameObject.GetComponent<Animator>();
             }

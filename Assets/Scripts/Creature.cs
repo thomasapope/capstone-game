@@ -14,7 +14,6 @@ using System;
 public abstract class Creature : MonoBehaviour
 {
     // Component References
-    // public Health stats;
     Renderer rend;
     protected Animator animator;
     public Animator attackAnimator;
@@ -38,9 +37,6 @@ public abstract class Creature : MonoBehaviour
     public int attackDamage = 10;
 
     // Other Stats
-    // private float hitTime = 1f;
-    // private Material defMat;
-    // public static Material hitMat;
     [HideInInspector]
     public bool isCarryingItem = false;
     public Interactable item;
@@ -56,11 +52,7 @@ public abstract class Creature : MonoBehaviour
     {
         hp = MAX_HEALTH;
 
-        // stats = gameObject.GetComponent<Health>();
         animator = GetComponent<Animator>();
-
-        // if (hitMat == null)
-        //     hitMat = Resources.Load<Material>("HitMat");
     }
 
 
@@ -77,24 +69,10 @@ public abstract class Creature : MonoBehaviour
         {
             if (hitting)
             {
-                // Debug.Log("Hitting");
                 Attack();
                 nextAttackTime = Time.time + 1f / attackRate;
             }
         }
-
-        // Hit feedback
-        // if (hitTime < 1)
-        // {
-        //     hitTime += Time.deltaTime;
-        // }
-        // else
-        // {
-        //     if (rend.material != defMat)
-        //     {
-        //         rend.material = defMat;
-        //     }
-        // }
     }
 
 

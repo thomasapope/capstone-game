@@ -40,7 +40,7 @@ public class Player : Creature
     private Vector3 smoothVelocity; // Used for velocity smoothing
 
     // Picked Up Items
-    public List<Interactable> pickedUpItems;
+    // public List<Interactable> pickedUpItems;
     public LayerMask interactableLayer;
 
 
@@ -52,19 +52,12 @@ public class Player : Creature
         public GameObject prefab;
     }
 
-    // private int currentWeapon = 0;
     public Weapon[] weapons;
-    // private bool weaponIsSwitching = false;
-
-    
 
 
     // public override void Initialize()
     protected virtual void Start()
     {
-        // movementSpeed = 10f;
-        // attackDamage = 35;
-
         controller = GetComponent<CharacterController>();
         cam = Camera.main;
 
@@ -98,11 +91,6 @@ public class Player : Creature
         // Update the inputVector for movement
         movementInput.x = Input.GetAxisRaw("Horizontal");
         movementInput.z = Input.GetAxisRaw("Vertical");
-
-        // if (movementInput != Vector3.zero)
-        // {
-        //     animator.SetBool("Moving", true);
-        // }
 
         Move();
         
@@ -138,11 +126,9 @@ public class Player : Creature
         controller.Move(velocity * Time.deltaTime);
 
         animator.SetBool("Moving", true);
-        // animator.SetFloat("Velocity Z", velocity.magnitude);
         
         animator.SetFloat("Velocity X", transform.InverseTransformDirection(velocity).x);
         animator.SetFloat("Velocity Z", transform.InverseTransformDirection(velocity).z);
-        // animator.SetBool("Strafing", true);
 
         if (usesGravity) 
         {
@@ -185,13 +171,11 @@ public class Player : Creature
         if(Input.GetMouseButtonUp(1)){
             if (isCarryingItem)
             {
-                // Debug.Log("dropping");
                 DropObject();
-                pickedUpItems.RemoveAt(0);
+                // pickedUpItems.RemoveAt(0);
                 return;
             }
 
-            // Debug.Log("Hit Button");
             Collider[] hits = Physics.OverlapSphere(attackPoint.position, 4, interactableLayer);
         
             if(hits.Length == 0) return;
@@ -204,28 +188,11 @@ public class Player : Creature
                 if (!isCarryingItem) {
                     if (!interactableItem.pickedUp)
                     {
-                        PickUpItem(interactableItem);
-                        // objectToDestroy.SetActive(false);
+                        PickUpObject(interactableItem);
                     }
                 }
 
             }
         }
     }
-
-
-    // Add Interactable to PickedUp List.
-    void PickUpItem(Interactable item) 
-    {
-        pickedUpItems.Add(item);
-        // item.PickUpObject();
-        PickUpObject(item);
-        // foreach(int i in pickedUpItems)
-        // {
-
-        // }
-    }
-
-
-    
 }

@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
 
     public static int numOfChildren = 3;
 
-    private void Start()
+    private void Awake()
     {
         // playerRef = GameObject.FindGameObjectsWithTag("Player").ToList();
         playerRef = GameObject.FindWithTag("Player");
