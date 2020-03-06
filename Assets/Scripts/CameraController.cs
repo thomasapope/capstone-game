@@ -34,7 +34,7 @@ public class CameraController : MonoBehaviour
 
     public float pitch = 2f;
 
-    private float currentZoom = 5f;
+    private float currentZoom = 7f;
 
     void Start()
     {
