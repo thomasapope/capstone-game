@@ -22,10 +22,14 @@ public class Player : Creature
     // private Animator animator;
 
     // Movement Stats
+    public float RUNNING_SPEED = 10f;
+    public float CARRYING_SPEED = 6f;
+    [HideInInspector]
     public float movementSpeed = 10f;
     private float speedSmoothTime = 0.1f;
     private float rotationSpeed = 0.08f;
 
+    [HideInInspector]
     public bool usesGravity = true;
     public float gravity = 10f;
 
@@ -36,8 +40,6 @@ public class Player : Creature
     private Vector3 velocity; // The current velocity
     private Vector3 smoothVelocity; // Used for velocity smoothing
 
-    // Picked Up Items
-    public List<Interactable> pickedUpItems;
     public LayerMask interactableLayer;
 
 
@@ -49,19 +51,11 @@ public class Player : Creature
         public GameObject prefab;
     }
 
-    private int currentWeapon = 0;
     public Weapon[] weapons;
-    private bool weaponIsSwitching = false;
-
-    
 
 
-    // public override void Initialize()
     protected virtual void Start()
     {
-        // movementSpeed = 10f;
-        // attackDamage = 35;
-
         controller = GetComponent<CharacterController>();
         cam = Camera.main;
 
@@ -75,8 +69,10 @@ public class Player : Creature
     {
         //Check for interactable
         CheckForInteractable();
-        // hitting = Input.GetKeyDown(KeyCode.Space);
-        hitting = Input.GetMouseButton(0); // Get attack input
+
+        if (!isCarryingItem) // Make sure the player can't attack while carrying an item
+            hitting = Input.GetMouseButton(0); // Get attack input
+
         if (hitting)
         {
             animator.SetInteger("Weapon", 0);
@@ -85,19 +81,12 @@ public class Player : Creature
             animator.SetTrigger("AttackTrigger");
         }
 
-        //WeaponSelection();
-
         // Call the update method in the Creature class.
         base.Update();
 
         // Update the inputVector for movement
         movementInput.x = Input.GetAxisRaw("Horizontal");
         movementInput.z = Input.GetAxisRaw("Vertical");
-
-        // if (movementInput != Vector3.zero)
-        // {
-        //     animator.SetBool("Moving", true);
-        // }
 
         Move();
         
@@ -114,6 +103,14 @@ public class Player : Creature
             moveDirection = new Vector3(movementInput.x, 0, movementInput.z).normalized;
         }
 
+        // Determine movement speed
+        if (isCarryingItem)
+            movementSpeed = CARRYING_SPEED; // Move slower when carrying something
+        else
+            movementSpeed = RUNNING_SPEED;
+
+
+
         if (moveDirection != Vector3.zero)
         {
             targetVelocity = movementSpeed * movementInput;
@@ -125,11 +122,9 @@ public class Player : Creature
         controller.Move(velocity * Time.deltaTime);
 
         animator.SetBool("Moving", true);
-        // animator.SetFloat("Velocity Z", velocity.magnitude);
         
         animator.SetFloat("Velocity X", transform.InverseTransformDirection(velocity).x);
         animator.SetFloat("Velocity Z", transform.InverseTransformDirection(velocity).z);
-        // animator.SetBool("Strafing", true);
 
         if (usesGravity) 
         {
@@ -170,7 +165,13 @@ public class Player : Creature
     void CheckForInteractable()
     {
         if(Input.GetMouseButtonUp(1)){
-            // Debug.Log("Hit Button");
+            // Drop the carried item if there is one
+            if (isCarryingItem)
+            {
+                DropObject();
+                return;
+            }
+
             Collider[] hits = Physics.OverlapSphere(attackPoint.position, 4, interactableLayer);
         
             if(hits.Length == 0) return;
@@ -179,23 +180,15 @@ public class Player : Creature
             {
                 GameObject objectToDestroy = item.gameObject;
                 Interactable interactableItem = item.GetComponent<Interactable>();
-                PickUpItem(interactableItem);
-                objectToDestroy.SetActive(false);
+
+                if (!isCarryingItem) { // Make sure not to pick up more than one item
+                    if (!interactableItem.pickedUp)
+                    {
+                        PickUpObject(interactableItem);
+                    }
+                }
 
             }
         }
     }
-    // Add Interactable to PickedUp List.
-    void PickUpItem(Interactable item) 
-    {
-        pickedUpItems.Add(item);
-        item.PickUpObject();
-        // foreach(int i in pickedUpItems)
-        // {
-
-        // }
-    }
-
-
-    
 }

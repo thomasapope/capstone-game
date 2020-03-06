@@ -11,13 +11,10 @@ using UnityEngine.AI;
 
 
 [RequireComponent(typeof(NavMeshAgent))]
-// [RequireComponent(typeof(CharacterController))]
-// [RequireComponent(typeof(Health))]
 public class Enemy : Creature
 {
     public Transform startingPoint;
     public Transform target;
-    // public Transform carryPoint;
     private UnityEngine.AI.NavMeshAgent agent;
 
     public enum MindState { CHASING, FLEEING }
@@ -30,8 +27,6 @@ public class Enemy : Creature
     protected virtual void Start()
     {
         base.Start();
-
-        // attackRate = .5f;
 
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
     }
@@ -67,7 +62,7 @@ public class Enemy : Creature
         {
             if (target.CompareTag("Target"))
             {
-                if (GameManager.numOfChildren < 1 || target.parent.gameObject.GetComponent<Interactable>().pickedUp == true)
+                if (/*GameManager.numOfChildren < 1 || */target.parent.gameObject.GetComponent<Interactable>().pickedUp == true)
                 {
                     FindTarget();
                     return;
@@ -75,13 +70,9 @@ public class Enemy : Creature
 
                 Debug.Log("They're taking the children!!!");
                 state = MindState.FLEEING;
-                // GameObject child = Instantiate(GameManager.childPrefab, carryPoint.position, target.rotation);
-                // child.transform.SetParent(transform); // Pick up child
                 GameManager.numOfChildren--;
 
-                PickUpObject(target.transform.parent.gameObject.GetComponent<Interactable>());
-
-                // target.SetParent(transform);
+                PickUpObject(target.parent.gameObject.GetComponent<Interactable>());
             }
             if (target.CompareTag("SpawnPoint")) 
             {
@@ -122,7 +113,6 @@ public class Enemy : Creature
             }
             if (closest)
             {
-                // Debug.Log(closest.gameObject.name);
                 target = closest;
             }
             else 
@@ -148,26 +138,9 @@ public class Enemy : Creature
         // Unparent child if carrying
         if (state == MindState.FLEEING)
         {
-            // Debug.Log("Your enemies have dropped a child!!!");
-            // Debug.Log(target.name);
-            // Transform kid = transform.GetChild(0).gameObject.GetComponentInChildren<Transform>();
-            // if (kid.CompareTag("Target"))
-            // {
-            //     kid.SetParent(null);
-            // }
+            DropObject();
 
-
-            Transform[] children = GetComponentsInChildren<Transform>();
-            foreach (Transform child in children)
-            {
-                if (child.CompareTag("holdable"))
-                {
-                    child.SetParent(null);
-                }
-            }
-
-            // target.SetParent(null);
-            // target.parent = null;
+            Debug.Log("Your enemies have dropped a child!!!");
         }
 
         Destroy(gameObject);

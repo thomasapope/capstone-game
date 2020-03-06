@@ -14,9 +14,9 @@ using System;
 public abstract class Creature : MonoBehaviour
 {
     // Component References
-    // public Health stats;
     Renderer rend;
     protected Animator animator;
+    [HideInInspector]
     public Animator attackAnimator;
     public Transform attackPoint;
     public Transform carryPoint;
@@ -27,6 +27,7 @@ public abstract class Creature : MonoBehaviour
     [SerializeField]
     private int MAX_HEALTH = 100;
 
+    [HideInInspector]
     public int hp;
 
     protected bool hitting;
@@ -38,9 +39,9 @@ public abstract class Creature : MonoBehaviour
     public int attackDamage = 10;
 
     // Other Stats
-    // private float hitTime = 1f;
-    // private Material defMat;
-    // public static Material hitMat;
+    [HideInInspector]
+    public bool isCarryingItem = false;
+    public Interactable item;
     
     // Delegates
     public event System.Action OnAttack;
@@ -53,11 +54,7 @@ public abstract class Creature : MonoBehaviour
     {
         hp = MAX_HEALTH;
 
-        // stats = gameObject.GetComponent<Health>();
         animator = GetComponent<Animator>();
-
-        // if (hitMat == null)
-        //     hitMat = Resources.Load<Material>("HitMat");
     }
 
 
@@ -74,24 +71,10 @@ public abstract class Creature : MonoBehaviour
         {
             if (hitting)
             {
-                // Debug.Log("Hitting");
                 Attack();
                 nextAttackTime = Time.time + 1f / attackRate;
             }
         }
-
-        // Hit feedback
-        // if (hitTime < 1)
-        // {
-        //     hitTime += Time.deltaTime;
-        // }
-        // else
-        // {
-        //     if (rend.material != defMat)
-        //     {
-        //         rend.material = defMat;
-        //     }
-        // }
     }
 
 
@@ -99,7 +82,7 @@ public abstract class Creature : MonoBehaviour
     {
         hitting = false;
 
-        if (attackAnimator != null)
+        if (attackAnimator)
         {
             attackAnimator.SetTrigger("swing");
         }
@@ -163,15 +146,33 @@ public abstract class Creature : MonoBehaviour
 
     protected void PickUpObject(Interactable obj)
     {
-        Debug.Log("Picked up a " + obj.gameObject.name);
+        item = obj;
+        // Debug.Log("Picked up a " + obj.gameObject.name);
+        isCarryingItem = true;
         obj.transform.SetParent(carryPoint);
-        obj.PickUpObject();
+        obj.transform.position = carryPoint.position;
+        obj.OnPickUp();
     }
 
 
-    protected void DropObject(Interactable obj)
+    protected void DropObject()
     {
 
+        item.transform.SetParent(null);
+        item.OnDrop();
+
+        item = null;
+        isCarryingItem = false;
+
+        
+        // Transform[] children = GetComponentsInChildren<Transform>();
+        // foreach (Transform child in children)
+        // {
+        //     if (child.CompareTag("holdable"))
+        //     {
+        //         child.SetParent(null);
+        //     }
+        // }
     }
 
 
