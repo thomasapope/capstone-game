@@ -16,6 +16,7 @@ public abstract class Creature : MonoBehaviour
     // Component References
     Renderer rend;
     protected Animator animator;
+    [HideInInspector]
     public Animator attackAnimator;
     public Transform attackPoint;
     public Transform carryPoint;
@@ -26,6 +27,7 @@ public abstract class Creature : MonoBehaviour
     [SerializeField]
     private int MAX_HEALTH = 100;
 
+    [HideInInspector]
     public int hp;
 
     protected bool hitting;

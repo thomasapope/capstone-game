@@ -29,6 +29,7 @@ public class Player : Creature
     private float speedSmoothTime = 0.1f;
     private float rotationSpeed = 0.08f;
 
+    [HideInInspector]
     public bool usesGravity = true;
     public float gravity = 10f;
 
@@ -39,8 +40,6 @@ public class Player : Creature
     private Vector3 velocity; // The current velocity
     private Vector3 smoothVelocity; // Used for velocity smoothing
 
-    // Picked Up Items
-    // public List<Interactable> pickedUpItems;
     public LayerMask interactableLayer;
 
 
@@ -55,7 +54,6 @@ public class Player : Creature
     public Weapon[] weapons;
 
 
-    // public override void Initialize()
     protected virtual void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -82,8 +80,6 @@ public class Player : Creature
             animator.SetInteger("Action", 2);
             animator.SetTrigger("AttackTrigger");
         }
-
-        //WeaponSelection();
 
         // Call the update method in the Creature class.
         base.Update();
@@ -169,10 +165,10 @@ public class Player : Creature
     void CheckForInteractable()
     {
         if(Input.GetMouseButtonUp(1)){
+            // Drop the carried item if there is one
             if (isCarryingItem)
             {
                 DropObject();
-                // pickedUpItems.RemoveAt(0);
                 return;
             }
 
@@ -185,7 +181,7 @@ public class Player : Creature
                 GameObject objectToDestroy = item.gameObject;
                 Interactable interactableItem = item.GetComponent<Interactable>();
 
-                if (!isCarryingItem) {
+                if (!isCarryingItem) { // Make sure not to pick up more than one item
                     if (!interactableItem.pickedUp)
                     {
                         PickUpObject(interactableItem);

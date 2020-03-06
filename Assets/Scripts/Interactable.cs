@@ -6,18 +6,10 @@ using UnityEngine.UI;
 public class Interactable : MonoBehaviour
 {
     public bool pickedUp = false;
-    // Player player;
     public GameObject objectUI;
     public string itemName;
     public string itemDescription;
     
-    
-    // protected virtual void Start()
-    // {
-    //     pickedUp = false;
-    //     // player = GameObject.FindObjectOfType<Player>();
-    // }
-
 
     void Update()
     {
