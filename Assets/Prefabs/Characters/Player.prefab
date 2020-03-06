@@ -154,7 +154,11 @@ MonoBehaviour:
   attackRate: 2
   attackDelay: 0
   attackDamage: 50
+  isCarryingItem: 0
+  item: {fileID: 0}
   weaponPoint: {fileID: 583958578335881556}
+  RUNNING_SPEED: 10
+  CARRYING_SPEED: 6
   movementSpeed: 10
   usesGravity: 1
   gravity: 9.8
@@ -264,6 +268,25 @@ Transform:
   m_Father: {fileID: 904692277821601854}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &6882106564704204936
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4031459908452528776}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a2222843f80c5d3458f693b1f807f6b1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6422823196585381783
 GameObject:
   m_ObjectHideFlags: 0
@@ -3543,7 +3566,7 @@ PrefabInstance:
     - target: {fileID: 1449254789879792391, guid: 3da703c35c2c1b74685355037f1383ec,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1449254789880094503, guid: 3da703c35c2c1b74685355037f1383ec,
         type: 3}
@@ -3605,6 +3628,12 @@ PrefabInstance:
 --- !u!4 &4031459908452691624 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1449254789880094503, guid: 3da703c35c2c1b74685355037f1383ec,
+    type: 3}
+  m_PrefabInstance: {fileID: 2589102359386468751}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4031459908452528776 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1449254789879792391, guid: 3da703c35c2c1b74685355037f1383ec,
     type: 3}
   m_PrefabInstance: {fileID: 2589102359386468751}
   m_PrefabAsset: {fileID: 0}
@@ -3775,7 +3804,8 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1745544554, guid: 5c57c515b01f67441838df42178a3447, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5c57c515b01f67441838df42178a3447, type: 3}
 --- !u!4 &7488690962420259297 stripped
 Transform:

@@ -7,7 +7,7 @@ public class WeaponSwitching : MonoBehaviour
     
     void Start()
     {
-        // SelectWeapon();
+        SelectWeapon();
     }
 
 

@@ -78,8 +78,10 @@ public class Player : Creature
     {
         //Check for interactable
         CheckForInteractable();
-        // hitting = Input.GetKeyDown(KeyCode.Space);
-        hitting = Input.GetMouseButton(0); // Get attack input
+
+        if (!isCarryingItem) // Make sure the player can't attack while carrying an item
+            hitting = Input.GetMouseButton(0); // Get attack input
+
         if (hitting)
         {
             animator.SetInteger("Weapon", 0);

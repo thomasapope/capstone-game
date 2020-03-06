@@ -102,7 +102,7 @@ public abstract class Creature : MonoBehaviour
     {
         hitting = false;
 
-        if (attackAnimator != null)
+        if (attackAnimator)
         {
             attackAnimator.SetTrigger("swing");
         }
