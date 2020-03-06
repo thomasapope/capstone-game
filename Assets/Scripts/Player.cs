@@ -22,6 +22,9 @@ public class Player : Creature
     // private Animator animator;
 
     // Movement Stats
+    public float RUNNING_SPEED = 10f;
+    public float CARRYING_SPEED = 6f;
+    [HideInInspector]
     public float movementSpeed = 10f;
     private float speedSmoothTime = 0.1f;
     private float rotationSpeed = 0.08f;
@@ -113,6 +116,14 @@ public class Player : Creature
         {
             moveDirection = new Vector3(movementInput.x, 0, movementInput.z).normalized;
         }
+
+        // Determine movement speed
+        if (isCarryingItem)
+            movementSpeed = CARRYING_SPEED; // Move slower when carrying something
+        else
+            movementSpeed = RUNNING_SPEED;
+
+
 
         if (moveDirection != Vector3.zero)
         {

@@ -41,7 +41,7 @@ public abstract class Creature : MonoBehaviour
     // private float hitTime = 1f;
     // private Material defMat;
     // public static Material hitMat;
-    // [HideInInspector]
+    [HideInInspector]
     public bool isCarryingItem = false;
     public Interactable item;
     
