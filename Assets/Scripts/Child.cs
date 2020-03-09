@@ -21,4 +21,12 @@ public class Child : Interactable
 
         targetRef.SetActive(true);
     }
+
+    void OnDisable()
+    {
+        if (GameManager.targetRefs.Contains(gameObject))
+        {
+            GameManager.targetRefs.Remove(gameObject);
+        }
+    }
 }

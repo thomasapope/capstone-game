@@ -53,30 +53,35 @@ public class Enemy : Creature
             }
         }
 
-        float distance = Vector3.Distance(target.position, transform.position);
+        agent.SetDestination(target.position); // start the enemy moving toward its target
 
-        agent.SetDestination(target.position);
+        // float distance = Vector3.Distance(target.position, transform.position);
+
 
         // Check if enemy is close to target
-        if (distance <= agent.stoppingDistance)
+        // if (distance <= agent.stoppingDistance)
+        if (hasReachedTarget())
         {
-            if (target.CompareTag("Target"))
+            if (target.CompareTag("Target")) // If the target is a child
             {
                 if (/*GameManager.numOfChildren < 1 || */target.parent.gameObject.GetComponent<Interactable>().pickedUp == true)
                 {
+                    Debug.Log("My target is already taken");
                     FindTarget();
                     return;
                 }
 
                 Debug.Log("They're taking the children!!!");
                 state = MindState.FLEEING;
-                GameManager.numOfChildren--;
 
                 PickUpObject(target.parent.gameObject.GetComponent<Interactable>());
             }
-            if (target.CompareTag("SpawnPoint")) 
-            {
 
+            if (target.CompareTag("SpawnPoint")) // If the enemy has returned to their spawn point
+            {
+                Debug.Log("An enemy has escaped with a child!");
+                GameManager.numOfChildren--;
+                Destroy(gameObject);
             }
 
             // Attack
@@ -85,6 +90,13 @@ public class Enemy : Creature
         }
 
         base.Update();
+    }
+
+
+    bool hasReachedTarget()
+    {
+        float distance = Vector3.Distance(target.position, transform.position);
+        return distance <= agent.stoppingDistance;
     }
 
 
@@ -105,7 +117,7 @@ public class Enemy : Creature
 
                 if (target.CompareTag("Target"))
                 {
-                    if (target.GetComponent<Interactable>().pickedUp)
+                    if (target.transform.parent.gameObject.GetComponent<Interactable>().pickedUp)
                     {
                         target = GameManager.playerRef.transform;
                         return;
@@ -117,6 +129,7 @@ public class Enemy : Creature
             Transform closest = transform;
             foreach (GameObject g in GameManager.targetRefs)
             {
+                if (!g) continue;
                 float dist = Vector3.Distance(transform.position, g.transform.position);
                 if (dist < minDistance) 
                 {
@@ -146,7 +159,7 @@ public class Enemy : Creature
 
     protected override void OnDeath()
     {
-        Debug.Log("Enemy slain!!!");
+        // Debug.Log("Enemy slain!!!");
 
         // Unparent child if carrying
         if (state == MindState.FLEEING)
@@ -156,12 +169,14 @@ public class Enemy : Creature
             Debug.Log("Your enemies have dropped a child!!!");
         }
 
+        GameStats.score++; // Add one kill to the score
+
         Destroy(gameObject);
     }
 
+
     protected override void OnDisable()
     {
-        GameStats.score++; // Add one kill to the score
         base.OnDisable();
     }
 }
