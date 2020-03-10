@@ -1,27 +1,29 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class WaveSpawner : MonoBehaviour 
 {
+    public static WaveSpawner instance;
+
     public Transform player;
     public enum SpawnState { SPAWNING, WAITING, COUNTING, COMPLETE}
 
-    
+    public static SpawnState state = SpawnState.COUNTING;
+    public static bool complete = false;
 
-    public Wave[] waves;
-    // private int nextWave = 0;
-    public static int nextWave {get; private set;} = 0;
+    public float timeBeforeFirstWave = 15f;
 
     public Transform[] spawnPoints;
+    public Wave[] waves;
 
-    public float timeBetweenWaves = 15f;
+    public static int nextWave {get; private set;} = 0;
     public static float waveCountdown { get; private set; }
 
-    private float searchCountdown = 1f;
+    private float searchCountdown = 3f; // How often the game checks if there are enemies left
 
-    public static SpawnState state = SpawnState.COUNTING;
-
-    public static bool complete = false;
+    public static event Action WaveComplete = delegate {};
+    public static event Action WaveStarting = delegate {};
 
 
     [System.Serializable]
@@ -37,13 +39,16 @@ public class WaveSpawner : MonoBehaviour
 
     void Start() 
     {
+        // Set up singleton behavior
+        instance = this;
+
         // Check if there are spawn points
         if (spawnPoints.Length == 0)
         {
             Debug.Log("Error: No spawn points referenced.");
         }
 
-        waveCountdown = timeBetweenWaves;
+        waveCountdown = timeBeforeFirstWave;
     }
 
 
@@ -80,7 +85,8 @@ public class WaveSpawner : MonoBehaviour
 
     void WaveCompleted()
     {
-        Debug.Log("Wave Completed");
+        // Debug.Log("Wave Completed");
+        WaveComplete();
 
         state = SpawnState.COUNTING;
         // waveCountdown = timeBetweenWaves;
@@ -107,7 +113,7 @@ public class WaveSpawner : MonoBehaviour
         searchCountdown -= Time.deltaTime;
         if (searchCountdown <= 0)
         {
-            searchCountdown = 1f;
+            searchCountdown = 3f;
             if (GameObject.FindGameObjectWithTag("Enemy") == null)
             {
                 return false;
@@ -120,8 +126,9 @@ public class WaveSpawner : MonoBehaviour
 
     IEnumerator SpawnWave(Wave _wave) 
     {
-        Debug.Log("Spawning Wave: " + _wave.name);
+        Debug.Log("Starting " + _wave.name);
         state = SpawnState.SPAWNING;
+        WaveStarting();
 
         // Spawn
         for(int i = 0; i< _wave.count; i++) 
@@ -139,7 +146,7 @@ public class WaveSpawner : MonoBehaviour
     void SpawnEnemy(Enemy _enemy)
     {
         // Choose a random spawn point to spawn the enemy at.
-        Transform _sp = spawnPoints[Random.Range(0, spawnPoints.Length)];
+        Transform _sp = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length)];
 
         // Spawn enemy
         // Debug.Log("Spawning Enemy: " + _enemy.name);

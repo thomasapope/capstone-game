@@ -1,5 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿// using System;
+// using System.Collections;
+// using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,6 +18,7 @@ public class CountdownTimer : MonoBehaviour
     [SerializeField]
     private Text timer;
 
+    // private Color invisible = new Color(0, 0, 0, 0);
     public Color defColor = Color.white;
     public Color quickColor = Color.yellow;
     public Color urgentColor = Color.red;
@@ -27,6 +29,9 @@ public class CountdownTimer : MonoBehaviour
         timer = GetComponent<Text>();
         // currentTime = startingTime;
         timer.color = defColor;
+
+        WaveSpawner.WaveComplete += OnWaveCompleted;
+        WaveSpawner.WaveStarting += OnWaveStarting;
     }
 
 
@@ -37,20 +42,28 @@ public class CountdownTimer : MonoBehaviour
         timer.text = time.ToString(); // Update timer text
 
         // Change color when time is almost up
-        if (time <= quickTime) {
-            timer.color = quickColor;
-        }
-        if (time <= urgentTime) {
-            timer.color = urgentColor;
-        }
-
-        // Control the visibility of the timer
-        if (time <= 0 || WaveSpawner.complete) {
-            timer.color = new Color(0, 0, 0, 0);
-        }
-        else
+        if (WaveSpawner.state == WaveSpawner.SpawnState.COUNTING)
         {
-            timer.color = defColor;
+            if (time <= quickTime)
+            {
+                timer.color = quickColor;
+            }
+            if (time <= urgentTime)
+            {
+                timer.color = urgentColor;
+            }
         }
+    }
+
+
+    void OnWaveCompleted()
+    {
+        timer.color = defColor;
+    }
+
+
+    void OnWaveStarting()
+    {
+        timer.color = new Color(0, 0, 0, 0);
     }
 }

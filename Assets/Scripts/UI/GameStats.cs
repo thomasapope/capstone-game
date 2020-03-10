@@ -21,7 +21,8 @@ public class GameStats : MonoBehaviour
 
     void Update()
     {
-        scoreLabel.text = "Wave: " + (WaveSpawner.nextWave + 1) + "\n" + 
+        // scoreLabel.text = "Wave: " + (WaveSpawner.nextWave + 1) + "\n" +
+        scoreLabel.text = WaveSpawner.instance.waves[WaveSpawner.nextWave].name + "\n" +  
                             "Kills: " + GameManager.kills + "\n" + 
                             "Damage: " + GameManager.damage + "\n" + 
                             "Children Left: " + GameManager.numOfChildren;
