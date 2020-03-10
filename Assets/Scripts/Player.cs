@@ -64,6 +64,7 @@ public class Player : Creature
         base.Start();
     }
 
+
     // Update is called once per frame
     protected override void Update()
     {
@@ -162,6 +163,7 @@ public class Player : Creature
 		}
     }
 
+
     void CheckForInteractable()
     {
         if(Input.GetMouseButtonUp(1)){
@@ -193,25 +195,17 @@ public class Player : Creature
                     }
                 }
             }
-
-            // Collider[] hits = Physics.OverlapSphere(attackPoint.position, 4, interactableLayer);
-        
-            // if(hits.Length == 0) return;
-
-            // foreach (Collider item in hits)
-            // {
-            //     GameObject objectToDestroy = item.gameObject;
-            //     Interactable interactableItem = item.GetComponent<Interactable>();
-
-            //     if (!isCarryingItem) { // Make sure not to pick up more than one item
-            //         if (!interactableItem.pickedUp)
-            //         {
-            //             PickUpObject(interactableItem);
-            //         }
-            //     }
-
-            // }
         }
+    }
+
+
+    protected override void OnDeath()
+    {
+        // You died. Game over.
+        // Debug.Log("You Died");
+        GameManager.instance.EndGame(); 
+
+        Destroy(gameObject);
     }
 
 }

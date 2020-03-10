@@ -6,14 +6,7 @@ public class WaveSpawner : MonoBehaviour
     public Transform player;
     public enum SpawnState { SPAWNING, WAITING, COUNTING, COMPLETE}
 
-    [System.Serializable]
-    public class Wave 
-    {
-        public string name;
-        public Enemy enemy;
-        public int count;
-        public float rate;
-    }
+    
 
     public Wave[] waves;
     // private int nextWave = 0;
@@ -21,14 +14,25 @@ public class WaveSpawner : MonoBehaviour
 
     public Transform[] spawnPoints;
 
-    public float timeBetweenWaves = 2f;
-    private float waveCountdown;
+    public float timeBetweenWaves = 15f;
+    public static float waveCountdown { get; private set; }
 
     private float searchCountdown = 1f;
 
-    private SpawnState state = SpawnState.COUNTING;
+    public static SpawnState state = SpawnState.COUNTING;
 
     public static bool complete = false;
+
+
+    [System.Serializable]
+    public class Wave 
+    {
+        public string name;
+        public Enemy enemy;
+        public int count;
+        public float rate;
+        public float timeAfterWave = 15f;
+    }
 
 
     void Start() 
@@ -79,7 +83,8 @@ public class WaveSpawner : MonoBehaviour
         Debug.Log("Wave Completed");
 
         state = SpawnState.COUNTING;
-        waveCountdown = timeBetweenWaves;
+        // waveCountdown = timeBetweenWaves;
+        waveCountdown = waves[nextWave].timeAfterWave;
 
         // All Waves Completed
         if (nextWave + 1 > waves.Length - 1) 

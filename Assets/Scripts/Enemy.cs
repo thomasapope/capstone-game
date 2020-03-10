@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -80,7 +81,8 @@ public class Enemy : Creature
             if (target.CompareTag("SpawnPoint")) // If the enemy has returned to their spawn point
             {
                 Debug.Log("An enemy has escaped with a child!");
-                GameManager.numOfChildren--;
+                // GameManager.numOfChildren--;
+                GameManager.NumOfChildren--;
                 Destroy(gameObject);
             }
 
@@ -115,14 +117,14 @@ public class Enemy : Creature
                 }
 
 
-                if (target.CompareTag("Target"))
-                {
-                    if (target.transform.parent.gameObject.GetComponent<Interactable>().pickedUp)
-                    {
-                        target = GameManager.playerRef.transform;
-                        return;
-                    }
-                }
+                // if (target.CompareTag("Target"))
+                // {
+                //     if (target.transform.parent.gameObject.GetComponent<Interactable>().pickedUp)
+                //     {
+                //         target = GameManager.playerRef.transform;
+                //         return;
+                //     }
+                // }
             }
 
             float minDistance = 1000f;
@@ -157,6 +159,14 @@ public class Enemy : Creature
     }
 
 
+    public override void TakeDamage(int damage)
+    {
+        base.TakeDamage(damage);
+
+        GameManager.damage += damage;
+    }
+
+
     protected override void OnDeath()
     {
         // Debug.Log("Enemy slain!!!");
@@ -169,7 +179,8 @@ public class Enemy : Creature
             Debug.Log("Your enemies have dropped a child!!!");
         }
 
-        GameStats.score++; // Add one kill to the score
+        // GameStats.score++; // Add one kill to the score
+        GameManager.kills++; // Add one kill to the score
 
         Destroy(gameObject);
     }

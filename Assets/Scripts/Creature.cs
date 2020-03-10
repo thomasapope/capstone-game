@@ -116,9 +116,9 @@ public abstract class Creature : MonoBehaviour
     }
 
 
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
-        Debug.Log(name + " took " + damage + " damage!");
+        // Debug.Log(name + " took " + damage + " damage!");
         ModifyHealth(damage * -1);
         
         // hitTime = 0;
@@ -179,7 +179,7 @@ public abstract class Creature : MonoBehaviour
 
     protected virtual void OnDeath()
     {
-        Debug.Log(gameObject.name + " died!");
+        // Debug.Log(gameObject.name + " died!");
         Destroy(gameObject);
     }
     
@@ -196,11 +196,13 @@ public abstract class Creature : MonoBehaviour
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 
+
     public int health 
     {
         get { return hp; }
         set { hp = value; }
     }
+
 
     // For animation
     public void Hit(){

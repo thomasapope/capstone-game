@@ -5,9 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    bool gameHasEnded = false;
+    public static GameManager instance;
 
-    public float restartDelay = 3f;
+
+    bool gameHasEnded = false;
+    public static bool isVictory = false;
+
+    public float endScreenDelay = 3f;
+    public float returnToMenuDelay = 10f;
 
     public GameObject completeLevelUI;
     public GameObject gameUI;
@@ -20,10 +25,16 @@ public class GameManager : MonoBehaviour
 
     // public static enum AIState {}
 
+    // Stats and Score
+    public static int kills;
+    public static float damage;
     public static int numOfChildren = 3;
+
 
     private void Awake()
     {
+        instance = this;
+
         // playerRef = GameObject.FindGameObjectsWithTag("Player").ToList();
         playerRef = GameObject.FindWithTag("Player");
         targetRefs = new List<GameObject>(GameObject.FindGameObjectsWithTag("Target"));
@@ -41,6 +52,7 @@ public class GameManager : MonoBehaviour
     {
         if (WaveSpawner.complete)
         {
+
             Debug.Log("YOU WON!");
             gameUI.SetActive(false);
             completeLevelUI.SetActive(true);
@@ -52,6 +64,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
     public void EndGame()
     {
         if (gameHasEnded == false) 
@@ -59,14 +72,46 @@ public class GameManager : MonoBehaviour
             gameHasEnded = true;
             Debug.Log("GAME OVER");
 
+            if (isVictory)
+            {
+                Debug.Log("YOU WON!");
+                Invoke("ShowEndUI", endScreenDelay);  
+            }
+            else
+            {
+                Debug.Log("YOU LOST!");
+                Invoke("ShowEndUI", endScreenDelay);
+            }
+
             //Returns user to Main Menu
-            Invoke("ReturnToMenu", restartDelay);
+            Invoke("ReturnToMenu", returnToMenuDelay);
         }
+    }
+
+
+    void ShowEndUI()
+    {
+        gameUI.SetActive(false);
+        completeLevelUI.SetActive(true);
     }
 
 
     public void ReturnToMenu()
     {
 		SceneManager.LoadScene("Menu");
+    }
+
+
+    public static int NumOfChildren
+    {
+        get { return numOfChildren; }
+        set 
+        { 
+            numOfChildren = value;
+            if (numOfChildren <= 0) // No children left
+            {
+                GameManager.instance.EndGame();
+            }
+        }
     }
 }

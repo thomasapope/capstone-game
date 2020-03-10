@@ -9,6 +9,17 @@ public class EndTrigger : MonoBehaviour
 
     void OnTriggerEnter()
     {
-        gameManager.CompleteLevel();
+        // GameManager.isVictory = true;
+        // gameManager.CompleteLevel();
+
+        if (!WaveSpawner.complete)
+        {
+            Debug.Log("WAVES NOT COMPLETE");
+        }
+        else
+        {
+            GameManager.isVictory = true;
+            GameManager.instance.EndGame();
+        }
     }
 }
