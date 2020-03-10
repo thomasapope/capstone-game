@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 4119752691816221646}
   - component: {fileID: 451555348973886637}
   - component: {fileID: 1432957862278533281}
+  - component: {fileID: 5974278260025654072}
   m_Layer: 12
   m_Name: Child
   m_TagString: holdable
@@ -144,6 +145,41 @@ MonoBehaviour:
   itemDescription: Awwww, It's a baby!
   radius: 0.5
   targetRef: {fileID: 3689221774433860705}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 2048
+  stashLayer:
+    serializedVersion: 2
+    m_Bits: 8192
+  state: 1
+  timer: 0
+  wanderRadius: 20
+  hiddenTime: 15
+  wanderTime: 10
+  safeTime: 5
+  stashRadius: 1
+--- !u!195 &5974278260025654072
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4119752691816221644}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.49999997
+  m_Speed: 0.5
+  m_Acceleration: 3
+  avoidancePriority: 50
+  m_AngularSpeed: 60
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 0.5
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1001 &6203324661002821748
 PrefabInstance:
   m_ObjectHideFlags: 0
