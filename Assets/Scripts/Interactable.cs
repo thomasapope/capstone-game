@@ -13,10 +13,10 @@ public class Interactable : MonoBehaviour
     public float radius = .5f;
     
 
-    void Update()
+    protected virtual void Update()
     {
         if(GameManager.playerRef){
-            if(Vector3.Distance(GameManager.playerRef.transform.position, transform.position) < 4 && !pickedUp){
+            if(Vector3.Distance(GameManager.playerRef.transform.position, transform.position) < 4f && !pickedUp){
                 objectUI.SetActive(true);
             }else{
                 objectUI.SetActive(false);
