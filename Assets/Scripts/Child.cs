@@ -34,6 +34,7 @@ public class Child : Interactable
     public float wanderTime = 10f; // seconds before wandering in a new direction
     public float safeTime = 3f; // seconds a child is safe after being dropped
  
+    public float enemyDetectionRadius = 5f;
     public float stashRadius = 1f; // the radius that is checked to determine if the child has been hidden in a stash
 
     // Use this for initialization
@@ -60,19 +61,30 @@ public class Child : Interactable
                     ChangeState(ChildState.WANDERING);
                 }
                 break;
+
             case ChildState.WANDERING: // Wander around
+                // Check if there is an enemy nearby
+                if (Physics.CheckSphere(transform.position, enemyDetectionRadius, enemyLayer, QueryTriggerInteraction.Collide))
+                {
+                    // ChangeState(ChildState.HIDDEN);
+                    print("ENEMY NEARBY!!!");
+                }
+
+                // Track time until direction change
                 if (timer >= wanderTime) {
                     Vector3 newPos = RandomNavSphere(transform.position, wanderRadius, -1);
                     agent.SetDestination(newPos);
                     timer = 0;
                 }
                 break;
+
             case ChildState.SAFE: // Wait for a time before going back to wandering. Occurs when dropped.
                 if (timer >= safeTime)
                 {
                     ChangeState(ChildState.WANDERING);
                 }
                 break;
+
             default:
                 break;
         }
@@ -83,7 +95,7 @@ public class Child : Interactable
     {
         // Changes the state the child is in and runs one time code for that state
         state = newState;
-        print(newState);
+        // print(newState);
 
         switch (newState)
         {
@@ -130,10 +142,6 @@ public class Child : Interactable
         if (transform.parent.parent.gameObject.CompareTag("Enemy"))
         {
             ChildPickedUp(transform);
-        }
-        else 
-        {
-
         }
 
         targetRef.SetActive(false);
