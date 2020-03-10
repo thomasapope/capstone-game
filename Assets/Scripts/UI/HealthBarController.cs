@@ -3,8 +3,7 @@ using UnityEngine;
 
 public class HealthBarController : MonoBehaviour
 {
-    [SerializeField]
-    private HealthBar healthBarPrefab;
+    public HealthBar healthBarPrefab;
 
     private Camera mainCamera;
 

@@ -25,7 +25,7 @@ public class Enemy : Creature
     private float timeTilRefresh;
 
 
-    protected virtual void Start()
+    protected override void Start()
     {
         base.Start();
 

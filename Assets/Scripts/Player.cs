@@ -54,12 +54,10 @@ public class Player : Creature
     public Weapon[] weapons;
 
 
-    protected virtual void Start()
+    protected override void Start()
     {
         controller = GetComponent<CharacterController>();
         cam = Camera.main;
-
-        // SwitchWeapon(currentWeapon);
         
         base.Start();
     }
