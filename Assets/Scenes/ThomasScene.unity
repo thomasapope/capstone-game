@@ -1444,9 +1444,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 367118072cbdd1944bcec5d7035bdc79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  restartDelay: 3
   completeLevelUI: {fileID: 128309713}
   gameUI: {fileID: 389228385}
+  endScreenDelay: 4
+  returnToMenuDelay: 10
+  childPrefab: {fileID: 0}
 --- !u!43 &166756901
 Mesh:
   m_ObjectHideFlags: 0

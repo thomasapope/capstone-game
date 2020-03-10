@@ -61,7 +61,7 @@ public class Enemy : Creature
         {
             if (target.CompareTag("Target")) // If the target is a child
             {
-                if (target.parent.gameObject.GetComponent<Interactable>().pickedUp == true)
+                if (target.parent.gameObject.GetComponent<Interactable>().pickedUp || !target.gameObject.activeInHierarchy)
                 {
                     Debug.Log("My target is already taken");
                     FindTarget();
@@ -101,20 +101,21 @@ public class Enemy : Creature
         // Should not be executed every frame as it is resource intensive.
         if (state == MindState.CHASING)
         {
-            if (target)
-            {
-                if(!target.gameObject.activeInHierarchy)
-                {
-                    target = GameManager.playerRef.transform;
-                    return;
-                }
-            }
+            // if (target)
+            // {
+            //     if(!target.gameObject.activeInHierarchy)
+            //     {
+            //         target = GameManager.playerRef.transform;
+            //         return;
+            //     }
+            // }
 
             float minDistance = 1000f;
             Transform closest = transform;
             foreach (GameObject g in GameManager.targetRefs)
             {
                 if (!g) continue;
+                if (!g.gameObject.activeInHierarchy) continue;
                 float dist = Vector3.Distance(transform.position, g.transform.position);
                 if (dist < minDistance) 
                 {

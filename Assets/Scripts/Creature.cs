@@ -105,7 +105,10 @@ public abstract class Creature : MonoBehaviour
                     OnAttack();
                 }
 
-                creature.GetComponent<Creature>().TakeDamage(attackDamage);
+                if (creature) // Make sure creature still exists
+                {
+                    creature.GetComponent<Creature>().TakeDamage(attackDamage);
+                }
             }
         }
     }
