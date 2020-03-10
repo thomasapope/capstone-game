@@ -5,25 +5,25 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
+    public static GameManager instance; // Instance of self to make the GameManager easy to access
 
+    public GameObject completeLevelUI;
+    public GameObject gameUI;
 
+    // Game Completion Variables
     bool gameHasEnded = false;
     public static bool isVictory = false;
 
     public float endScreenDelay = 3f;
     public float returnToMenuDelay = 10f;
 
-    public GameObject completeLevelUI;
-    public GameObject gameUI;
-
-    // public static GameObject[] playerRef;
+    // Object References
     public static GameObject playerRef;
-    public static List<GameObject> targetRefs;
+    public static List<GameObject> targetRefs; // Used for AI navigation
 
-    public static GameObject childPrefab;
-
-    // public static enum AIState {}
+    // Cached Prefabs
+    [SerializeField]
+    public GameObject childPrefab;
 
     // Stats and Score
     public static int kills;
@@ -35,16 +35,27 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
 
-        // playerRef = GameObject.FindGameObjectsWithTag("Player").ToList();
+        // Set up targetRefs
         playerRef = GameObject.FindWithTag("Player");
         targetRefs = new List<GameObject>(GameObject.FindGameObjectsWithTag("Target"));
         targetRefs.Add(playerRef);
-        childPrefab = (GameObject)Resources.Load("ChildPrefab");
+        // childPrefab = (GameObject)Resources.Load("ChildPrefab");
 
-        // foreach (GameObject o in targetRefs)
-        // {
-        //     Debug.Log(o.name);
-        // }
+        // Hook into child messages
+        Child.ChildPickedUp += OnChildPickedUp;
+        Child.ChildTaken += OnChildTaken;
+    }
+
+
+    void OnChildPickedUp(Transform location)
+    {
+        Debug.Log("Child Picked Up!");
+    }
+
+
+    void OnChildTaken(Transform location)
+    {
+        Debug.Log("Child Taken!");
     }
     
 

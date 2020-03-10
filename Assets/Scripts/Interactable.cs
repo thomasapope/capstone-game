@@ -25,11 +25,10 @@ public class Interactable : MonoBehaviour
         
     }
 
+
     public virtual void OnPickUp()
     {
         pickedUp = true;
-        // Debug.Log(pickedUp);
-        // objectUI.SetActive(false);
     }
 
 
@@ -37,11 +36,4 @@ public class Interactable : MonoBehaviour
     {
         pickedUp = false;
     }
-
-
-    // void OnDrawGizmosSelected()
-    // {
-    //     Gizmos.color = Color.yellow;
-    //     Gizmos.DrawWireSphere(transform.position, radius);
-    // }
 }

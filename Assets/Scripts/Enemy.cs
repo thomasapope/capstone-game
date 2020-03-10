@@ -56,23 +56,18 @@ public class Enemy : Creature
 
         agent.SetDestination(target.position); // start the enemy moving toward its target
 
-        // float distance = Vector3.Distance(target.position, transform.position);
-
-
         // Check if enemy is close to target
-        // if (distance <= agent.stoppingDistance)
         if (hasReachedTarget())
         {
             if (target.CompareTag("Target")) // If the target is a child
             {
-                if (/*GameManager.numOfChildren < 1 || */target.parent.gameObject.GetComponent<Interactable>().pickedUp == true)
+                if (target.parent.gameObject.GetComponent<Interactable>().pickedUp == true)
                 {
                     Debug.Log("My target is already taken");
                     FindTarget();
                     return;
                 }
 
-                Debug.Log("They're taking the children!!!");
                 state = MindState.FLEEING;
 
                 PickUpObject(target.parent.gameObject.GetComponent<Interactable>());
@@ -80,8 +75,6 @@ public class Enemy : Creature
 
             if (target.CompareTag("SpawnPoint")) // If the enemy has returned to their spawn point
             {
-                Debug.Log("An enemy has escaped with a child!");
-                // GameManager.numOfChildren--;
                 GameManager.NumOfChildren--;
                 Destroy(gameObject);
             }
@@ -115,16 +108,6 @@ public class Enemy : Creature
                     target = GameManager.playerRef.transform;
                     return;
                 }
-
-
-                // if (target.CompareTag("Target"))
-                // {
-                //     if (target.transform.parent.gameObject.GetComponent<Interactable>().pickedUp)
-                //     {
-                //         target = GameManager.playerRef.transform;
-                //         return;
-                //     }
-                // }
             }
 
             float minDistance = 1000f;
@@ -169,8 +152,6 @@ public class Enemy : Creature
 
     protected override void OnDeath()
     {
-        // Debug.Log("Enemy slain!!!");
-
         // Unparent child if carrying
         if (state == MindState.FLEEING)
         {
@@ -179,7 +160,6 @@ public class Enemy : Creature
             Debug.Log("Your enemies have dropped a child!!!");
         }
 
-        // GameStats.score++; // Add one kill to the score
         GameManager.kills++; // Add one kill to the score
 
         Destroy(gameObject);

@@ -91,14 +91,10 @@ public abstract class Creature : MonoBehaviour
         Collider[] hits = Physics.OverlapSphere(attackPoint.position, attackRange, attackLayers);
         
         if(hits.Length == 0) return;
-        // Debug.Log("There are " + hits.Length);
 
         foreach (Collider enemy in hits)
         {
-            // Debug.Log(enemy.name);
-            // Creature enemyCreature = enemy.GetComponent<Creature>().TakeDamage(attackDamage);
             StartCoroutine(DoDamage(enemy, attackDelay));
-            // enemy.GetComponent<Creature>().TakeDamage(attackDamage);
 
             IEnumerator DoDamage(Collider creature, float delay)
             {
@@ -110,7 +106,6 @@ public abstract class Creature : MonoBehaviour
                 }
 
                 creature.GetComponent<Creature>().TakeDamage(attackDamage);
-                // creature.TakeDamage(attackDamage);
             }
         }
     }
@@ -118,11 +113,7 @@ public abstract class Creature : MonoBehaviour
 
     public virtual void TakeDamage(int damage)
     {
-        // Debug.Log(name + " took " + damage + " damage!");
         ModifyHealth(damage * -1);
-        
-        // hitTime = 0;
-        // rend.material = hitMat;
     }
 
     
@@ -148,7 +139,6 @@ public abstract class Creature : MonoBehaviour
     protected void PickUpObject(Interactable obj)
     {
         item = obj;
-        // Debug.Log("Picked up a " + obj.gameObject.name);
         isCarryingItem = true;
         obj.transform.SetParent(carryPoint);
         obj.transform.position = carryPoint.position;
@@ -164,22 +154,11 @@ public abstract class Creature : MonoBehaviour
 
         item = null;
         isCarryingItem = false;
-
-        
-        // Transform[] children = GetComponentsInChildren<Transform>();
-        // foreach (Transform child in children)
-        // {
-        //     if (child.CompareTag("holdable"))
-        //     {
-        //         child.SetParent(null);
-        //     }
-        // }
     }
 
 
     protected virtual void OnDeath()
     {
-        // Debug.Log(gameObject.name + " died!");
         Destroy(gameObject);
     }
     
