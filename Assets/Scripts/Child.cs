@@ -34,8 +34,10 @@ public class Child : Interactable
     public float wanderTime = 10f; // seconds before wandering in a new direction
     public float safeTime = 3f; // seconds a child is safe after being dropped
  
-    public float enemyDetectionRadius = 5f;
+    public float enemyDetectionRadius = 15f;
     public float stashRadius = 1f; // the radius that is checked to determine if the child has been hidden in a stash
+
+    public Vector3 runDirection;
 
     // Use this for initialization
     void OnEnable () 
@@ -64,10 +66,11 @@ public class Child : Interactable
 
             case ChildState.WANDERING: // Wander around
                 // Check if there is an enemy nearby
-                if (Physics.CheckSphere(transform.position, enemyDetectionRadius, enemyLayer, QueryTriggerInteraction.Collide))
+                if (Physics.CheckSphere(transform.position, enemyDetectionRadius, enemyLayer))
                 {
                     // ChangeState(ChildState.HIDDEN);
-                    print("ENEMY NEARBY!!!");
+                    // print("ENEMY NEARBY!!!");
+                    ChangeState(ChildState.RUNNING);
                 }
 
                 // Track time until direction change
@@ -75,6 +78,20 @@ public class Child : Interactable
                     Vector3 newPos = RandomNavSphere(transform.position, wanderRadius, -1);
                     agent.SetDestination(newPos);
                     timer = 0;
+                }
+                break;
+
+            case ChildState.RUNNING: // Run from nearby enemies
+                agent.SetDestination(runDirection);
+                if (Physics.CheckSphere(transform.position, enemyDetectionRadius, enemyLayer))
+                {
+                    // ChangeState(ChildState.HIDDEN);
+                    // print("ENEMY NEARBY!!!");
+                    FindDirectionFromEnemy();
+                }
+                else 
+                {
+                    ChangeState(ChildState.WANDERING);
                 }
                 break;
 
@@ -103,18 +120,47 @@ public class Child : Interactable
                 timer = wanderTime;
                 targetRef.SetActive(true);
                 break;
+
             case ChildState.CARRIED:
                 agent.ResetPath();
                 agent.enabled = false; // disable navmeshagent to keep the child from walking away while being carried
                 break;
+
+            case ChildState.RUNNING:
+                FindDirectionFromEnemy();
+                // foreach(Collider c in nearbyEnemies)
+                // {
+
+                // }
+                break;
+
             case ChildState.HIDDEN:
             case ChildState.SAFE:
                 timer = 0f;
                 targetRef.SetActive(false);
                 break;
+
             default:
                 timer = 0f;
                 break;
+        }
+    }
+
+
+    void FindDirectionFromEnemy()
+    {
+        Collider[] nearbyEnemies = Physics.OverlapSphere(transform.position, enemyDetectionRadius, enemyLayer);
+        if (nearbyEnemies.Length > 0)
+        {
+            Vector3 delta = nearbyEnemies[0].transform.position - transform.position;
+            Vector3 direction = delta.normalized;
+            direction.y = 0f;
+
+            runDirection = direction * -10;
+
+            // runDirection *= -1;
+            // print("Position: " + transform.position + "EnemyPosition: " + nearbyEnemies[0].transform.position + " Direction: " + runDirection);
+            // agent.SetDestination(transform.position + enemyDir);
         }
     }
 

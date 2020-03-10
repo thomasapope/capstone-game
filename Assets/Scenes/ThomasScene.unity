@@ -1396,13 +1396,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 517472247}
-  timeBeforeFirstWave: 15
+  timeBeforeFirstWave: 0
   spawnPoints:
   - {fileID: 904569204}
   - {fileID: 599087949}
   - {fileID: 1710257970}
   - {fileID: 8985116448136358311}
   waves:
+  - name: Wave One
+    enemy: {fileID: 8516002812758349075, guid: 77547354c75c2d6449ccbd75b588c63c, type: 3}
+    count: 2
+    rate: 1
+    timeAfterWave: 5
   - name: Wave One
     enemy: {fileID: 8516002812758349075, guid: 77547354c75c2d6449ccbd75b588c63c, type: 3}
     count: 2
@@ -17511,7 +17516,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh20902
+  m_Name: pb_Mesh90514
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
