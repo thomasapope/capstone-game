@@ -27,7 +27,8 @@ public class Helicopter : MonoBehaviour
         }
 
         if(interactablesNear.Count == 3){
-            // Play win Sound and UI
+            GameManager.isVictory = true;
+            GameManager.instance.EndGame();
         }
         
     }
