@@ -1,17 +1,31 @@
 fileFormatVersion: 2
-guid: 7cc61490a77472b4782ecb5659f88274
-timeCreated: 1447484002
+guid: 5194e6cdfd55bf8438ebf6e665a18e9c
+timeCreated: 1440178154
 licenseType: Store
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
     100000: //RootNode
+    100002: lo_Rock_B_LOD0
+    100004: lo_Rock_B_LOD1
+    100006: lo_Rock_B_LOD2
     400000: //RootNode
+    400002: lo_Rock_B_LOD0
+    400004: lo_Rock_B_LOD1
+    400006: lo_Rock_B_LOD2
     2300000: //RootNode
+    2300002: lo_Rock_B_LOD0
+    2300004: lo_Rock_B_LOD1
+    2300006: lo_Rock_B_LOD2
     3300000: //RootNode
-    4300000: Branch1
-    7400000: Branch1|hi_Leaf.002Action
-    9500000: //RootNode
+    3300002: lo_Rock_B_LOD0
+    3300004: lo_Rock_B_LOD1
+    3300006: lo_Rock_B_LOD2
+    4300000: lo_Rock_B
+    4300002: lo_Rock_B_LOD2
+    4300004: lo_Rock_B_LOD1
+    4300006: lo_Rock_B_LOD0
+    20500000: //RootNode
   materials:
     importMaterials: 0
     materialName: 0
@@ -34,13 +48,16 @@ ModelImporter:
     clipAnimations: []
     isReadable: 1
   meshes:
-    lODScreenPercentages: []
+    lODScreenPercentages:
+    - .25
+    - .125
+    - .00999999978
     globalScale: 1
-    meshCompression: 0
+    meshCompression: 1
     addColliders: 0
-    importBlendShapes: 1
+    importBlendShapes: 0
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     optimizeMeshForGPU: 1
     keepQuads: 0
@@ -68,10 +85,8 @@ ModelImporter:
     legStretch: .0500000007
     feetSpacing: 0
     rootMotionBoneName: 
-    hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 0
-  humanoidOversampling: 1
   additionalBone: 0
   userData: 
   assetBundleName: 
