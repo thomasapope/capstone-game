@@ -200,7 +200,7 @@ public class Player : Creature
     protected override void OnDeath()
     {
         // You died. Game over.
-        // Debug.Log("You Died");
+        Debug.Log("You Died");
         GameManager.instance.EndGame(); 
 
         Destroy(gameObject);

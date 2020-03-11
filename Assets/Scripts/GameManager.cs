@@ -7,15 +7,14 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance; // Instance of self to make the GameManager easy to access
 
-    public GameObject completeLevelUI;
+    public EndUIController completeLevelUI;
     public GameObject gameUI;
 
     // Game Completion Variables
     bool gameHasEnded = false;
     public static bool isVictory = false;
 
-    public float endScreenDelay = 3f;
-    public float returnToMenuDelay = 10f;
+    public float endScreenDelay = 3f; // Delay after end of game to show end screen
 
     // Object References
     public static GameObject playerRef;
@@ -29,6 +28,9 @@ public class GameManager : MonoBehaviour
     public static int kills;
     public static float damage;
     public static int numOfChildren = 3;
+
+    // public enum CauseOfDefeat {DEAD, CHILDRENSTOLEN}
+    // private reasonForDeath
 
 
     private void Awake()
@@ -66,7 +68,7 @@ public class GameManager : MonoBehaviour
 
             Debug.Log("YOU WON!");
             gameUI.SetActive(false);
-            completeLevelUI.SetActive(true);
+            completeLevelUI.gameObject.SetActive(true);
             EndGame();
         }
         else 
@@ -78,32 +80,35 @@ public class GameManager : MonoBehaviour
 
     public void EndGame()
     {
+        Debug.Log("before if");
         if (gameHasEnded == false) 
         {
             gameHasEnded = true;
-            Debug.Log("GAME OVER");
+            // Debug.Log("GAME OVER");
 
-            if (isVictory)
-            {
-                Debug.Log("YOU WON!");
-                Invoke("ShowEndUI", endScreenDelay);  
-            }
-            else
-            {
-                Debug.Log("YOU LOST!");
-                Invoke("ShowEndUI", endScreenDelay);
-            }
+            // if (isVictory)
+            // {
+            //     Debug.Log("YOU WON!"); 
+            // }
+            // else
+            // {
+            //     Debug.Log("YOU LOST!");
+            // }
 
-            //Returns user to Main Menu
-            Invoke("ReturnToMenu", returnToMenuDelay);
+                Debug.Log("inside if");
+            Invoke("ShowEndUI", endScreenDelay);
         }
     }
 
 
     void ShowEndUI()
     {
+        Debug.Log("Hiding game UI");
         gameUI.SetActive(false);
-        completeLevelUI.SetActive(true);
+
+        Debug.Log("Showing end UI");
+        completeLevelUI.gameObject.SetActive(true);
+        completeLevelUI.UpdateUI();
     }
 
 
