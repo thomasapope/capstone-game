@@ -58,7 +58,11 @@ public class CountdownTimer : MonoBehaviour
 
     void OnWaveCompleted()
     {
-        timer.color = defColor;
+        // Make the timer visible unless all waves are complete
+        if (!WaveSpawner.complete)
+        {
+            timer.color = defColor;
+        }
     }
 
 

@@ -85,9 +85,6 @@ public class WaveSpawner : MonoBehaviour
 
     void WaveCompleted()
     {
-        // Debug.Log("Wave Completed");
-        WaveComplete();
-
         state = SpawnState.COUNTING;
         // waveCountdown = timeBetweenWaves;
         waveCountdown = waves[nextWave].timeAfterWave;
@@ -106,6 +103,8 @@ public class WaveSpawner : MonoBehaviour
         {
             nextWave++;
         }
+
+        WaveComplete();
     }
 
     bool EnemyIsAlive()

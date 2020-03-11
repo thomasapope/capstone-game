@@ -116,6 +116,15 @@ public class Enemy : Creature
             {
                 if (!g) continue;
                 if (!g.gameObject.activeInHierarchy) continue;
+                // Child child = g.GetComponent<Child>();
+                // if (child)
+                // {
+                //     if (child.state == Child.ChildState.HIDDEN) 
+                //     {
+                //         print("this is true");
+                //         continue;
+                //     }
+                // }
                 float dist = Vector3.Distance(transform.position, g.transform.position);
                 if (dist < minDistance) 
                 {
