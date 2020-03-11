@@ -17,7 +17,7 @@ public class Helicopter : MonoBehaviour
             Collider[] hits = Physics.OverlapSphere(this.transform.position, 10, interactableLayer);
             foreach(Collider item in hits){
                 if(item.gameObject != null  && !item.gameObject.GetComponent<Interactable>().pickedUp){
-                    if(!interactablesNear.Contains(item.gameObject)){
+                    if(!interactablesNear.Contains(item.gameObject) && (item.gameObject.GetComponent<Child>() == null)){
                         interactablesNear.Add(item.gameObject);
                         GameObject.Destroy(item.gameObject);
                     }
