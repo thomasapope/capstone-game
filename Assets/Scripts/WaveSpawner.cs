@@ -98,6 +98,8 @@ public class WaveSpawner : MonoBehaviour
             Debug.Log("All Waves Complete!");
             complete = true;
             state = SpawnState.COMPLETE;
+            GameManager.isVictory = true;
+            GameManager.instance.EndGame();
         }
         else 
         {

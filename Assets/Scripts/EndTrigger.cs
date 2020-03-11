@@ -10,7 +10,7 @@ public class EndTrigger : MonoBehaviour
     void OnTriggerEnter()
     {
         // GameManager.isVictory = true;
-        // gameManager.CompleteLevel();
+        // gameManager.CompleteLevel();s
 
         if (!WaveSpawner.complete)
         {
