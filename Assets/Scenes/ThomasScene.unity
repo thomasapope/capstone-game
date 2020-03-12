@@ -1287,7 +1287,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 529eeba132008ab45ad5cedd47b290b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 517472247}
   timeBeforeFirstWave: 0
   spawnPoints:
   - {fileID: 904569204}
@@ -1297,7 +1296,7 @@ MonoBehaviour:
   waves:
   - name: Wave One
     enemy: {fileID: 8516002812758349075, guid: 77547354c75c2d6449ccbd75b588c63c, type: 3}
-    count: 2
+    count: 30
     rate: 1
     timeAfterWave: 5
   - name: Wave One
@@ -1338,6 +1337,7 @@ MonoBehaviour:
   completeLevelUI: {fileID: 561495756}
   gameUI: {fileID: 561495757}
   endScreenDelay: 4
+  playerSpawnPoint: {fileID: 0}
   childPrefab: {fileID: 0}
 --- !u!43 &166756901
 Mesh:
@@ -6296,12 +6296,6 @@ Transform:
   m_Father: {fileID: 482812704}
   m_RootOrder: 30
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &517472247 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 904692277821601854, guid: 13f8fb30e0c6b7a4cbf7630804f35286,
-    type: 3}
-  m_PrefabInstance: {fileID: 1275983779}
-  m_PrefabAsset: {fileID: 0}
 --- !u!43 &531127914
 Mesh:
   m_ObjectHideFlags: 0
@@ -13590,7 +13584,7 @@ PrefabInstance:
     - target: {fileID: 904692277821601854, guid: 13f8fb30e0c6b7a4cbf7630804f35286,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.7
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 904692277821601854, guid: 13f8fb30e0c6b7a4cbf7630804f35286,
         type: 3}

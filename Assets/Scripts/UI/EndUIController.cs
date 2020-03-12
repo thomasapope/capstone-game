@@ -13,12 +13,6 @@ public class EndUIController : MonoBehaviour
     public Text damage;
 
 
-    void Start()
-    {
-        // gameObject.SetActive(false);
-    }
-
-
     void Update()
     {
         if (Input.anyKeyDown)

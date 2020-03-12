@@ -6,7 +6,9 @@ public class WaveSpawner : MonoBehaviour
 {
     public static WaveSpawner instance;
 
-    public Transform player;
+    // public GameObject player;
+    // public GameObject playerPrefab; // Store the player prefab to spawn the player
+    // public Transform playerSpawnPoint;
     public enum SpawnState { SPAWNING, WAITING, COUNTING, COMPLETE}
 
     public static SpawnState state = SpawnState.COUNTING;
@@ -42,7 +44,13 @@ public class WaveSpawner : MonoBehaviour
         // Set up singleton behavior
         instance = this;
 
+        // SpawnPlayer();       
+
         // Check if there are spawn points
+        // if (!playerSpawnPoint)
+        // {
+        //     Debug.Log("Error: The player does not have a spawn point.");
+        // }
         if (spawnPoints.Length == 0)
         {
             Debug.Log("Error: No spawn points referenced.");
@@ -154,8 +162,21 @@ public class WaveSpawner : MonoBehaviour
 
         Enemy enemy = Instantiate<Enemy>(_enemy, _sp.position, _sp.rotation);
         enemy.startingPoint = _sp;
-        enemy.target = player;
-        enemy.transform.rotation = Quaternion.LookRotation(new Vector3 (player.position.x, 0, player.position.z));
+        // enemy.target = player;
+        // enemy.transform.rotation = Quaternion.LookRotation(new Vector3 (player.position.x, 0, player.position.z));
     }
+
+
+    // Spawn the player at the beginning of a game
+    // void SpawnPlayer()
+    // {
+    //     if (playerSpawnPoint)
+    //     {
+    //         GameObject player = Instantiate(playerPrefab, playerSpawnPoint.position, playerSpawnPoint.rotation);
+    //         GameManager.playerRef = player;
+
+    //         // Enemy enemy = Instantiate<Enemy>(_enemy, _sp.position, _sp.rotation);
+    //     }
+    // }
 
 }

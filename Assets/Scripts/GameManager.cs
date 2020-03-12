@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public float endScreenDelay = 3f; // Delay after end of game to show end screen
 
     // Object References
+    public Transform playerSpawnPoint;
     public static GameObject playerRef;
     public static List<GameObject> targetRefs; // Used for AI navigation
 
@@ -80,22 +81,10 @@ public class GameManager : MonoBehaviour
 
     public void EndGame()
     {
-        Debug.Log("before if");
         if (gameHasEnded == false) 
         {
             gameHasEnded = true;
-            // Debug.Log("GAME OVER");
 
-            // if (isVictory)
-            // {
-            //     Debug.Log("YOU WON!"); 
-            // }
-            // else
-            // {
-            //     Debug.Log("YOU LOST!");
-            // }
-
-                Debug.Log("inside if");
             Invoke("ShowEndUI", endScreenDelay);
         }
     }
@@ -103,10 +92,10 @@ public class GameManager : MonoBehaviour
 
     void ShowEndUI()
     {
-        Debug.Log("Hiding game UI");
+        // Debug.Log("Hiding game UI");
         gameUI.SetActive(false);
 
-        Debug.Log("Showing end UI");
+        // Debug.Log("Showing end UI");
         completeLevelUI.gameObject.SetActive(true);
         completeLevelUI.UpdateUI();
     }
