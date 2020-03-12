@@ -6,9 +6,6 @@ public class WaveSpawner : MonoBehaviour
 {
     public static WaveSpawner instance;
 
-    // public GameObject player;
-    // public GameObject playerPrefab; // Store the player prefab to spawn the player
-    // public Transform playerSpawnPoint;
     public enum SpawnState { SPAWNING, WAITING, COUNTING, COMPLETE}
 
     public static SpawnState state = SpawnState.COUNTING;
@@ -44,13 +41,6 @@ public class WaveSpawner : MonoBehaviour
         // Set up singleton behavior
         instance = this;
 
-        // SpawnPlayer();       
-
-        // Check if there are spawn points
-        // if (!playerSpawnPoint)
-        // {
-        //     Debug.Log("Error: The player does not have a spawn point.");
-        // }
         if (spawnPoints.Length == 0)
         {
             Debug.Log("Error: No spawn points referenced.");

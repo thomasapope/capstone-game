@@ -41,8 +41,12 @@ public class GameManager : MonoBehaviour
         // Set up targetRefs
         playerRef = GameObject.FindWithTag("Player");
         targetRefs = new List<GameObject>(GameObject.FindGameObjectsWithTag("Target"));
+        // Debug.Log(targetRefs.Count);
+        numOfChildren = targetRefs.Count;
         targetRefs.Add(playerRef);
-        // childPrefab = (GameObject)Resources.Load("ChildPrefab");
+
+        // Find number of children
+        // GameObject[] children = GameObject.FindObjects
 
         // Hook into child messages
         Child.ChildPickedUp += OnChildPickedUp;
