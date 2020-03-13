@@ -13,10 +13,12 @@ public class Child : Interactable
     public LayerMask stashLayer;
     private Transform target;
     private NavMeshAgent agent;
+    public Animator animator;
 
     // States
     public enum ChildState {HIDDEN, WANDERING, RUNNING, CARRIED, SAFE}
-    public ChildState state = ChildState.WANDERING;
+    public ChildState state;
+    // public ChildState state = ChildState.WANDERING;
 
     // Messages
     public static event Action<Transform> ChildLeftHiding = delegate {};
@@ -42,7 +44,10 @@ public class Child : Interactable
     // Use this for initialization
     void OnEnable () 
     {
-        agent = GetComponent<NavMeshAgent> ();
+        agent = GetComponent<NavMeshAgent>();
+        // animator = GetComponentInChildren<Animator>();
+        // animator.Play("Carrying");
+        ChangeState(ChildState.WANDERING);
         timer = wanderTime / 2; // Set initial wander time
     }
  
@@ -119,11 +124,14 @@ public class Child : Interactable
             case ChildState.WANDERING:
                 timer = wanderTime;
                 targetRef.SetActive(true);
+                animator.SetBool("crawling", true);
+                animator.SetBool("carried", false);
                 break;
 
             case ChildState.CARRIED:
                 agent.ResetPath();
                 agent.enabled = false; // disable navmeshagent to keep the child from walking away while being carried
+                animator.SetBool("carried", true);
                 break;
 
             case ChildState.RUNNING:
@@ -138,6 +146,7 @@ public class Child : Interactable
             case ChildState.SAFE:
                 timer = 0f;
                 targetRef.SetActive(false);
+                animator.SetBool("carried", false);
                 break;
 
             default:
