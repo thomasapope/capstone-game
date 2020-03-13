@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public float endScreenDelay = 3f; // Delay after end of game to show end screen
 
     // Object References
+    public Transform playerSpawnPoint;
     public static GameObject playerRef;
     public static List<GameObject> targetRefs; // Used for AI navigation
 
@@ -40,8 +41,12 @@ public class GameManager : MonoBehaviour
         // Set up targetRefs
         playerRef = GameObject.FindWithTag("Player");
         targetRefs = new List<GameObject>(GameObject.FindGameObjectsWithTag("Target"));
+        // Debug.Log(targetRefs.Count);
+        numOfChildren = targetRefs.Count;
         targetRefs.Add(playerRef);
-        // childPrefab = (GameObject)Resources.Load("ChildPrefab");
+
+        // Find number of children
+        // GameObject[] children = GameObject.FindObjects
 
         // Hook into child messages
         Child.ChildPickedUp += OnChildPickedUp;
@@ -80,22 +85,10 @@ public class GameManager : MonoBehaviour
 
     public void EndGame()
     {
-        Debug.Log("before if");
         if (gameHasEnded == false) 
         {
             gameHasEnded = true;
-            // Debug.Log("GAME OVER");
 
-            // if (isVictory)
-            // {
-            //     Debug.Log("YOU WON!"); 
-            // }
-            // else
-            // {
-            //     Debug.Log("YOU LOST!");
-            // }
-
-                Debug.Log("inside if");
             Invoke("ShowEndUI", endScreenDelay);
         }
     }
@@ -103,10 +96,10 @@ public class GameManager : MonoBehaviour
 
     void ShowEndUI()
     {
-        Debug.Log("Hiding game UI");
+        // Debug.Log("Hiding game UI");
         gameUI.SetActive(false);
 
-        Debug.Log("Showing end UI");
+        // Debug.Log("Showing end UI");
         completeLevelUI.gameObject.SetActive(true);
         completeLevelUI.UpdateUI();
     }
