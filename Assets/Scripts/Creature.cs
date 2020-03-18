@@ -56,6 +56,8 @@ public abstract class Creature : MonoBehaviour
         hp = MAX_HEALTH;
 
         animator = GetComponent<Animator>();
+        // animator.SetInteger("Weapon", 1);
+        // animator.SetTrigger("InstantSwitchTrigger");
     }
 
 
