@@ -80,6 +80,20 @@ public class Player : Creature
             animator.SetTrigger("AttackTrigger");
         }
 
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            if (animator.GetCurrentAnimatorStateInfo(1).IsName("Attack2"))
+            {
+                animator.SetTrigger("attack3");
+            } else if (animator.GetCurrentAnimatorStateInfo(1).IsName("Attack1"))
+            {
+                animator.SetTrigger("attack2");
+            } else
+            {
+                animator.SetTrigger("attack1");
+            }
+        }
+
         // Call the update method in the Creature class.
         base.Update();
 
