@@ -2,11 +2,15 @@
 
 public class WeaponSwitching : MonoBehaviour
 {
+    public Player playerRef;
+
     public int selectedWeapon = 0;
 
     
     void Start()
     {
+        playerRef = GameManager.playerRef.GetComponent<Player>();
+
         SelectWeapon();
     }
 
@@ -45,7 +49,8 @@ public class WeaponSwitching : MonoBehaviour
             if (i == selectedWeapon)
             {
                 weapon.gameObject.SetActive(true);
-                GameManager.playerRef.GetComponent<Player>().attackAnimator = weapon.gameObject.GetComponent<Animator>();
+                playerRef.currentWeapon = weapon.GetComponent<Weapon>();
+                // playerRef.attackAnimator = weapon.gameObject.GetComponent<Animator>();
             }
             else 
             {

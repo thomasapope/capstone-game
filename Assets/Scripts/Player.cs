@@ -44,14 +44,7 @@ public class Player : Creature
 
 
     // Weapons
-    [System.Serializable]
-    public class Weapon
-    {
-        public string name;
-        public GameObject prefab;
-    }
-
-    public Weapon[] weapons;
+    public Weapon currentWeapon;
 
 
     protected override void Start()
@@ -82,15 +75,22 @@ public class Player : Creature
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            if (animator.GetCurrentAnimatorStateInfo(1).IsName("Attack2"))
+            if (!currentWeapon.isRanged)
             {
-                animator.SetTrigger("attack3");
-            } else if (animator.GetCurrentAnimatorStateInfo(1).IsName("Attack1"))
+                if (animator.GetCurrentAnimatorStateInfo(1).IsName("Attack2"))
+                {
+                    animator.SetTrigger("attack3");
+                } else if (animator.GetCurrentAnimatorStateInfo(1).IsName("Attack1"))
+                {
+                    animator.SetTrigger("attack2");
+                } else
+                {
+                    animator.SetTrigger("attack1");
+                }
+            }
+            else
             {
-                animator.SetTrigger("attack2");
-            } else
-            {
-                animator.SetTrigger("attack1");
+                
             }
         }
 
