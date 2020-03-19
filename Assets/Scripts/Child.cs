@@ -48,7 +48,8 @@ public class Child : Interactable
         // animator = GetComponentInChildren<Animator>();
         // animator.Play("Carrying");
         ChangeState(ChildState.WANDERING);
-        timer = wanderTime / 2; // Set initial wander time
+        timer = wanderTime;
+        // timer = wanderTime / 2; // Set initial wander time
     }
  
 

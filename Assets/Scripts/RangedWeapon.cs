@@ -4,24 +4,35 @@ using UnityEngine;
 
 public class RangedWeapon : Weapon
 {
-    // Only for ranged weapons
+    public enum GunType {Semi, Burst, Auto}
+
     public GameObject projectilePrefab;
     public Transform firePoint; // Where the bullets are created
 
-    public float fireRate = 0.5f;
+    public GunType gunType= GunType.Auto;
+
+    public float rpm = 10;
+
     public float bulletSpeed = 30f;
     public float lifeTime = 3f;
 
+    // System:
+    private float secondsBetweenShots;
+    private float nextPossibleShootTime;
 
-    void Start()
+
+    protected override void Start()
     {
-        if (isRanged)
-        {
-            if (!projectilePrefab)
-                Debug.Log("No projectile assigned to ranged weapon. Please assign a projectile.");
-            if (!firePoint)
-                Debug.Log("No firePoint designated. Please specify a firepoint for " + name);
-        }
+        base.Start();
+
+        // Check for required references
+        if (!projectilePrefab)
+            Debug.Log("No projectile assigned to ranged weapon. Please assign a projectile.");
+        if (!firePoint)
+            Debug.Log("No firePoint designated. Please specify a firepoint for " + name);
+
+        // Set up rpm
+        secondsBetweenShots = 60 / rpm;
     }
 
 
@@ -31,25 +42,53 @@ public class RangedWeapon : Weapon
     }
 
 
+    public override void AttackContinuous()
+    {
+        if (gunType == GunType.Auto)
+        {
+            Fire();
+        }
+    }
+
+
     private void Fire()
     {
-        GameObject bullet = Instantiate(projectilePrefab);
+        if (CanFire())
+        {
+            GameObject bullet = Instantiate(projectilePrefab);
 
-        Physics.IgnoreCollision(bullet.GetComponent<Collider>(), GameManager.playerRef.GetComponent<Collider>());
-        // Physics.IgnoreCollision(bullet.GetComponent<Collider>(), firePoint.parent.GetComponent<Collider>());
+            Physics.IgnoreCollision(bullet.GetComponent<Collider>(), GameManager.playerRef.GetComponent<Collider>());
+            
+            // Give the bullet damage
+            bullet.GetComponent<BulletBehavior>().damage = damage;
 
-        // Set bullet position and rotation
-        bullet.transform.position = firePoint.position;
-        Vector3 rotation = bullet.transform.rotation.eulerAngles;
-        bullet.transform.rotation = Quaternion.Euler(rotation.x, transform.eulerAngles.y, rotation.z);
+            // Set bullet position and rotation
+            bullet.transform.position = firePoint.position;
+            Vector3 rotation = bullet.transform.rotation.eulerAngles;
+            bullet.transform.rotation = Quaternion.Euler(rotation.x, transform.eulerAngles.y, rotation.z);
 
-        // bullet.transform.rotation = Quaternion.LookRotation(GameManager.playerRef.transform.rotation.eulerAngles);
-        // bullet.transform.rotation = Quaternion.Euler(Vector3.forward);
+            // Give the bullet a force
+            bullet.GetComponent<Rigidbody>().AddForce(GameManager.playerRef.transform.forward * bulletSpeed, ForceMode.Impulse);
 
-        // bullet.GetComponent<Rigidbody>().AddForce(firePoint.forward * bulletSpeed, ForceMode.Impulse);
-        bullet.GetComponent<Rigidbody>().AddForce(GameManager.playerRef.transform.forward * bulletSpeed, ForceMode.Impulse);
+            nextPossibleShootTime = Time.time + secondsBetweenShots;
 
-        StartCoroutine(DestroyBulletAfterTime(bullet, lifeTime));
+            audioSource.Play();
+
+            StartCoroutine(DestroyBulletAfterTime(bullet, lifeTime));
+        }
+    }
+
+
+    private bool CanFire()
+    {
+        bool canShoot = true;
+
+        if (Time.time < nextPossibleShootTime)
+        {
+            canShoot = false;
+        }
+
+        return canShoot;
     }
 
 

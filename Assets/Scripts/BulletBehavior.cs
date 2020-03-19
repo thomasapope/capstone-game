@@ -4,9 +4,18 @@ using UnityEngine;
 
 public class BulletBehavior : MonoBehaviour
 {
+    public int damage;
+
     private void OnTriggerEnter(Collider other)
     {
-        print("hit " + other.name + "!");
+        Creature creature = other.gameObject.GetComponent<Creature>();
+        if (creature)
+        {
+            print("Hit " + other.name + " for " + damage + " damage!");
+            creature.TakeDamage(damage);
+        }
+
+
         Destroy(gameObject);
     }
 }
