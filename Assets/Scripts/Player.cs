@@ -42,7 +42,7 @@ public class Player : Creature
     private Vector3 smoothVelocity; // Used for velocity smoothing
 
     // Weapons
-    public Weapon currentWeapon;
+    // public Weapon currentWeapon;
 
 
 
@@ -76,16 +76,23 @@ public class Player : Creature
         {
             if (!currentWeapon.isRanged)
             {
-                if (animator.GetCurrentAnimatorStateInfo(1).IsName("Attack2"))
-                {
-                    animator.SetTrigger("attack3");
-                } else if (animator.GetCurrentAnimatorStateInfo(1).IsName("Attack1"))
-                {
-                    animator.SetTrigger("attack2");
-                } else
-                {
-                    animator.SetTrigger("attack1");
-                }
+                // if (animator.GetCurrentAnimatorStateInfo(1).IsName("Attack2"))
+                // {
+                //     animator.SetTrigger("attack3");
+                //     hitsQueued++;
+                // } else if (animator.GetCurrentAnimatorStateInfo(1).IsName("Attack1"))
+                // {
+                //     animator.SetTrigger("attack2");
+                //     hitsQueued++;
+                // } else
+                // {
+                //     animator.SetTrigger("attack1");
+                //     hitsQueued++;
+                // }
+                // animator.SetTrigger("AttackTrigger");
+                hitsQueued++;
+
+                // hitsQueued++;
             }
             else
             {

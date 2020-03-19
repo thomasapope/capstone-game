@@ -102,19 +102,19 @@ MonoBehaviour:
   attackRate: 2
   attackDelay: 0
   attackDamage: 50
+  currentWeapon: {fileID: 0}
   isCarryingItem: 0
   item: {fileID: 0}
   pickupDistance: 4
   weaponPoint: {fileID: 583958578335881556}
+  interactableLayer:
+    serializedVersion: 2
+    m_Bits: 4096
   RUNNING_SPEED: 10
   CARRYING_SPEED: 6
   movementSpeed: 10
   usesGravity: 1
   gravity: 9.8
-  interactableLayer:
-    serializedVersion: 2
-    m_Bits: 4096
-  currentWeapon: {fileID: 0}
 --- !u!114 &9184803921306215388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3597,7 +3597,7 @@ PrefabInstance:
     - target: {fileID: 1671509569088316835, guid: 75c5731fae2da124980869e2e8446d76,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.0142
       objectReference: {fileID: 0}
     - target: {fileID: 1671509569088316835, guid: 75c5731fae2da124980869e2e8446d76,
         type: 3}
@@ -3667,17 +3667,17 @@ PrefabInstance:
     - target: {fileID: 2155249748424065840, guid: 5c57c515b01f67441838df42178a3447,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.004
       objectReference: {fileID: 0}
     - target: {fileID: 2155249748424065840, guid: 5c57c515b01f67441838df42178a3447,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.104
       objectReference: {fileID: 0}
     - target: {fileID: 2155249748424065840, guid: 5c57c515b01f67441838df42178a3447,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.014
       objectReference: {fileID: 0}
     - target: {fileID: 2155249748424065840, guid: 5c57c515b01f67441838df42178a3447,
         type: 3}
@@ -3718,6 +3718,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155249748424065840, guid: 5c57c515b01f67441838df42178a3447,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155249748424065840, guid: 5c57c515b01f67441838df42178a3447,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155249748424065840, guid: 5c57c515b01f67441838df42178a3447,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 3149042957874098467, guid: 5c57c515b01f67441838df42178a3447,
         type: 3}

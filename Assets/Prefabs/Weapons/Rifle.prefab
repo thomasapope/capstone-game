@@ -40,7 +40,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1671509569088316835}
   - component: {fileID: 7576607190187387010}
-  - component: {fileID: 6870145726214896365}
+  - component: {fileID: -8338886446738097391}
+  - component: {fileID: 3593081866602708769}
   m_Layer: 0
   m_Name: Rifle
   m_TagString: Untagged
@@ -83,6 +84,7 @@ MonoBehaviour:
   name: Rifle
   isRanged: 1
   damage: 25
+  attackRange: 0.5
   projectilePrefab: {fileID: 5797147044338505056, guid: bf6dca774514cbb469aa1852bd2c5cf3,
     type: 3}
   firePoint: {fileID: 3385607291001661879}
@@ -90,7 +92,24 @@ MonoBehaviour:
   rpm: 600
   bulletSpeed: 30
   lifeTime: 3
---- !u!82 &6870145726214896365
+--- !u!114 &-8338886446738097391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1671509569088223619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf97a64cfa9f83e4798aef9116d8b6ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectSource: {fileID: 0}
+  basePitch: 0
+  baseVolume: 0
+  pitchVariation: 0.1
+  volumeVariation: 0.1
+--- !u!82 &3593081866602708769
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

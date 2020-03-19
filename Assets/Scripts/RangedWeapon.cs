@@ -9,11 +9,12 @@ public class RangedWeapon : Weapon
     public GameObject projectilePrefab;
     public Transform firePoint; // Where the bullets are created
 
+    // Ranged stats
     public GunType gunType= GunType.Auto;
 
     public float rpm = 10;
-
     public float bulletSpeed = 30f;
+
     public float lifeTime = 3f;
 
     // System:
@@ -72,7 +73,7 @@ public class RangedWeapon : Weapon
 
             nextPossibleShootTime = Time.time + secondsBetweenShots;
 
-            audioSource.Play();
+            audioSource.PlayVaryPitch();
 
             StartCoroutine(DestroyBulletAfterTime(bullet, lifeTime));
         }

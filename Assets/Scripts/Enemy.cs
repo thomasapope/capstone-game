@@ -14,8 +14,8 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class Enemy : Creature
 {
-    public Transform startingPoint;
-    public Transform target;
+    [HideInInspector] public Transform startingPoint;
+    [HideInInspector] public Transform target;
     private UnityEngine.AI.NavMeshAgent agent;
 
     public enum MindState { CHASING, FLEEING }

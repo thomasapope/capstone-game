@@ -21,24 +21,25 @@ public abstract class Creature : MonoBehaviour
     
 
     // Stats
-    [SerializeField]
-    private int MAX_HEALTH = 100;
+    [SerializeField] private int MAX_HEALTH = 100;
 
-    [HideInInspector]
-    public int hp;
+    [HideInInspector] public int hp;
 
     protected bool hitting;
+    protected int hitsQueued; // Is another hit queued?
 
     public float attackRange = 0.5f;
-    public float attackRate = 2f; // Times per second this creature can attack
+    public float attackRate = 3f; // Times per second this creature can attack
     private float nextAttackTime = 0f;
     public float attackDelay = .2f;
-    public int attackDamage = 10;
+    // public int attackDamage = 10;
+    
+    // Weapons
+    [HideInInspector] public Weapon currentWeapon;
 
     // Other Stats
-    [HideInInspector]
-    public bool isCarryingItem = false;
-    public Interactable item;
+    [HideInInspector] public bool isCarryingItem = false;
+    [HideInInspector] public Interactable item;
     public float pickupDistance = 4f;
     
     // Delegates
@@ -53,6 +54,7 @@ public abstract class Creature : MonoBehaviour
         hp = MAX_HEALTH;
 
         animator = GetComponent<Animator>();
+        currentWeapon = GetComponentInChildren<Weapon>();
         // animator.SetInteger("Weapon", 1);
         // animator.SetTrigger("InstantSwitchTrigger");
     }
@@ -66,11 +68,17 @@ public abstract class Creature : MonoBehaviour
     
     protected virtual void Update()
     {
+        // Prevent too many hits from queuing up
+        if (hitsQueued > 2)
+            hitsQueued = 2;
+
         // Attacking
-        if (Time.time >= nextAttackTime)
+        if (hitting || hitsQueued > 0)
         {
-            if (hitting)
+            if (Time.time >= nextAttackTime)
             {
+                animator.SetTrigger("AttackTrigger");
+                currentWeapon.Attack();
                 Attack();
                 nextAttackTime = Time.time + 1f / attackRate;
             }
@@ -81,8 +89,9 @@ public abstract class Creature : MonoBehaviour
     void Attack()
     {
         hitting = false;
+        hitsQueued--;
 
-        Collider[] hits = Physics.OverlapSphere(attackPoint.position, attackRange, attackLayers);
+        Collider[] hits = Physics.OverlapSphere(attackPoint.position, currentWeapon.attackRange, attackLayers);
         
         if(hits.Length == 0) return;
 
@@ -101,7 +110,8 @@ public abstract class Creature : MonoBehaviour
 
                 if (creature) // Make sure creature still exists
                 {
-                    creature.GetComponent<Creature>().TakeDamage(attackDamage);
+                    creature.GetComponent<Creature>().TakeDamage(currentWeapon.damage);
+                    print("Hit " + creature.name + " for " + currentWeapon.damage + " damage!");
                 }
             }
         }
@@ -182,6 +192,13 @@ public abstract class Creature : MonoBehaviour
 
     // For animation
     public void Hit(){
+                // currentWeapon.Attack();
+        // hitsQueued--;
+        // if (hitsQueued > 0)
+        // {
+        //     animator.SetTrigger("AttackTrigger");
+        //     currentWeapon.Attack();
+        // }
     }
 
     public void Shoot(){

@@ -2,21 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(SoundEffectVariation))]
 public class Weapon : MonoBehaviour
 {
     // Component references
-    protected AudioSource audioSource;
+    protected SoundEffectVariation audioSource;
 
     // General stats
     public string name;
     public bool isRanged = false;
     public int damage = 10;
+    
+    // Melee stats
+    public float attackRange = 0.5f;
 
 
     protected virtual void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+        audioSource = GetComponent<SoundEffectVariation>();
     }
 
 
@@ -24,7 +27,7 @@ public class Weapon : MonoBehaviour
 
     public virtual void Attack()
     {
-
+        audioSource.PlayVaryPitch();
     }
 
     
