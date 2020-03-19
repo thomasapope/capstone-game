@@ -14,10 +14,7 @@ using System;
 public abstract class Creature : MonoBehaviour
 {
     // Component References
-    Renderer rend;
     protected Animator animator;
-    [HideInInspector]
-    public Animator attackAnimator;
     public Transform attackPoint;
     public Transform carryPoint;
     public LayerMask attackLayers; // The layers this creature can deal damage to
@@ -56,6 +53,8 @@ public abstract class Creature : MonoBehaviour
         hp = MAX_HEALTH;
 
         animator = GetComponent<Animator>();
+        // animator.SetInteger("Weapon", 1);
+        // animator.SetTrigger("InstantSwitchTrigger");
     }
 
 
@@ -82,11 +81,6 @@ public abstract class Creature : MonoBehaviour
     void Attack()
     {
         hitting = false;
-
-        if (attackAnimator)
-        {
-            attackAnimator.SetTrigger("swing");
-        }
 
         Collider[] hits = Physics.OverlapSphere(attackPoint.position, attackRange, attackLayers);
         

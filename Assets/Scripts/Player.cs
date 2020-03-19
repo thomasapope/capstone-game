@@ -17,6 +17,7 @@ public class Player : Creature
     private Camera cam;
     [SerializeField]
     private Transform weaponPoint;
+    public LayerMask interactableLayer;
 
     // [SerializeField]
     // private Animator animator;
@@ -40,18 +41,9 @@ public class Player : Creature
     private Vector3 velocity; // The current velocity
     private Vector3 smoothVelocity; // Used for velocity smoothing
 
-    public LayerMask interactableLayer;
-
-
     // Weapons
-    [System.Serializable]
-    public class Weapon
-    {
-        public string name;
-        public GameObject prefab;
-    }
+    public Weapon currentWeapon;
 
-    public Weapon[] weapons;
 
 
     protected override void Start()
@@ -72,12 +64,42 @@ public class Player : Creature
         if (!isCarryingItem) // Make sure the player can't attack while carrying an item
             hitting = Input.GetMouseButton(0); // Get attack input
 
-        if (hitting)
+        // if (hitting)
+        // {
+        //     animator.SetInteger("Weapon", 0);
+        //     animator.SetInteger("AttackSide", 1);
+        //     animator.SetInteger("Action", 2);
+        //     animator.SetTrigger("AttackTrigger");
+        // }
+
+        if (Input.GetButtonDown("Attack"))
         {
-            animator.SetInteger("Weapon", 0);
-            animator.SetInteger("AttackSide", 1);
-            animator.SetInteger("Action", 2);
-            animator.SetTrigger("AttackTrigger");
+            if (!currentWeapon.isRanged)
+            {
+                if (animator.GetCurrentAnimatorStateInfo(1).IsName("Attack2"))
+                {
+                    animator.SetTrigger("attack3");
+                } else if (animator.GetCurrentAnimatorStateInfo(1).IsName("Attack1"))
+                {
+                    animator.SetTrigger("attack2");
+                } else
+                {
+                    animator.SetTrigger("attack1");
+                }
+            }
+            else
+            {
+                hitting = false;
+                currentWeapon.Attack();
+            }
+        }
+        else if (Input.GetButton("Attack"))
+        {
+            if (currentWeapon.isRanged)
+            {
+                hitting = false;
+                currentWeapon.AttackContinuous();
+            }
         }
 
         // Call the update method in the Creature class.
