@@ -90,7 +90,7 @@ public class Player : Creature
             }
             else
             {
-                
+                currentWeapon.Attack();
             }
         }
 
