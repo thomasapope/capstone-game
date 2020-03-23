@@ -32,7 +32,7 @@ public class Child : Interactable
     private float timer;
 
     public float wanderRadius = 20f;
-    public float hiddenTime = 15f; // seconds before child will leave hiding
+    public float hiddenTime = 30f; // seconds before child will leave hiding
     public float wanderTime = 10f; // seconds before wandering in a new direction
     public float safeTime = 3f; // seconds a child is safe after being dropped
  
