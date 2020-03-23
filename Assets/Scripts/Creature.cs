@@ -201,14 +201,18 @@ public abstract class Creature : MonoBehaviour
         // }
     }
 
+
     public void Shoot(){
     }
+
 
     public void FootR(){
     }
 
+
     public void FootL(){
     }
+
 
     public void Land(){
     }

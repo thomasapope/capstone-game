@@ -132,6 +132,7 @@ public class Child : Interactable
             case ChildState.CARRIED:
                 agent.ResetPath();
                 agent.enabled = false; // disable navmeshagent to keep the child from walking away while being carried
+                animator.SetBool("crawling", false);
                 animator.SetBool("carried", true);
                 break;
 
