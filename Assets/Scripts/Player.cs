@@ -15,9 +15,9 @@ public class Player : Creature
     // Component References
     private CharacterController controller;
     private Camera cam;
-    [SerializeField]
-    private Transform weaponPoint;
+    [SerializeField] private Transform weaponPoint;
     public LayerMask interactableLayer;
+    /*[HideInInspector] */public WeaponSwitching weaponSwitching;
 
     // [SerializeField]
     // private Animator animator;
@@ -25,14 +25,12 @@ public class Player : Creature
     // Movement Stats
     public float RUNNING_SPEED = 10f;
     public float CARRYING_SPEED = 6f;
-    [HideInInspector]
-    public float movementSpeed = 10f;
+    [HideInInspector] public float movementSpeed = 10f;
     private float speedSmoothTime = 0.1f;
     private float rotationSpeed = 0.08f;
 
-    [HideInInspector]
-    public bool usesGravity = true;
-    public float gravity = 10f;
+    [HideInInspector] public bool usesGravity = true;
+    public float gravity = 20f;
 
     protected Vector3 movementInput; // Input direction received from subclass
     private Vector3 moveDirection; // The desired movement direction
@@ -50,6 +48,7 @@ public class Player : Creature
     {
         controller = GetComponent<CharacterController>();
         cam = Camera.main;
+        weaponSwitching = GetComponentInChildren<WeaponSwitching>();
         
         base.Start();
     }
@@ -198,6 +197,8 @@ public class Player : Creature
             if (isCarryingItem)
             {
                 DropObject();
+                weaponSwitching.selectedWeapon = weaponSwitching.previousSelectedWeapon;
+                weaponSwitching.previousSelectedWeapon = -1;
                 return;
             }
 
@@ -217,6 +218,7 @@ public class Player : Creature
                             if (!interactable.pickedUp)
                             {
                                 PickUpObject(interactable);
+                                weaponSwitching.selectedWeapon = -1;
                             }
                         }
                     }

@@ -18,12 +18,12 @@ public class WeaponSwitching : MonoBehaviour
 
     void Update()
     {
-        if (playerRef.isCarryingItem)
+        if (previousSelectedWeapon != selectedWeapon)
         {
-            // Setting the selected weapon to -1 will deselect all weapons.
-            selectedWeapon = -1;
+            SelectWeapon();
         }
-        else
+
+        if (!playerRef.isCarryingItem)
         {
             // We only want to update this if the player is not carrying an item.
             // That way, previousSelectedWeapon will equal the weapon the player 
@@ -46,11 +46,6 @@ public class WeaponSwitching : MonoBehaviour
             }
         }
 
-
-        if (previousSelectedWeapon != selectedWeapon)
-        {
-            SelectWeapon();
-        }
     }
 
 
