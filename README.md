@@ -18,19 +18,12 @@ Hide Yo Kids is a 3D hack and slash game where players must protect their family
 - GitHub
 
 
-## Planned Features:
-- ~~Score tracking (Waves survived, enemies killed)~~
-- Story mode
-- Endless horde mode
-
-
 ## Technical Notes:
 - Players and enemies inherit from a base "Creature" class, which holds code for moving, health, and other shared behaviors.
+
 
 ## Notes:
 - The focus should be on the players as the heros of the game.
 - Should not feel like a tower defense game.
 - Gameplay should be designed to induce a healthy bit of panic.
-- Collaboration with teamates should be neccesary to succeed.
-- Most weapons are fairly primitive, but occasionally a rare relic of fallen humanity can be found.
 - Setting is dark night in the ruins of an elementary school. Most lighting is from lamps, torches, and campfires.
