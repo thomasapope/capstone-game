@@ -11,7 +11,7 @@ public class Helicopter : MonoBehaviour
     public List<GameObject> interactablesNear;
     void Update()
     {
-        if GameManager.playerRef)
+        if (GameManager.playerRef)
         {
             float distance = Vector3.Distance(GameManager.playerRef.transform.position, this.transform.position);
             if(distance < 10){
