@@ -24,7 +24,9 @@ public class Child : Interactable
     public static event Action<Transform> ChildLeftHiding = delegate {};
 
     public static event Action<Transform> ChildPickedUp = delegate {};
-    public static event Action<Transform> ChildTaken = delegate {};
+    public event Action ChildTaken = delegate {};
+    public event Action ChildDropped = delegate {};
+
 
 
     // Behavior timing
@@ -207,6 +209,12 @@ public class Child : Interactable
 
     public override void OnDrop()
     {
+        // Check if being picked up by an enemy
+        // if (transform.parent.parent.gameObject.CompareTag("Enemy"))
+        // {
+            ChildDropped(); // Call delegate for alert arrow
+        // }
+
         base.OnDrop();
 
         // If being dropped in a stash, hide the child
@@ -232,7 +240,7 @@ public class Child : Interactable
             GameManager.targetRefs.Remove(gameObject);
         }
 
-        ChildTaken(transform);
+        ChildTaken();
     }
 
 }

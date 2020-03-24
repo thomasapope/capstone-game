@@ -7,11 +7,33 @@ public class AlertArrow : MonoBehaviour
     [HideInInspector] public Transform target;
 
 
+    void Start()
+    {
+        target.gameObject.GetComponent<Child>().ChildDropped += RemoveArrow;
+        target.gameObject.GetComponent<Child>().ChildTaken += RemoveArrow;
+    }
+
+
     void Update()
     {
-        // transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
+        if (!target)
+        {
+            RemoveArrow();
+        }
+
         transform.LookAt(target);
-        // Vector3 rotation = bullet.transform.rotation.eulerAngles;
-        // bullet.transform.rotation = Quaternion.Euler(rotation.x, transform.eulerAngles.y, rotation.z);
+    }
+
+
+    void RemoveArrow()
+    {
+        Destroy(gameObject);
+    }
+
+
+    void OnDisable()
+    {
+        target.gameObject.GetComponent<Child>().ChildDropped -= RemoveArrow;
+        target.gameObject.GetComponent<Child>().ChildTaken -= RemoveArrow;
     }
 }

@@ -43,6 +43,11 @@ public class GameManager : MonoBehaviour
         targetRefs = new List<GameObject>(GameObject.FindGameObjectsWithTag("Target"));
         // Debug.Log(targetRefs.Count);
         numOfChildren = targetRefs.Count;
+        foreach (GameObject child in targetRefs)
+        {
+            child.GetComponentInParent<Child>().ChildTaken += OnChildTaken;
+            // child.GetComponent<Child>().ChildTaken += OnChildTaken;
+        }
         targetRefs.Add(playerRef);
 
         // Find number of children
@@ -50,7 +55,7 @@ public class GameManager : MonoBehaviour
 
         // Hook into child messages
         Child.ChildPickedUp += OnChildPickedUp;
-        Child.ChildTaken += OnChildTaken;
+        // Child.ChildTaken += OnChildTaken;
     }
 
 
@@ -60,7 +65,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    void OnChildTaken(Transform location)
+    void OnChildTaken()
     {
         Debug.Log("Child Taken!");
     }
