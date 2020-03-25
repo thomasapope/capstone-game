@@ -45,6 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  reason: 0
+  controllerRef: {fileID: 0}
 --- !u!1001 &1868280675949044655
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -106,6 +108,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: -1504981713932161579, guid: 3ea4905cc60fecd43a10944dd09455ef,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1504981713932161579, guid: 3ea4905cc60fecd43a10944dd09455ef,
+        type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: 3ea4905cc60fecd43a10944dd09455ef,
         type: 3}

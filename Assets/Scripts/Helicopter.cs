@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +8,8 @@ public class Helicopter : MonoBehaviour
 {
     private LayerMask interactableLayer;
     public List<GameObject> interactablesNear;
+    
+    public event Action<float> OnHealthChanged = delegate {};
 
 
     void Start()
@@ -16,6 +20,7 @@ public class Helicopter : MonoBehaviour
 
     void Update()
     {
+        // Check for dropped items
         if (GameManager.playerRef)
         {
             float distance = Vector3.Distance(GameManager.playerRef.transform.position, this.transform.position);

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Interactable : MonoBehaviour
 {
     public bool pickedUp = false;
+    public bool isPart = true;
     public GameObject objectUI;
     public string itemName;
     public string itemDescription;

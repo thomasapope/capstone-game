@@ -17,7 +17,8 @@ public class Player : Creature
     private Camera cam;
     [SerializeField] private Transform weaponPoint;
     public LayerMask interactableLayer;
-    /*[HideInInspector] */public WeaponSwitching weaponSwitching;
+    [HideInInspector] public WeaponSwitching weaponSwitching;
+    [HideInInspector] public AlertArrowController alertArrowController;
 
     // [SerializeField]
     // private Animator animator;
@@ -41,6 +42,8 @@ public class Player : Creature
 
     // Weapons
     // public Weapon currentWeapon;
+    public static event Action<Transform, AlertArrowController.AlertReason> PartPickedUp = delegate {};
+    public static event Action PartDropped = delegate {};
 
 
 
@@ -49,6 +52,7 @@ public class Player : Creature
         controller = GetComponent<CharacterController>();
         cam = Camera.main;
         weaponSwitching = GetComponentInChildren<WeaponSwitching>();
+        alertArrowController = GetComponentInChildren<AlertArrowController>();
         
         base.Start();
     }
@@ -197,8 +201,8 @@ public class Player : Creature
             if (isCarryingItem)
             {
                 DropObject();
-                weaponSwitching.selectedWeapon = weaponSwitching.previousSelectedWeapon;
-                weaponSwitching.previousSelectedWeapon = -1;
+                // weaponSwitching.selectedWeapon = weaponSwitching.previousSelectedWeapon;
+                // weaponSwitching.previousSelectedWeapon = -1;
                 return;
             }
 
@@ -218,13 +222,35 @@ public class Player : Creature
                             if (!interactable.pickedUp)
                             {
                                 PickUpObject(interactable);
-                                weaponSwitching.selectedWeapon = -1;
+                                // weaponSwitching.selectedWeapon = -1;
                             }
                         }
                     }
                 }
             }
         }
+    }
+
+
+    protected override void PickUpObject(Interactable obj)
+    {
+        base.PickUpObject(obj);
+        weaponSwitching.selectedWeapon = -1;
+
+        if (obj.isPart) // Is this a part?
+        {
+            PartPickedUp(GameManager.instance.escapeVehicleRef, AlertArrowController.AlertReason.Direction);
+        }
+    }
+
+
+    protected override void DropObject()
+    {
+        base.DropObject();
+        weaponSwitching.selectedWeapon = weaponSwitching.previousSelectedWeapon;
+        weaponSwitching.previousSelectedWeapon = -1;
+        
+        PartDropped();
     }
 
 

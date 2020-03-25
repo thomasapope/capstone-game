@@ -8,6 +8,7 @@ TagManager:
   - Target
   - holdable
   - SpawnPoint
+  - vehicle
   layers:
   - Default
   - TransparentFX

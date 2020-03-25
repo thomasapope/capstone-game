@@ -21,10 +21,10 @@ public class GameManager : MonoBehaviour
     public Transform playerSpawnPoint;
     public static GameObject playerRef;
     public static List<GameObject> targetRefs; // Used for AI navigation
+    public Transform escapeVehicleRef;
 
     // Cached Prefabs
-    [SerializeField]
-    public GameObject childPrefab;
+    [SerializeField] public GameObject childPrefab;
 
     // Stats and Score
     public static int kills;
@@ -42,17 +42,14 @@ public class GameManager : MonoBehaviour
         // Set up targetRefs
         playerRef = GameObject.FindWithTag("Player");
         targetRefs = new List<GameObject>(GameObject.FindGameObjectsWithTag("Target"));
-        // Debug.Log(targetRefs.Count);
         numOfChildren = targetRefs.Count;
         foreach (GameObject child in targetRefs)
         {
             child.GetComponentInParent<Child>().ChildTaken += OnChildTaken;
-            // child.GetComponent<Child>().ChildTaken += OnChildTaken;
         }
         targetRefs.Add(playerRef);
 
-        // Find number of children
-        // GameObject[] children = GameObject.FindObjects
+        escapeVehicleRef = GameObject.FindWithTag("vehicle").transform;
 
         // Hook into child messages
         Child.ChildPickedUp += OnChildPickedUp;
@@ -62,13 +59,13 @@ public class GameManager : MonoBehaviour
 
     void OnChildPickedUp(Transform location)
     {
-        Debug.Log("Child Picked Up!");
+        // Debug.Log("Child Picked Up!");
     }
 
 
     void OnChildTaken()
     {
-        Debug.Log("Child Taken!");
+        // Debug.Log("Child Taken!");
     }
     
 

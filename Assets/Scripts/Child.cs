@@ -49,6 +49,9 @@ public class Child : Interactable
         agent = GetComponent<NavMeshAgent>();
         // animator = GetComponentInChildren<Animator>();
         // animator.Play("Carrying");
+
+        isPart = false;
+
         ChangeState(ChildState.WANDERING);
         timer = wanderTime;
         // timer = wanderTime / 2; // Set initial wander time

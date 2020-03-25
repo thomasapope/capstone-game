@@ -111,7 +111,7 @@ public abstract class Creature : MonoBehaviour
                 if (creature) // Make sure creature still exists
                 {
                     creature.GetComponent<Creature>().TakeDamage(currentWeapon.damage);
-                    print("Hit " + creature.name + " for " + currentWeapon.damage + " damage!");
+                    // print("Hit " + creature.name + " for " + currentWeapon.damage + " damage!");
                 }
             }
         }
@@ -143,7 +143,7 @@ public abstract class Creature : MonoBehaviour
     }
 
 
-    protected void PickUpObject(Interactable obj)
+    protected virtual void PickUpObject(Interactable obj)
     {
         item = obj;
         isCarryingItem = true;
@@ -153,7 +153,7 @@ public abstract class Creature : MonoBehaviour
     }
 
 
-    protected void DropObject()
+    protected virtual void DropObject()
     {
 
         item.transform.SetParent(null);

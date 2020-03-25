@@ -29,7 +29,7 @@ public class Enemy : Creature
     {
         base.Start();
 
-        print(currentWeapon);
+        // print(currentWeapon);
 
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
     }

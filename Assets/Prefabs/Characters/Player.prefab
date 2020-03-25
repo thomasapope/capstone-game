@@ -275,6 +275,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arrowPrefab: {fileID: 8747539112663914685, guid: c80608a7a7f85964380a8072c49ff263,
     type: 3}
+  warningMat: {fileID: 2100000, guid: e9a4c79a927cb754691ee7316c8fab0f, type: 2}
+  directionMat: {fileID: 2100000, guid: 3862b77a5c4d33e47acf61e3544c4594, type: 2}
 --- !u!1 &6422823196585381783
 GameObject:
   m_ObjectHideFlags: 0

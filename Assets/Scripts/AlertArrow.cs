@@ -5,12 +5,28 @@ using UnityEngine;
 public class AlertArrow : MonoBehaviour
 {
     [HideInInspector] public Transform target;
+    [HideInInspector] public AlertArrowController.AlertReason reason;
+
+    [HideInInspector] public AlertArrowController controllerRef;
 
 
     void Start()
     {
-        target.gameObject.GetComponent<Child>().ChildDropped += RemoveArrow;
-        target.gameObject.GetComponent<Child>().ChildTaken += RemoveArrow;
+        switch (reason)
+        {
+            case AlertArrowController.AlertReason.Warning:
+                target.gameObject.GetComponent<Child>().ChildDropped += RemoveArrow;
+                target.gameObject.GetComponent<Child>().ChildTaken += RemoveArrow;
+                break;
+            case AlertArrowController.AlertReason.Direction:
+                Player.PartDropped += RemoveArrow;
+                break;
+        }
+        // if (reason == AlertArrowController.AlertReason.Warning)
+        // {
+        //     target.gameObject.GetComponent<Child>().ChildDropped += RemoveArrow;
+        //     target.gameObject.GetComponent<Child>().ChildTaken += RemoveArrow;
+        // }
     }
 
 
@@ -27,13 +43,28 @@ public class AlertArrow : MonoBehaviour
 
     void RemoveArrow()
     {
+        if (controllerRef)
+        {
+            controllerRef.arrows.Remove(this);
+            controllerRef.NumOfArrows -= 1;
+        }
+
         Destroy(gameObject);
     }
 
 
     void OnDisable()
     {
-        target.gameObject.GetComponent<Child>().ChildDropped -= RemoveArrow;
-        target.gameObject.GetComponent<Child>().ChildTaken -= RemoveArrow;
+        // Disconnect delegates
+        switch (reason)
+        {
+            case AlertArrowController.AlertReason.Warning:
+                target.gameObject.GetComponent<Child>().ChildDropped -= RemoveArrow;
+                target.gameObject.GetComponent<Child>().ChildTaken -= RemoveArrow;
+                break;
+            case AlertArrowController.AlertReason.Direction:
+                Player.PartDropped -= RemoveArrow;
+                break;
+        }
     }
 }
