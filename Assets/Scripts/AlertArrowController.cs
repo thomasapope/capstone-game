@@ -29,4 +29,10 @@ public class AlertArrowController : MonoBehaviour
         arrow.transform.position = transform.position; // position it properly
         arrow.GetComponent<AlertArrow>().target = location; // set arrow target
     }
+
+
+    void OnDisable() 
+    {
+        Child.ChildPickedUp -= CreateAlertArrow;
+    }
 }
