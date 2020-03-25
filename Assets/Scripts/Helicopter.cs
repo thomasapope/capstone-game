@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class Helicopter : MonoBehaviour
 {
-    LayerMask interactableLayer;
-    void Start(){
+    private LayerMask interactableLayer;
+    public List<GameObject> interactablesNear;
+
+
+    void Start()
+    {
         interactableLayer = LayerMask.GetMask("Interactable");
     }
-    public List<GameObject> interactablesNear;
+
+
     void Update()
     {
         if (GameManager.playerRef)
@@ -19,9 +24,20 @@ public class Helicopter : MonoBehaviour
                 Collider[] hits = Physics.OverlapSphere(this.transform.position, 10, interactableLayer);
                 foreach(Collider item in hits){
                     if(item.gameObject != null  && !item.gameObject.GetComponent<Interactable>().pickedUp){
-                        if(!interactablesNear.Contains(item.gameObject) && (item.gameObject.GetComponent<Child>() == null)){
-                            interactablesNear.Add(item.gameObject);
-                            GameObject.Destroy(item.gameObject);
+                        // if(!interactablesNear.Contains(item.gameObject) && (item.gameObject.GetComponent<Child>() == null)){
+                        if(!interactablesNear.Contains(item.gameObject)) // Make sure the item isn't already present
+                        { 
+
+                            if (interactablesNear.Count < GameManager.instance.numOfParts && item.gameObject.GetComponent<Child>())
+                            {
+                                // If this is a child and there are still parts to be found, do nothing.
+                                break;
+                            }
+                            else
+                            {
+                                // If it is not a child or all parts have been found, add the item
+                                AddInteractable(item.gameObject);
+                            }
                         }
 
                     }
@@ -29,10 +45,17 @@ public class Helicopter : MonoBehaviour
             }
         }
 
-        if(interactablesNear.Count == 3){
+        if(interactablesNear.Count == GameManager.instance.numOfParts + GameManager.numOfChildren){
             GameManager.isVictory = true;
             GameManager.instance.EndGame();
         }
         
+    }
+
+
+    void AddInteractable(GameObject item)
+    {
+        interactablesNear.Add(item);
+        GameObject.Destroy(item);
     }
 }

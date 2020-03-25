@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     // Game Completion Variables
     bool gameHasEnded = false;
     public static bool isVictory = false;
+    public int numOfParts = 3; // Number of parts that need to be found
 
     public float endScreenDelay = 3f; // Delay after end of game to show end screen
 
