@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
     public EndUIController completeLevelUI;
     public GameObject gameUI;
 
+    // public Transform[] itemSpawnPoints;
+    public List<Transform> itemSpawnPoints;
+
     // Game Completion Variables
     bool gameHasEnded = false;
     public static bool isVictory = false;
@@ -18,13 +21,14 @@ public class GameManager : MonoBehaviour
     public float endScreenDelay = 3f; // Delay after end of game to show end screen
 
     // Object References
-    public Transform playerSpawnPoint;
+    // public Transform playerSpawnPoint;
     public static GameObject playerRef;
     public static List<GameObject> targetRefs; // Used for AI navigation
     public Transform escapeVehicleRef;
 
     // Cached Prefabs
-    [SerializeField] public GameObject childPrefab;
+    // [SerializeField] public GameObject childPrefab;
+    public GameObject[] items;
 
     // Stats and Score
     public static int kills;
@@ -53,7 +57,24 @@ public class GameManager : MonoBehaviour
 
         // Hook into child messages
         Child.ChildPickedUp += OnChildPickedUp;
-        // Child.ChildTaken += OnChildTaken;
+
+        // Spawn items
+        SpawnItems();
+    }
+
+
+    void SpawnItems()
+    {
+        foreach (GameObject item in items)
+        {
+            Transform _sp = itemSpawnPoints[Random.Range(0, itemSpawnPoints.Count)];
+
+            // Transform rand = itemSpawnPoints[Random.Range(0, itemSpawnPoints.Length)].transform;
+            GameObject go = Instantiate(item);
+            go.transform.position = _sp.position;
+            itemSpawnPoints.Remove(_sp);
+            // print(go.transform.position);
+        }
     }
 
 
