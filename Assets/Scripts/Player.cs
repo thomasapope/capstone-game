@@ -204,7 +204,10 @@ public class Player : Creature
 
     void CheckForInteractable()
     {
-        if(Input.GetMouseButtonUp(1)){
+        // if(Input.GetMouseButtonUp(1)){
+        if(Input.GetButtonDown("Pickup")) 
+        {
+            Debug.Log("Pickup key pressed");
             // Drop the carried item if there is one
             if (isCarryingItem)
             {
@@ -213,25 +216,20 @@ public class Player : Creature
                 // weaponSwitching.previousSelectedWeapon = -1;
                 return;
             }
-
-            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit, 100))
+            else
             {
-                Interactable interactable = hit.collider.GetComponent<Interactable>();
-
-                if (interactable)
+                Collider[] items = Physics.OverlapSphere(attackPoint.position, pickupDistance, interactableLayer);
+            
+                foreach (Collider c in items)
                 {
-                    // SetFocus(interactable);
-                    if (Vector3.Distance(interactable.transform.position, transform.position) < pickupDistance)
+                    Interactable interactable = c.GetComponent<Interactable>();
+
+                    if (interactable)
                     {
-                        if (!isCarryingItem) { // Make sure not to pick up more than one item
-                            if (!interactable.pickedUp)
-                            {
-                                PickUpObject(interactable);
-                                // weaponSwitching.selectedWeapon = -1;
-                            }
+                        if (!interactable.pickedUp)
+                        {
+                            PickUpObject(interactable);
+                            break;
                         }
                     }
                 }
