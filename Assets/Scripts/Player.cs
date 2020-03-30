@@ -156,7 +156,7 @@ public class Player : Creature
             velocity = Vector3.SmoothDamp(velocity, targetVelocity, ref smoothVelocity, speedSmoothTime);
         }
 
-        Rotation(); // Rotation
+        // Rotation(); // Rotation
 
         controller.Move(inputVector * velocity.magnitude * Time.deltaTime);
 
