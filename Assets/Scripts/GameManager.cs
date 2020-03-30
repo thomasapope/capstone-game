@@ -60,6 +60,8 @@ public class GameManager : MonoBehaviour
 
         // Spawn items
         SpawnItems();
+
+        Debug.Log(GameStats.difficulty);
     }
 
 

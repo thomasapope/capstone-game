@@ -130,7 +130,7 @@ public class WaveSpawner : MonoBehaviour
         WaveStarting();
 
         // Spawn
-        for(int i = 0; i< _wave.count; i++) 
+        for(int i = 0; i< _wave.count * GameStats.difficulty; i++) 
         {
             SpawnEnemy(_wave.enemy);
             yield return new WaitForSeconds(1f/_wave.rate);

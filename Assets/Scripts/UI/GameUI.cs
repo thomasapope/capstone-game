@@ -4,12 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
-public class GameStats : MonoBehaviour
+public class GameUI : MonoBehaviour
 {
     // public static int score { get; set; }
     // public static float damage { get; set; }
 
-    [SerializeField]
     private Text scoreLabel;
 
 
