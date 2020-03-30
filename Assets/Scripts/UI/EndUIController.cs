@@ -3,19 +3,18 @@ using UnityEngine.UI;
 
 public class EndUIController : MonoBehaviour
 {
-    public Text stats;
-
     public Text completionCondtion; // Victory or defeat
     public Text completionReason; // Why the player won or lost
     public Text waves; // Number of waves lasted
     public Text childrenLeft;
     public Text kills;
     public Text damage;
+    public Text score;
 
 
     void Update()
     {
-        if (Input.anyKeyDown)
+        if (Input.GetButtonDown("Pickup"))
         {
             GameManager.instance.ReturnToMenu();
         }
@@ -47,6 +46,18 @@ public class EndUIController : MonoBehaviour
         kills.text = "Kills: " + GameManager.kills;
 
         damage.text = "Damage: " + GameManager.damage;
+
+        score.text = "Score: " + CalculateScore();
+    }
+
+
+    public int CalculateScore()
+    {
+        int killScore = GameManager.kills * GameStats.KILL_SCORE;
+        int childScore = GameManager.numOfChildren * GameStats.CHILD_SCORE;
+        int waveScore = WaveSpawner.nextWave * GameStats.WAVE_SCORE;
+
+        return (int)((killScore + childScore + waveScore) * GameStats.difficultyMultiplier);
     }
 
 

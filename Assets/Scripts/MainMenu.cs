@@ -32,12 +32,15 @@ public class MainMenu : MonoBehaviour
             {
                 case 1:
                     GameStats.difficulty = GameStats.EASY;
+                    GameStats.difficultyMultiplier = GameStats.EASY_MULTIPLIER;
                     break;
                 case 2:
                     GameStats.difficulty = GameStats.MEDIUM;
+                    GameStats.difficultyMultiplier = GameStats.MEDIUM_MULTIPLIER;
                     break;
                 case 3:
                     GameStats.difficulty = GameStats.HARD;
+                    GameStats.difficultyMultiplier = GameStats.HARD_MULTIPLIER;
                     break;
             }
             Debug.Log("Difficulty has been set to " + GameStats.difficulty);
