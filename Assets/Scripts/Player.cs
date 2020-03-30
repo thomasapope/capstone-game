@@ -40,6 +40,10 @@ public class Player : Creature
     private Vector3 velocity; // The current velocity
     private Vector3 smoothVelocity; // Used for velocity smoothing
 
+    private Vector3 inputVector;
+    private float x;
+    private float z;
+
     // Weapons
     // public Weapon currentWeapon;
     public static event Action<Transform, AlertArrowController.AlertReason> PartPickedUp = delegate {};
@@ -116,6 +120,10 @@ public class Player : Creature
         base.Update();
 
         // Update the inputVector for movement
+        x = Input.GetAxisRaw("Horizontal");
+        z = Input.GetAxisRaw("Vertical");
+        inputVector = transform.right * x + transform.forward * z;
+
         movementInput.x = Input.GetAxisRaw("Horizontal");
         movementInput.z = Input.GetAxisRaw("Vertical");
 
@@ -131,7 +139,7 @@ public class Player : Creature
 
         if (movementInput != Vector3.zero)
         {
-            moveDirection = new Vector3(movementInput.x, 0, movementInput.z).normalized;
+            moveDirection = transform.right * movementInput.x + transform.forward * movementInput.z;
         }
 
         // Determine movement speed
@@ -150,12 +158,12 @@ public class Player : Creature
 
         Rotation(); // Rotation
 
-        controller.Move(velocity * Time.deltaTime);
+        controller.Move(inputVector * velocity.magnitude * Time.deltaTime);
 
         animator.SetBool("Moving", true);
         
-        animator.SetFloat("Velocity X", transform.InverseTransformDirection(velocity).x);
-        animator.SetFloat("Velocity Z", transform.InverseTransformDirection(velocity).z);
+        animator.SetFloat("Velocity X", x);
+        animator.SetFloat("Velocity Z", z);
 
         if (usesGravity) 
         {
