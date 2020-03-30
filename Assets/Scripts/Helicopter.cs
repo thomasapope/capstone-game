@@ -42,6 +42,10 @@ public class Helicopter : MonoBehaviour
                             {
                                 // If it is not a child or all parts have been found, add the item
                                 AddInteractable(item.gameObject);
+                                if (item.gameObject.GetComponent<Child>())
+                                {
+                                    GameStats.childrenSaved++;
+                                }
                             }
                         }
 

@@ -28,6 +28,7 @@ public static class GameStats
     public static float damage;
     public static int score;
     public static int kills;
+    public static int childrenSaved;
 
 
     public static void ResetStats() 

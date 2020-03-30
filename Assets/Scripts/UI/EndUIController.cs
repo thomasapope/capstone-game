@@ -41,7 +41,7 @@ public class EndUIController : MonoBehaviour
 
         waves.text = "on the " + AddOrdinal(WaveSpawner.nextWave + 1) + " wave ";
 
-        childrenLeft.text = "Children Left: " + GameManager.numOfChildren;
+        childrenLeft.text = "Children Saved: " + GameStats.childrenSaved;
 
         kills.text = "Kills: " + GameManager.kills;
 
