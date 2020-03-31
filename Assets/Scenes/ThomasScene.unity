@@ -47653,7 +47653,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 529eeba132008ab45ad5cedd47b290b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBeforeFirstWave: 0
+  timeBeforeFirstWave: 10
   spawnPoints:
   - {fileID: 1471332241}
   - {fileID: 277977886}

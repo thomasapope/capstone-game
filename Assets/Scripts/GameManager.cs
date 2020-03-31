@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
 
     // Stats and Score
     public static int kills;
-    public static float damage;
+    public static int damage;
     public static int numOfChildren = 3;
 
     // public enum CauseOfDefeat {DEAD, CHILDRENSTOLEN}
@@ -127,7 +127,6 @@ public class GameManager : MonoBehaviour
 
         // Debug.Log("Showing end UI");
         completeLevelUI.gameObject.SetActive(true);
-        completeLevelUI.UpdateUI();
     }
 
 
