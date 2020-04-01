@@ -59,6 +59,7 @@ public class RangedWeapon : Weapon
             GameObject bullet = Instantiate(projectilePrefab);
 
             Physics.IgnoreCollision(bullet.GetComponent<Collider>(), GameManager.playerRef.GetComponent<Collider>());
+
             
             // Give the bullet damage
             bullet.GetComponent<BulletBehavior>().damage = damage;
