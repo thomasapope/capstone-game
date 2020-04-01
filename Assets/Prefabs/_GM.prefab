@@ -108,9 +108,16 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  childrenSpawnPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   numOfParts: 3
   endScreenDelay: 3
   escapeVehicleRef: {fileID: 0}
+  childPrefab: {fileID: 4119752691816221644, guid: 478b5eb6a8d9bbd4994a7e4aacc4b810,
+    type: 3}
   items:
   - {fileID: 5841570939041394923, guid: 93c64bd3aa8d3764ab06d03ff9e667c3, type: 3}
   - {fileID: 8902497905599986388, guid: 4cc43bee3eef6294c8e7e274f7ed8fc9, type: 3}

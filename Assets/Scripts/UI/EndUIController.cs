@@ -3,6 +3,11 @@ using UnityEngine.UI;
 
 public class EndUIController : MonoBehaviour
 {
+    [HideInInspector] public AudioSource audio;
+    public AudioClip textSound;
+    public AudioClip tallySound;
+    public AudioClip returnSound;
+    
     public Text completionCondtionText; // Victory or defeat
     public Text completionReasonText; // Why the player won or lost
     public Text wavesText; // Number of waves lasted
@@ -33,6 +38,7 @@ public class EndUIController : MonoBehaviour
 
     void OnEnable()
     {
+        audio = GetComponent<AudioSource>();
         timer = 0;
     }
 
@@ -88,7 +94,15 @@ public class EndUIController : MonoBehaviour
                     duration = 1.5f;
                     break;
                 case fields.Return:
-                    ActivateField(returnText);
+                    // ActivateField(returnText);
+                    duration = 0f;
+                    if (!returnText.gameObject.activeInHierarchy)
+                    {
+                        returnText.gameObject.SetActive(true);
+
+                        audio.clip = returnSound;
+                        audio.Play();
+                    }
                     break;
             }
 
@@ -114,6 +128,7 @@ public class EndUIController : MonoBehaviour
                 break;
             case fields.Damage: // Damage
                 TallyField(GameManager.damage, damageText, "Damage Dealt: ", 1f);
+                duration = .25f;
                 break;
         }
     }
@@ -126,6 +141,9 @@ public class EndUIController : MonoBehaviour
         if (!field.gameObject.activeInHierarchy)
         {
             field.gameObject.SetActive(true);
+
+            audio.clip = textSound;
+            audio.Play();
         }
     }
 
@@ -144,21 +162,21 @@ public class EndUIController : MonoBehaviour
             else
             {
                 duration = TEXT_DURATION;
+                audio.clip = tallySound;
+                audio.Play();
             }
             field.gameObject.SetActive(true);
+            Debug.Log("Target: " + target + " Duration: " + duration);
         }
 
         int tally;
         // Tally score
-        if (duration != 0)
+        tally = (int)Mathf.Ceil(((timer / duration) * target));
+        scoreTally = (int)Mathf.Ceil(((timer / duration) * target * multiplier * GameStats.difficultyMultiplier));
+        if (target > 0 && !skipped)
         {
-            tally = (int)Mathf.Ceil(((timer / duration) * target));
-            scoreTally = (int)Mathf.Ceil(((timer / duration) * target * multiplier));
-        }
-        else
-        {
-            tally = target;
-            scoreTally = (int)Mathf.Ceil(target * multiplier);
+            audio.clip = tallySound;
+            audio.Play();
         }
         field.text = message + tally;
         // scoreTally = tally * multiplier;

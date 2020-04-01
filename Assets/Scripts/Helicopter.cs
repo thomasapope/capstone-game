@@ -54,7 +54,8 @@ public class Helicopter : MonoBehaviour
             }
         }
 
-        if(interactablesNear.Count == GameManager.instance.numOfParts + GameManager.numOfChildren){
+        if(interactablesNear.Count == GameManager.instance.numOfParts + GameManager.numOfChildren)
+        {
             GameManager.isVictory = true;
             GameManager.instance.EndGame();
         }

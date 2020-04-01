@@ -43,7 +43,8 @@ public class MainMenu : MonoBehaviour
                     GameStats.difficultyMultiplier = GameStats.HARD_MULTIPLIER;
                     break;
             }
-            Debug.Log("Difficulty has been set to " + GameStats.difficulty);
+            GameStats.totalChildren = (int)(GameStats.BASE_CHILDREN * GameStats.difficultyMultiplier);
+            Debug.Log("Difficulty has been set to " + GameStats.difficulty + ". There will be " + GameStats.totalChildren + " children.");
         }
     }
 

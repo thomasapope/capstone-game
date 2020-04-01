@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
 
     // public Transform[] itemSpawnPoints;
     public List<Transform> itemSpawnPoints;
+    public List<Transform> childrenSpawnPoints;
 
     // Game Completion Variables
     bool gameHasEnded = false;
@@ -27,13 +28,14 @@ public class GameManager : MonoBehaviour
     public Transform escapeVehicleRef;
 
     // Cached Prefabs
-    // [SerializeField] public GameObject childPrefab;
+    public GameObject childPrefab;
     public GameObject[] items;
+
 
     // Stats and Score
     public static int kills;
     public static int damage;
-    public static int numOfChildren = 3;
+    public static int numOfChildren = 3; // number of remaining children
 
     // public enum CauseOfDefeat {DEAD, CHILDRENSTOLEN}
     // private reasonForDeath
@@ -42,6 +44,11 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+
+
+        // Spawn items and children
+        SpawnItems();
+        SpawnChildren();
 
         // Set up targetRefs
         playerRef = GameObject.FindWithTag("Player");
@@ -57,11 +64,6 @@ public class GameManager : MonoBehaviour
 
         // Hook into child messages
         Child.ChildPickedUp += OnChildPickedUp;
-
-        // Spawn items
-        SpawnItems();
-
-        Debug.Log(GameStats.difficulty);
     }
 
 
@@ -75,6 +77,21 @@ public class GameManager : MonoBehaviour
             GameObject go = Instantiate(item);
             go.transform.position = _sp.position;
             itemSpawnPoints.Remove(_sp);
+            // print(go.transform.position);
+        }
+    }
+
+
+    void SpawnChildren()
+    {
+        for (int i = 0; i < GameStats.totalChildren; i++)
+        {
+            Transform _sp = childrenSpawnPoints[Random.Range(0, childrenSpawnPoints.Count)];
+
+            // Transform rand = itemSpawnPoints[Random.Range(0, itemSpawnPoints.Length)].transform;
+            GameObject go = Instantiate(childPrefab);
+            go.transform.position = _sp.position;
+            childrenSpawnPoints.Remove(_sp);
             // print(go.transform.position);
         }
     }
