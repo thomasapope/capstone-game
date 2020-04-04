@@ -7,29 +7,27 @@ public class CameraCollide : MonoBehaviour
     public float minDistance = 1.0f;
     public float maxDistance = 4.0f;
     public float smooth = 10.0f;
-    Vector3 dollyDir;
-    public Vector3 dollyDirAdjusted;
+    Vector3 cameraDirection;
     public float distance;
 
     void Awake() {
-        dollyDir = transform.localPosition.normalized;
+        cameraDirection = transform.localPosition.normalized;
         distance = transform.localPosition.magnitude;
-        Debug.Log("parent: " + transform.parent);
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 desiredCameraPos = transform.parent.TransformPoint(dollyDir * maxDistance);
+        Vector3 desiredCameraPos = transform.parent.TransformPoint(cameraDirection * maxDistance);
         RaycastHit hit;
 
         if (Physics.Linecast (transform.parent.position, desiredCameraPos, out hit)) {
-            distance = Mathf.Clamp ((hit.distance), minDistance, maxDistance);
+            distance = Mathf.Clamp ((hit.distance * .7f), minDistance, maxDistance);
 
         } else {
             distance = maxDistance;
         }
 
-        transform.localPosition = Vector3.Lerp (transform.localPosition, dollyDir * distance, Time.deltaTime * smooth);
+        transform.localPosition = Vector3.Lerp (transform.localPosition, cameraDirection * distance, Time.deltaTime * smooth);
         }
 }
