@@ -144,9 +144,15 @@ public class Player : Creature
 
         // Determine movement speed
         if (isCarryingItem)
+        {
             movementSpeed = CARRYING_SPEED; // Move slower when carrying something
+            animator.SetFloat("AnimationSpeed", 0.8f); // slow down animation speed
+        }
         else
+        {
             movementSpeed = RUNNING_SPEED;
+            animator.SetFloat("AnimationSpeed", 1.0f);
+        }
 
 
 
