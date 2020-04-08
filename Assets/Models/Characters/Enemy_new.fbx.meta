@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1cd663f3871044f458f1ea190deee36c
+guid: 5f332e14902c5fb4e839e144754a9abf
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable: []
@@ -47,7 +47,7 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
-    useSRGBMaterialColor: 1
+    useSRGBMaterialColor: 0
     sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
@@ -227,18 +227,18 @@ ModelImporter:
         length: 0
         modified: 0
     skeleton:
-    - name: mole_man 1(Clone)
+    - name: Enemy_new(Clone)
       parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: body
-      parentName: mole_man 1(Clone)
+      parentName: Enemy_new(Clone)
       position: {x: -0, y: 10.905245, z: -0.000000057610247}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
       scale: {x: 558.36743, y: 558.36743, z: 558.36743}
     - name: Armature
-      parentName: mole_man 1(Clone)
+      parentName: Enemy_new(Clone)
       position: {x: -0, y: 12.0150385, z: 2.83821}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
       scale: {x: 100, y: 100, z: 100}
