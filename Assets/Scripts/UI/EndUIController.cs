@@ -24,7 +24,7 @@ public class EndUIController : MonoBehaviour
     private float duration = TEXT_DURATION; // Duration of each tally
 
     private enum fields { Condition, Reason, Score, Wait, Waves, ChildrenSaved, Kills, Damage, Return }
-    private fields field = 0; // The field currently being tallied
+    [SerializeField] private fields field = 0; // The field currently being tallied
 
     // private int waves, waveScore;
     // private int childrenSaved;
@@ -111,7 +111,11 @@ public class EndUIController : MonoBehaviour
             {
                 timer = 0;
             }
-            field++; // Move on to the next field when this one is finished
+
+            if (field != fields.Return)
+            {
+                field++; // Move on to the next field when this one is finished
+            }
         }
 
         // Tally the current field
