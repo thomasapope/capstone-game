@@ -40,6 +40,7 @@ public class EndUIController : MonoBehaviour
     {
         audio = GetComponent<AudioSource>();
         timer = 0;
+        FindObjectOfType<AudioManager>().Play("EndGame");
     }
 
 

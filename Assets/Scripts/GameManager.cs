@@ -44,7 +44,8 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-
+        // Play Music
+        FindObjectOfType<AudioManager>().Play("School");
 
         // Spawn items and children
         SpawnItems();
@@ -113,7 +114,6 @@ public class GameManager : MonoBehaviour
     {
         if (WaveSpawner.complete)
         {
-
             Debug.Log("YOU WON!");
             gameUI.SetActive(false);
             completeLevelUI.gameObject.SetActive(true);
