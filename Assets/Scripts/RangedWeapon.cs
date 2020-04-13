@@ -58,7 +58,8 @@ public class RangedWeapon : Weapon
         {
             GameObject bullet = Instantiate(projectilePrefab);
 
-            Physics.IgnoreCollision(bullet.GetComponent<Collider>(), GameManager.playerRef.GetComponent<Collider>());
+            // Physics.IgnoreCollision(bullet.GetComponent<Collider>(), GameManager.playerRef.GetComponent<Collider>());
+            Physics.IgnoreCollision(bullet.GetComponent<Collider>(), parent.GetComponent<Collider>());
 
             
             // Give the bullet damage
@@ -67,10 +68,18 @@ public class RangedWeapon : Weapon
             // Set bullet position and rotation
             bullet.transform.position = firePoint.position;
             Vector3 rotation = bullet.transform.rotation.eulerAngles;
-            bullet.transform.rotation = Quaternion.Euler(rotation.x, transform.eulerAngles.y, rotation.z);
-
+            // bullet.transform.rotation = Quaternion.Euler(rotation.x, transform.eulerAngles.y, rotation.z);
+ 
+        	// bullet.transform.forward = target - firePoint.position;
+            // bullet.transform.LookAt(target);
+            Vector3 direction = firePoint.position - target;
+            // bullet.transform.LookAt(bullet.transform.position + direction.up);
+            bullet.transform.LookAt(target);
+            
+            // print("target: " + target);
             // Give the bullet a force
-            bullet.GetComponent<Rigidbody>().AddForce(GameManager.playerRef.transform.forward * bulletSpeed, ForceMode.Impulse);
+            // bullet.GetComponent<Rigidbody>().AddForce(parent.transform.forward * bulletSpeed, ForceMode.Impulse);
+            bullet.GetComponent<Rigidbody>().AddForce((target - firePoint.position).normalized * bulletSpeed, ForceMode.Impulse);
 
             nextPossibleShootTime = Time.time + secondsBetweenShots;
 

@@ -8,6 +8,11 @@ public class Weapon : MonoBehaviour
     // Component references
     protected SoundEffectVariation audioSource;
 
+    // [HideInInspector] public Transform attackPoint;
+    // [HideInInspector] public LayerMask attackLayers;
+    [HideInInspector] public Creature parent;
+    [HideInInspector] public Vector3 target;
+
     // General stats
     public string name;
     public bool isRanged = false;
@@ -28,6 +33,20 @@ public class Weapon : MonoBehaviour
     public virtual void Attack()
     {
         audioSource.PlayVaryPitch();
+
+        // hitting = false;
+        // hitsQueued--;
+
+        Collider[] hits = Physics.OverlapSphere(parent.attackPoint.position, attackRange, parent.attackLayers);
+        
+        if(hits.Length == 0) return;
+
+        foreach (Collider enemy in hits)
+        {
+            enemy.GetComponent<Creature>().TakeDamage(damage);
+            print("Hit " + enemy.name + " for " + damage + " damage!");
+        }
+    
     }
 
     

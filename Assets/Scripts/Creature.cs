@@ -30,8 +30,8 @@ public abstract class Creature : MonoBehaviour
 
     public float attackRange = 0.5f;
     public float attackRate = 3f; // Times per second this creature can attack
-    private float nextAttackTime = 0f;
-    public float attackDelay = .2f;
+    [HideInInspector] public float nextAttackTime = 0f;
+    public float attackDelay = .2f; // Time it takes to execute the damage of an attack (when the animation "hits")
     // public int attackDamage = 10;
     
     // Weapons
@@ -40,7 +40,7 @@ public abstract class Creature : MonoBehaviour
     // Other Stats
     [HideInInspector] public bool isCarryingItem = false;
     [HideInInspector] public Interactable item;
-    public float pickupDistance = 4f;
+    public float pickupDistance = 2f;
     
     // Delegates
     public event System.Action OnAttack;
@@ -90,31 +90,6 @@ public abstract class Creature : MonoBehaviour
     {
         hitting = false;
         hitsQueued--;
-
-        Collider[] hits = Physics.OverlapSphere(attackPoint.position, currentWeapon.attackRange, attackLayers);
-        
-        if(hits.Length == 0) return;
-
-        foreach (Collider enemy in hits)
-        {
-            StartCoroutine(DoDamage(enemy, attackDelay));
-
-            IEnumerator DoDamage(Collider creature, float delay)
-            {
-                yield return new WaitForSeconds(delay);
-
-                if (OnAttack != null)
-                {
-                    OnAttack();
-                }
-
-                if (creature) // Make sure creature still exists
-                {
-                    creature.GetComponent<Creature>().TakeDamage(currentWeapon.damage);
-                    // print("Hit " + creature.name + " for " + currentWeapon.damage + " damage!");
-                }
-            }
-        }
     }
 
 

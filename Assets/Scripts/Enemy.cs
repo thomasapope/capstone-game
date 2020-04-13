@@ -18,20 +18,36 @@ public class Enemy : Creature
     [HideInInspector] public Transform target;
     private UnityEngine.AI.NavMeshAgent agent;
 
-    public enum MindState { CHASING, FLEEING }
-    private MindState state = MindState.CHASING;
+    public enum MindState { CHASING, ATTACKING, FLEEING }
+    [SerializeField] private MindState state = MindState.CHASING;
 
-    public float refreshTime = 3f;
+    [HideInInspector] public float refreshTime = 3f;
     private float timeTilRefresh;
+
+    public float attackDistance = 2f;
+    public int weapon = 0;
+
+    public float attackTime = 2f; // Amount of time it takes to complete an attack and return to previous state
 
 
     protected override void Start()
     {
         base.Start();
 
+        animator.SetInteger("weapon", weapon);
+        // currentWeapon.attackPoint = attackPoint;
+        // currentWeapon.attackLayers = 
+        currentWeapon.parent = this;
         // print(currentWeapon);
-
+        
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+
+        if(!startingPoint)
+        {
+            startingPoint = WaveSpawner.instance.spawnPoints[0];
+            Debug.Log("No starting point set. Setting new one");
+        }
+
     }
 
 
@@ -40,60 +56,115 @@ public class Enemy : Creature
         // Find Target
         if (!target) FindTarget();
 
-        if (state == MindState.FLEEING) target = startingPoint;
-
-        if (state == MindState.CHASING) 
+        switch (state)
         {
-            if (timeTilRefresh < 0) // A timer to keep this from getting calculated every frame
-            {
-                FindTarget();
+            case MindState.FLEEING:
+                target = startingPoint;
+                agent.SetDestination(target.position); // start the enemy moving toward its target
+                animator.SetBool("moving", true);
 
-                timeTilRefresh = refreshTime;
-            }
-            else
-            {
-                timeTilRefresh -= Time.deltaTime;
-            }
-        }
-
-        agent.SetDestination(target.position); // start the enemy moving toward its target
-
-        // Check if enemy is close to target
-        if (hasReachedTarget())
-        {
-            if (target.CompareTag("Target")) // If the target is a child
-            {
-                if (target.parent.gameObject.GetComponent<Interactable>().pickedUp || !target.gameObject.activeInHierarchy)
+                if (HasReachedTarget())
                 {
-                    Debug.Log("My target is already taken");
+                    if (target.CompareTag("SpawnPoint")) // If the enemy has returned to their spawn point
+                    {
+                        GameManager.NumOfChildren--;
+                        Destroy(gameObject);
+                    }
+                }
+                break;
+            case MindState.CHASING:
+                if (timeTilRefresh < 0) // A timer to keep this from getting calculated every frame
+                {
                     FindTarget();
-                    return;
+
+                    timeTilRefresh = refreshTime;
+                }
+                else
+                {
+                    timeTilRefresh -= Time.deltaTime;
                 }
 
-                state = MindState.FLEEING;
+                agent.SetDestination(target.position); // start the enemy moving toward its target
+                animator.SetBool("moving", true);
 
-                PickUpObject(target.parent.gameObject.GetComponent<Interactable>());
-            }
+                // Check if target is child and enemy is close enough to pick it up
+                if (target.CompareTag("Target") && HasReachedTarget())
+                {
+                    if (target.parent.gameObject.GetComponent<Interactable>().pickedUp || !target.gameObject.activeInHierarchy)
+                    {
+                        Debug.Log("My target is already taken");
+                        FindTarget();
+                        return;
+                    }
 
-            if (target.CompareTag("SpawnPoint")) // If the enemy has returned to their spawn point
-            {
-                GameManager.NumOfChildren--;
-                Destroy(gameObject);
-            }
+                    state = MindState.FLEEING;
 
-            // Attack
-            hitting = true;
-            FaceTarget();
-        }
+                    PickUpObject(target.parent.gameObject.GetComponent<Interactable>());
+                } 
+                else if (HasReachedAttackTarget()) // If the enemy is close enough to attack
+                {
+                    if (Time.time >= nextAttackTime)
+                    {
+                        // Make sure the enemy has a line of sight to the player
+                        // if (!Physics.Linecast(transform.position, target.position, attackLayers, QueryTriggerInteraction.Ignore))
+                        if (!Physics.Linecast(transform.position, target.position))
+                        {
+                            // Play attack animation
+                            animator.SetTrigger("attack");
+                            animator.SetBool("moving", false);
+
+                            // Resest navmesh path
+                            agent.ResetPath();
+
+                            // Change to attacking state
+                            // Stops enemy from moving while attacking
+                            nextAttackTime = Time.time + attackTime; // timer for returning to chase state
+                            state = MindState.ATTACKING;
+
+                            // Do the actual attacking
+                            StartCoroutine(Attack(attackDelay));
+
+                            IEnumerator Attack(float delay)
+                            {
+                                yield return new WaitForSeconds(delay);
+
+                                currentWeapon.target = target.transform.position + Vector3.up * 2;
+                                currentWeapon.Attack();
+                            }
+                        }
+                    }
+                    FaceTarget();
+                }
+                break;
+            case MindState.ATTACKING:
+                // Make sure to properly face the target
+                FaceTarget();
+
+                // Return to chasing state when appropriate
+                if (Time.time >= nextAttackTime)
+                {
+                    state = MindState.CHASING;
+                    // nextAttackTime = Time.time + 1f / attackRate; // reset time for next attack
+                }
+                break;
+        } // end switch
 
         base.Update();
     }
 
 
-    bool hasReachedTarget()
+    bool HasReachedTarget()
     {
         float distance = Vector3.Distance(target.position, transform.position);
         return distance <= agent.stoppingDistance;
+    }
+
+
+    bool HasReachedAttackTarget()
+    {
+        if (!target.CompareTag("Player")) return false;
+        float distance = Vector3.Distance(target.position, transform.position);
+        return distance <= attackDistance;
     }
 
 
@@ -103,14 +174,6 @@ public class Enemy : Creature
         // Should not be executed every frame as it is resource intensive.
         if (state == MindState.CHASING)
         {
-            // if (target)
-            // {
-            //     if(!target.gameObject.activeInHierarchy)
-            //     {
-            //         target = GameManager.playerRef.transform;
-            //         return;
-            //     }
-            // }
 
             float minDistance = 1000f;
             Transform closest = transform;
@@ -118,15 +181,7 @@ public class Enemy : Creature
             {
                 if (!g) continue;
                 if (!g.gameObject.activeInHierarchy) continue;
-                // Child child = g.GetComponent<Child>();
-                // if (child)
-                // {
-                //     if (child.state == Child.ChildState.HIDDEN) 
-                //     {
-                //         print("this is true");
-                //         continue;
-                //     }
-                // }
+
                 float dist = Vector3.Distance(transform.position, g.transform.position);
                 if (dist < minDistance) 
                 {

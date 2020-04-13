@@ -52,12 +52,14 @@ public class WeaponSwitching : MonoBehaviour
     void SelectWeapon()
     {
         int i = 0;
-        foreach(Transform weapon in transform)
+        foreach(Weapon weapon in GetComponentsInChildren<Weapon>(true))
         {
             if (i == selectedWeapon)
             {
                 weapon.gameObject.SetActive(true);
-                playerRef.currentWeapon = weapon.GetComponent<Weapon>();
+                playerRef.currentWeapon = weapon;
+                weapon.parent = playerRef;
+                
                 // playerRef.attackAnimator = weapon.gameObject.GetComponent<Animator>();
             }
             else 

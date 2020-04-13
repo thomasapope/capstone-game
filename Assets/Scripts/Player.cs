@@ -103,16 +103,14 @@ public class Player : Creature
             }
             else
             {
-                hitting = false;
-                currentWeapon.Attack();
+                RangedAttack();
             }
         }
         else if (Input.GetButton("Attack"))
         {
             if (currentWeapon.isRanged)
             {
-                hitting = false;
-                currentWeapon.AttackContinuous();
+                RangedAttack();
             }
         }
 
@@ -188,6 +186,27 @@ public class Player : Creature
         }
         
         controller.Move(gravityVector * Time.deltaTime);
+    }
+
+
+    void RangedAttack() 
+    {
+        hitting = false;
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        Vector3 direction = ray.GetPoint(100000.0f);
+
+        // Uncomment for baby 'splosion
+        // if (Physics.Raycast (ray, out hit, 1000, 9))
+        //     {
+        //     GameObject go = Instantiate(GameManager.instance.childPrefab);
+        //     go.transform.position = hit.point;
+        // }
+
+        currentWeapon.target = direction;
+        
+        currentWeapon.AttackContinuous();
     }
 
 

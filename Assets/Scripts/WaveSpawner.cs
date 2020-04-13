@@ -36,7 +36,7 @@ public class WaveSpawner : MonoBehaviour
     }
 
 
-    void Start() 
+    void Awake() 
     {
         // Set up singleton behavior
         instance = this;

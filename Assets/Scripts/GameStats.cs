@@ -29,8 +29,8 @@ public static class GameStats
 
 
     // Stats
-    public static float difficulty = MEDIUM;
-    public static float difficultyMultiplier = MEDIUM_MULTIPLIER;
+    public static float difficulty = EASY;
+    public static float difficultyMultiplier = EASY_MULTIPLIER;
 
     public static int totalChildren = (int)(BASE_CHILDREN * difficultyMultiplier);
 

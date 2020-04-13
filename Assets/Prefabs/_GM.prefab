@@ -52,12 +52,12 @@ MonoBehaviour:
   - {fileID: 0}
   waves:
   - name: Wave One
-    enemy: {fileID: 8516002812758349075, guid: 77547354c75c2d6449ccbd75b588c63c, type: 3}
+    enemy: {fileID: 1971953128947703787, guid: 4988a40dff8017249b388e0c3b30c9ed, type: 3}
     count: 3
     rate: 1
     timeAfterWave: 15
   - name: Wave Two
-    enemy: {fileID: 8516002812758349075, guid: 77547354c75c2d6449ccbd75b588c63c, type: 3}
+    enemy: {fileID: 1971953128947703787, guid: 4988a40dff8017249b388e0c3b30c9ed, type: 3}
     count: 4
     rate: 0.9
     timeAfterWave: 15
@@ -67,22 +67,22 @@ MonoBehaviour:
     rate: 0.8
     timeAfterWave: 0
   - name: Break
-    enemy: {fileID: 8516002812758349075, guid: 77547354c75c2d6449ccbd75b588c63c, type: 3}
+    enemy: {fileID: 1971953128947703787, guid: 4988a40dff8017249b388e0c3b30c9ed, type: 3}
     count: 0
     rate: 1.5
     timeAfterWave: 60
   - name: Wave Four
-    enemy: {fileID: 8516002812758349075, guid: 77547354c75c2d6449ccbd75b588c63c, type: 3}
+    enemy: {fileID: 1971953128947703787, guid: 4988a40dff8017249b388e0c3b30c9ed, type: 3}
     count: 6
     rate: 1
     timeAfterWave: 15
   - name: Wave Five
-    enemy: {fileID: 8516002812758349075, guid: 77547354c75c2d6449ccbd75b588c63c, type: 3}
+    enemy: {fileID: 1971953128947703787, guid: 4988a40dff8017249b388e0c3b30c9ed, type: 3}
     count: 6
     rate: 1.25
     timeAfterWave: 15
   - name: Wave Six
-    enemy: {fileID: 8516002812758349075, guid: 77547354c75c2d6449ccbd75b588c63c, type: 3}
+    enemy: {fileID: 1971953128947703787, guid: 4988a40dff8017249b388e0c3b30c9ed, type: 3}
     count: 6
     rate: 1.5
     timeAfterWave: 15
