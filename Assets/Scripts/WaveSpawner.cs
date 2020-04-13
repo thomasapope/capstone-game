@@ -29,8 +29,10 @@ public class WaveSpawner : MonoBehaviour
     public class Wave 
     {
         public string name;
-        public Enemy enemy;
-        public int count;
+        // public Enemy enemy;
+        // public int count;
+        public Enemy[] enemies; // Different types of enemies spawning this wave
+        public int[] counts; // Number of each type of enemy. Parallel to the enemies array
         public float rate;
         public float timeAfterWave = 15f;
     }
@@ -130,10 +132,16 @@ public class WaveSpawner : MonoBehaviour
         WaveStarting();
 
         // Spawn
-        for(int i = 0; i< _wave.count * GameStats.difficulty; i++) 
+        // for(int i = 0; i< _wave.count * GameStats.difficulty; i++) 
+        for (int i = 0; i < _wave.enemies.Length; i++) // for each type of enemy
+        // foreach ( Enemy enemy in _wave.enemies)
         {
-            SpawnEnemy(_wave.enemy);
-            yield return new WaitForSeconds(1f/_wave.rate);
+            for (int j = 0; j < _wave.counts[i] * GameStats.difficulty; j++) // for each enemy of that type
+            {
+                // SpawnEnemy(_wave.enemy);
+                SpawnEnemy(_wave.enemies[i]);
+                yield return new WaitForSeconds(1f/_wave.rate);
+            }
         }
 
         state = SpawnState.WAITING;

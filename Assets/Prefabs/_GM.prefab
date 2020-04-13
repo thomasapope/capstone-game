@@ -52,38 +52,48 @@ MonoBehaviour:
   - {fileID: 0}
   waves:
   - name: Wave One
-    enemy: {fileID: 1971953128947703787, guid: 4988a40dff8017249b388e0c3b30c9ed, type: 3}
-    count: 3
+    enemies:
+    - {fileID: 1971953128947703787, guid: 4988a40dff8017249b388e0c3b30c9ed, type: 3}
+    - {fileID: 8884782149665964839, guid: 37bc2ddbfc32f9c4c8653429323cdc11, type: 3}
+    counts: 0100000001000000
     rate: 1
     timeAfterWave: 15
   - name: Wave Two
-    enemy: {fileID: 1971953128947703787, guid: 4988a40dff8017249b388e0c3b30c9ed, type: 3}
-    count: 4
+    enemies:
+    - {fileID: 1971953128947703787, guid: 4988a40dff8017249b388e0c3b30c9ed, type: 3}
+    counts: 04000000
     rate: 0.9
     timeAfterWave: 15
   - name: Wave Three
-    enemy: {fileID: 8516002812758349075, guid: 77547354c75c2d6449ccbd75b588c63c, type: 3}
-    count: 6
+    enemies:
+    - {fileID: 1971953128947703787, guid: 4988a40dff8017249b388e0c3b30c9ed, type: 3}
+    - {fileID: 8884782149665964839, guid: 37bc2ddbfc32f9c4c8653429323cdc11, type: 3}
+    counts: 0500000002000000
     rate: 0.8
     timeAfterWave: 0
   - name: Break
-    enemy: {fileID: 1971953128947703787, guid: 4988a40dff8017249b388e0c3b30c9ed, type: 3}
-    count: 0
+    enemies: []
+    counts: 
     rate: 1.5
     timeAfterWave: 60
   - name: Wave Four
-    enemy: {fileID: 1971953128947703787, guid: 4988a40dff8017249b388e0c3b30c9ed, type: 3}
-    count: 6
+    enemies:
+    - {fileID: 1971953128947703787, guid: 4988a40dff8017249b388e0c3b30c9ed, type: 3}
+    - {fileID: 8884782149665964839, guid: 37bc2ddbfc32f9c4c8653429323cdc11, type: 3}
+    counts: 0500000002000000
     rate: 1
     timeAfterWave: 15
   - name: Wave Five
-    enemy: {fileID: 1971953128947703787, guid: 4988a40dff8017249b388e0c3b30c9ed, type: 3}
-    count: 6
+    enemies:
+    - {fileID: 8884782149665964839, guid: 37bc2ddbfc32f9c4c8653429323cdc11, type: 3}
+    - {fileID: 1971953128947703787, guid: 4988a40dff8017249b388e0c3b30c9ed, type: 3}
+    counts: 0600000003000000
     rate: 1.25
     timeAfterWave: 15
   - name: Wave Six
-    enemy: {fileID: 1971953128947703787, guid: 4988a40dff8017249b388e0c3b30c9ed, type: 3}
-    count: 6
+    enemies:
+    - {fileID: 8884782149665964839, guid: 37bc2ddbfc32f9c4c8653429323cdc11, type: 3}
+    counts: 08000000
     rate: 1.5
     timeAfterWave: 15
 --- !u!114 &415355829233147710
