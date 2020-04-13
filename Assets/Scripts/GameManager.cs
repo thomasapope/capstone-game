@@ -44,8 +44,6 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        // Play Music
-        FindObjectOfType<AudioManager>().Play("School");
 
         // Spawn items and children
         SpawnItems();
@@ -65,6 +63,12 @@ public class GameManager : MonoBehaviour
 
         // Hook into child messages
         Child.ChildPickedUp += OnChildPickedUp;
+    }
+
+    void Start()
+    {
+        // Play Music
+        FindObjectOfType<AudioManager>().Play("School");
     }
 
 
