@@ -106,7 +106,7 @@ public class Enemy : Creature
                     if (Time.time >= nextAttackTime)
                     {
                         // Make sure the enemy has a line of sight to the player
-                        if (!Physics.Linecast(transform.position, target.position, attackLayers, QueryTriggerInteraction.Ignore))
+                        if (!Physics.Linecast(transform.position, target.position, attackLayers))
                         // if (!Physics.Linecast(transform.position, target.position))
                         {
                             // Play attack animation
