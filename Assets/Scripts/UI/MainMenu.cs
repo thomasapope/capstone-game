@@ -67,7 +67,7 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame ()
     {
-        SceneManager.LoadScene("SchoolScene");
+        SceneManager.LoadScene("IntroComic");
     }
     
 
