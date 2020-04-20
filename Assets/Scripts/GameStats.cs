@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public static class GameStats
-
 {
     // Difficulty constants
     // Multiplier for number of enemies and rough multiplier for number of children.

@@ -9,10 +9,11 @@ public class MainMenu : MonoBehaviour
     int currentSelection;
     public List<GameObject> selectionArray = new List<GameObject>();
 
-    public enum Menu {Main, Difficulty}
+    public enum Menu {Main, Difficulty, Highscores}
 
     public GameObject mainScreen;
     public GameObject difficultyScreen;
+    public GameObject highscoresScreen;
 
 
 
@@ -60,6 +61,10 @@ public class MainMenu : MonoBehaviour
             case Menu.Difficulty:
                 mainScreen.SetActive(false);
                 difficultyScreen.SetActive(true);
+                break;
+            case Menu.Highscores:
+                mainScreen.SetActive(false);
+                highscoresScreen.SetActive(true);
                 break;
         }
     }
