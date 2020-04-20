@@ -7495,7 +7495,7 @@ PrefabInstance:
     - target: {fileID: 3807679675985721369, guid: 369fac73c3da4a644a69aaa86a889424,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 48.179836
+      value: 52.68
       objectReference: {fileID: 0}
     - target: {fileID: 3807679675985721369, guid: 369fac73c3da4a644a69aaa86a889424,
         type: 3}
@@ -7505,7 +7505,7 @@ PrefabInstance:
     - target: {fileID: 3807679675985721369, guid: 369fac73c3da4a644a69aaa86a889424,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.0541935
+      value: -2.86
       objectReference: {fileID: 0}
     - target: {fileID: 3807679675985721369, guid: 369fac73c3da4a644a69aaa86a889424,
         type: 3}
@@ -22005,7 +22005,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 6.9e-42, y: 1.04e-43, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 2.1e-44}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -39810,7 +39810,7 @@ PrefabInstance:
     - target: {fileID: 3807679675985721369, guid: 369fac73c3da4a644a69aaa86a889424,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 53.018333
+      value: 51.6
       objectReference: {fileID: 0}
     - target: {fileID: 3807679675985721369, guid: 369fac73c3da4a644a69aaa86a889424,
         type: 3}
@@ -39820,7 +39820,7 @@ PrefabInstance:
     - target: {fileID: 3807679675985721369, guid: 369fac73c3da4a644a69aaa86a889424,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.150013
+      value: -9.56
       objectReference: {fileID: 0}
     - target: {fileID: 3807679675985721369, guid: 369fac73c3da4a644a69aaa86a889424,
         type: 3}
@@ -61206,7 +61206,7 @@ PrefabInstance:
     - target: {fileID: 1187436673671579993, guid: 8be62efa601c7564692e3e5979c716af,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1187436673671579999, guid: 8be62efa601c7564692e3e5979c716af,
         type: 3}
