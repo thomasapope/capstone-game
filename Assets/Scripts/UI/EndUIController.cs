@@ -16,6 +16,8 @@ public class EndUIController : MonoBehaviour
     public Text damageText;
     public Text scoreText;
     public Text returnText;
+    public Text HighScoreText;
+    public Text NewText;
 
     private const float TEXT_DURATION = 0.75f;
     private const float DEFAULT_DURATION = 3f;
@@ -23,7 +25,7 @@ public class EndUIController : MonoBehaviour
     private float timer; // Timer for score tallying
     private float duration = TEXT_DURATION; // Duration of each tally
 
-    private enum fields { Condition, Reason, Score, Wait, Waves, ChildrenSaved, Kills, Damage, Return }
+    private enum fields { Condition, Reason, Score, Wait, Waves, ChildrenSaved, Kills, Damage, HighScore, Return }
     [SerializeField] private fields field = 0; // The field currently being tallied
 
     // private int waves, waveScore;
@@ -38,6 +40,7 @@ public class EndUIController : MonoBehaviour
 
     void OnEnable()
     {
+        HighScoreText.text = PlayerPrefs.GetInt("HighScore", 0).ToString();
         audio = GetComponent<AudioSource>();
         timer = 0;
         FindObjectOfType<AudioManager>().Play("EndGame");
@@ -134,6 +137,10 @@ public class EndUIController : MonoBehaviour
             case fields.Damage: // Damage
                 TallyField(GameManager.damage, damageText, "Damage Dealt: ", 1f);
                 duration = .25f;
+                break;
+            case fields.HighScore: // HighScore
+                if ((score + scoreTally) > PlayerPrefs.GetInt("HighScore")) {PlayerPrefs.SetInt("HighScore", (score + scoreTally)); NewText.gameObject.SetActive(true);}
+                TallyField(PlayerPrefs.GetInt("HighScore"), HighScoreText, "HighScore: ", 0);
                 break;
         }
     }
