@@ -230,6 +230,7 @@ GameObject:
   - component: {fileID: 441120}
   - component: {fileID: 3381624}
   - component: {fileID: 2369264}
+  - component: {fileID: 6772813636087870916}
   m_Layer: 0
   m_Name: lo_CobbleRock_A_LOD0
   m_TagString: Untagged
@@ -245,7 +246,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 191966}
   m_LocalRotation: {x: 0.000000021855694, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.033, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 493642}
@@ -298,3 +299,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!136 &6772813636087870916
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 191966}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.8536513
+  m_Height: 3
+  m_Direction: 1
+  m_Center: {x: -0.06890315, y: 0.7850035, z: 0.037497073}

@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SchoolScene.unity
     guid: 4aaf902d613b86842b27f4c835624a73
+  - enabled: 1
+    path: Assets/Scenes/IntroComic.unity
+    guid: 904bc330d99fbf945841c2f72ef2b539
   m_configObjects: {}
