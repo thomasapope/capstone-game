@@ -32,25 +32,17 @@ public class HighscoreTable : MonoBehaviour
         // AddHighScoreEntry(3, "Not Josh");
         // AddHighScoreEntry(2, "Ok, it's josh");
 
-        // string jsonString = PlayerPrefs.GetString("highscoreTable");
-        // HighscoreList highscores = JsonUtility.FromJson<HighscoreList>(jsonString);
+        
+        // AddHighScoreEntry(3, "This really isn't josh");
+        // AddHighScoreEntry(3, "Josh returns");
+        // AddHighScoreEntry(1000000, "Better than \\/");
 
         HighscoreList highscores = Highscores.LoadScores();
 
 
+
+
         highscoreList = highscores.scoreList;
-        for (int i = 0; i < highscoreList.Count; i++)
-        {
-            for (int j = 0; j < highscoreList.Count; j++)
-            {
-                if (highscoreList[j].score < highscoreList[i].score)
-                {
-                    HighscoreEntry t = highscoreList[i];
-                    highscoreList[i] = highscoreList[j];
-                    highscoreList[j] = t;
-                }
-            }
-        }
 
         highscoreEntryTransformList = new List<Transform>();
 
@@ -70,7 +62,7 @@ public class HighscoreTable : MonoBehaviour
 
         // Rank
         int rank = transformList.Count + 1;
-        string rankString = AddOrdinal(rank);
+        string rankString = Highscores.AddOrdinal(rank);
         entryTransform.Find("positionText").GetComponent<Text>().text = rankString;
 
         // Score
@@ -90,54 +82,21 @@ public class HighscoreTable : MonoBehaviour
     private void AddHighScoreEntry(int score, string name)
     {
         // Create entry
-        HighscoreEntry entry = new HighscoreEntry {score = score, name = name};
+        HighscoreEntry entry = new HighscoreEntry(score, name);
 
         // Load highscore table
         HighscoreList highscores = Highscores.LoadScores();
-
-        // Add entry to table
-        if (highscores != null)
+        
+        int pos = Highscores.CheckScore(score, highscores.scoreList);
+        if (pos != -1 && pos != 10)
         {
-            highscores.scoreList.Add(entry);
+            Highscores.AddScore(pos, entry, highscores);
         }
-        else 
+        else
         {
-            highscores = new HighscoreList { scoreList = new List<HighscoreEntry>() };
-            highscores.scoreList.Add(entry);
+            print ("Score " + score + " too low. Discarding.");
         }
-
-        // Save to PlayerPrefs
-        // string json = JsonUtility.ToJson(highscores);
-        // PlayerPrefs.SetString("highscoreTable", json);
-        // PlayerPrefs.Save(); 
+        
         Highscores.SaveScores(highscores);
     }
-
-
-    //Add ordinals to a number. Used for waves.
-    public static string AddOrdinal(int num)
-    {
-        if( num <= 0 ) return num.ToString();
-
-        switch(num % 100)
-        {
-            case 11:
-            case 12:
-            case 13:
-                return num + "th";
-        }
-
-        switch(num % 10)
-        {
-            case 1:
-                return num + "st";
-            case 2:
-                return num + "nd";
-            case 3:
-                return num + "rd";
-            default:
-                return num + "th";
-        }
-    }
 }
-

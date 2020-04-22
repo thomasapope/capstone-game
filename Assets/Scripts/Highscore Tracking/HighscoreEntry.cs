@@ -9,4 +9,13 @@ public class HighscoreEntry
 {
     public int score;
     public string name;
+
+    
+    public HighscoreEntry(int score, string name)
+    {
+        this.score = score;
+        this.name = name;
+    }
 }
+
+

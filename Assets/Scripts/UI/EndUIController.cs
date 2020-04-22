@@ -19,6 +19,8 @@ public class EndUIController : MonoBehaviour
     public Text HighScoreText;
     public Text NewText;
 
+    public HighscorePrompt highscorePrompt;
+
     private const float TEXT_DURATION = 0.75f;
     private const float DEFAULT_DURATION = 3f;
 
@@ -36,6 +38,8 @@ public class EndUIController : MonoBehaviour
     private int score;
 
     private bool skipped = false;
+    private bool isHighScore = false;
+    private int rank = -1;
 
 
     void OnEnable()
@@ -44,6 +48,7 @@ public class EndUIController : MonoBehaviour
         audio = GetComponent<AudioSource>();
         timer = 0;
         FindObjectOfType<AudioManager>().Play("EndGame");
+
     }
 
 
@@ -106,6 +111,16 @@ public class EndUIController : MonoBehaviour
 
                         audio.clip = returnSound;
                         audio.Play();
+
+                        // If score is a highscore, prompt for name and save score
+                        if (isHighScore)
+                        {
+                            Cursor.lockState = CursorLockMode.None;
+
+                            highscorePrompt.gameObject.SetActive(true);
+                            highscorePrompt.score = score;
+                            highscorePrompt.pos = rank;
+                        }
                     }
                     break;
             }
@@ -136,11 +151,58 @@ public class EndUIController : MonoBehaviour
                 break;
             case fields.Damage: // Damage
                 TallyField(GameManager.damage, damageText, "Damage Dealt: ", 1f);
+                score += scoreTally;
                 duration = .25f;
                 break;
             case fields.HighScore: // HighScore
-                if ((score + scoreTally) > PlayerPrefs.GetInt("HighScore")) {PlayerPrefs.SetInt("HighScore", (score + scoreTally)); NewText.gameObject.SetActive(true);}
-                TallyField(PlayerPrefs.GetInt("HighScore"), HighScoreText, "HighScore: ", 0);
+                HighscoreList list = Highscores.LoadScores();
+
+                if (!HighScoreText.gameObject.activeInHierarchy)
+                {
+                    int pos = Highscores.CheckScore(score, list.scoreList);
+                    if (pos != -1 && pos != 10)
+                    {
+                        // You made it to the highscore list!
+                        // Highscores.AddScore(pos, entry, highscores);
+                        isHighScore = true;
+                        rank = pos;
+
+                        // Play sound
+                        audio.clip = textSound;
+                        audio.Play();
+
+                        // Display message
+                        if (pos == 0)
+                        {
+                            // You got 1st place!
+                            HighScoreText.text = "You got 1st place!\n" + 
+                                                "You were ahead by " + list.scoreList[pos - 1].score + "points!";
+                        }
+                        else
+                        {
+                            HighScoreText.text = "You got " + Highscores.AddOrdinal(pos + 1) + " place!\n" +
+                                                "The next highest score is " + list.scoreList[pos].score + ".";
+                        }
+
+                        // Set highscore text fields to active
+                        NewText.gameObject.SetActive(true);
+                        HighScoreText.gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        // Better luck next time.
+                        print ("Score " + score + " too low. You didn't make the cut.");
+                    }
+                }
+
+
+
+                // if ((score + scoreTally) > PlayerPrefs.GetInt("HighScore")) 
+                // {
+                //     PlayerPrefs.SetInt("HighScore", (score + scoreTally)); 
+                //     NewText.gameObject.SetActive(true);
+                // }
+                // TallyField(PlayerPrefs.GetInt("HighScore"), HighScoreText, "HighScore: ", 0);
                 break;
         }
     }
