@@ -47,6 +47,14 @@ public class EndUIController : MonoBehaviour
         HighScoreText.text = PlayerPrefs.GetInt("HighScore", 0).ToString();
         audio = GetComponent<AudioSource>();
         timer = 0;
+
+
+        // End the game if it hasn't already
+        if (!GameManager.instance.gameHasEnded)
+        {
+            GameManager.instance.gameHasEnded = true;
+        }
+
         FindObjectOfType<AudioManager>().Play("EndGame");
 
     }

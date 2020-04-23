@@ -125,8 +125,16 @@ public class Player : Creature
         movementInput.x = Input.GetAxisRaw("Horizontal");
         movementInput.z = Input.GetAxisRaw("Vertical");
 
-        Move();
+        // Move, but only if the game is still going
+        if (!GameManager.instance.gameHasEnded)
+        {
+            Move();
+        }
         
+        if (usesGravity) 
+        {
+            Gravity();
+        }
     }
 
 
@@ -169,10 +177,6 @@ public class Player : Creature
         animator.SetFloat("Velocity X", x);
         animator.SetFloat("Velocity Z", z);
 
-        if (usesGravity) 
-        {
-            Gravity();
-        }
     }
 
 

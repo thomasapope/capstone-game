@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public List<Transform> childrenSpawnPoints;
 
     // Game Completion Variables
-    bool gameHasEnded = false;
+    public bool gameHasEnded = false;
     public static bool isVictory = false;
     public int numOfParts = 3; // Number of parts that need to be found
 

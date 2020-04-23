@@ -20,10 +20,13 @@ public class CamFollow : MonoBehaviour
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
         
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90, 90);
+        if (!GameManager.instance.gameHasEnded)
+        {
+            xRotation -= mouseY;
+            xRotation = Mathf.Clamp(xRotation, -90, 90);
 
-        container.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-        player.Rotate(Vector3.up * mouseX);
+            container.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+            player.Rotate(Vector3.up * mouseX);
+        }
     }
 }
