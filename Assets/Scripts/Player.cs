@@ -68,8 +68,8 @@ public class Player : Creature
         //Check for interactable
         CheckForInteractable();
 
-        if (!isCarryingItem) // Make sure the player can't attack while carrying an item
-            hitting = Input.GetMouseButton(0); // Get attack input
+        // if (!isCarryingItem) // Make sure the player can't attack while carrying an item
+        //     hitting = Input.GetMouseButton(0); // Get attack input
 
         // if (hitting)
         // {
@@ -81,36 +81,28 @@ public class Player : Creature
 
         if (Input.GetButtonDown("Attack"))
         {
-            if (!currentWeapon.isRanged)
+            // Make sure the game is not over and the player is not carrying an object
+            if (!GameManager.instance.gameHasEnded && !isCarryingItem)
             {
-                // if (animator.GetCurrentAnimatorStateInfo(1).IsName("Attack2"))
-                // {
-                //     animator.SetTrigger("attack3");
-                //     hitsQueued++;
-                // } else if (animator.GetCurrentAnimatorStateInfo(1).IsName("Attack1"))
-                // {
-                //     animator.SetTrigger("attack2");
-                //     hitsQueued++;
-                // } else
-                // {
-                //     animator.SetTrigger("attack1");
-                //     hitsQueued++;
-                // }
-                // animator.SetTrigger("AttackTrigger");
-                hitsQueued++;
-
-                // hitsQueued++;
-            }
-            else
-            {
-                RangedAttack();
+                hitting = true;
+                if (!currentWeapon.isRanged)
+                {
+                    hitsQueued++;
+                }
+                else
+                {
+                    RangedAttack();
+                }
             }
         }
         else if (Input.GetButton("Attack"))
         {
-            if (currentWeapon.isRanged)
+            if(!GameManager.instance.gameHasEnded && !isCarryingItem)
             {
-                RangedAttack();
+                if (currentWeapon.isRanged)
+                {
+                    RangedAttack();
+                }
             }
         }
 

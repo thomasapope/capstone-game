@@ -38,7 +38,7 @@ public abstract class Creature : MonoBehaviour
     [HideInInspector] public Weapon currentWeapon;
 
     // Other Stats
-    [HideInInspector] public bool isCarryingItem = false;
+    /*[HideInInspector] */public bool isCarryingItem = false;
     [HideInInspector] public Interactable item;
     public float pickupDistance = 2f;
     
