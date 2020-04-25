@@ -152,29 +152,14 @@ public class WaveSpawner : MonoBehaviour
 
     void SpawnEnemy(Enemy _enemy)
     {
-        // Choose a random spawn point to spawn the enemy at.
-        Transform _sp = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length)];
+        if (GameManager.playerRef.GetComponent<Creature>().health > 0)
+        {
+            // Choose a random spawn point to spawn the enemy at.
+            Transform _sp = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length)];
 
-        // Spawn enemy
-        // Debug.Log("Spawning Enemy: " + _enemy.name);
-
-        Enemy enemy = Instantiate<Enemy>(_enemy, _sp.position, _sp.rotation);
-        enemy.startingPoint = _sp;
-        // enemy.target = player;
-        // enemy.transform.rotation = Quaternion.LookRotation(new Vector3 (player.position.x, 0, player.position.z));
+            // Spawn enemy
+            Enemy enemy = Instantiate<Enemy>(_enemy, _sp.position, _sp.rotation);
+            enemy.startingPoint = _sp;
+        }
     }
-
-
-    // Spawn the player at the beginning of a game
-    // void SpawnPlayer()
-    // {
-    //     if (playerSpawnPoint)
-    //     {
-    //         GameObject player = Instantiate(playerPrefab, playerSpawnPoint.position, playerSpawnPoint.rotation);
-    //         GameManager.playerRef = player;
-
-    //         // Enemy enemy = Instantiate<Enemy>(_enemy, _sp.position, _sp.rotation);
-    //     }
-    // }
-
 }

@@ -21,7 +21,7 @@ public class Enemy : Creature
     public enum MindState { CHASING, ATTACKING, FLEEING }
     [SerializeField] private MindState state = MindState.CHASING;
 
-    [HideInInspector] public float refreshTime = 3f;
+    [HideInInspector] public float refreshTime = 2f;
     private float timeTilRefresh;
 
     public float attackDistance = 2f;
