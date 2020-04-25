@@ -163,6 +163,7 @@ public class Enemy : Creature
     bool HasReachedAttackTarget()
     {
         if (!target.CompareTag("Player")) return false;
+        if (target.GetComponent<Creature>().health < 0) return false; // Don't attack when the player is dead
         float distance = Vector3.Distance(target.position, transform.position);
         return distance <= attackDistance;
     }

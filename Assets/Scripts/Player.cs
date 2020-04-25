@@ -286,7 +286,7 @@ public class Player : Creature
     protected override void OnDeath()
     {
         // You died. Game over.
-        Debug.Log("You Died");
+        // Debug.Log("You Died");
         GameManager.instance.EndGame(); 
         cam.transform.parent = null;
         if (alive == true)
@@ -295,6 +295,8 @@ public class Player : Creature
             animator.SetInteger("Weapon", 0);
             alive = false;
         }
+
+        GameManager.targetRefs.Remove(this.gameObject);
 
         // Destroy(gameObject);
     }
