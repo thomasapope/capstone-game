@@ -44,6 +44,8 @@ public class Player : Creature
     private float x;
     private float z;
 
+    private bool alive = true;
+
     // Weapons
     // public Weapon currentWeapon;
     public static event Action<Transform, AlertArrowController.AlertReason> PartPickedUp = delegate {};
@@ -286,8 +288,15 @@ public class Player : Creature
         // You died. Game over.
         Debug.Log("You Died");
         GameManager.instance.EndGame(); 
+        cam.transform.parent = null;
+        if (alive == true)
+        {
+            animator.SetTrigger("Death1Trigger");
+            animator.SetInteger("Weapon", 0);
+            alive = false;
+        }
 
-        Destroy(gameObject);
+        // Destroy(gameObject);
     }
 
 }
