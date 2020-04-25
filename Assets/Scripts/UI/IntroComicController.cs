@@ -44,7 +44,8 @@ public class IntroComicController : MonoBehaviour
         int previousFrame = frame;
 
         // Advance to next frame when button is pressed or timer expires
-        if ((timer > timerTarget && frame >= 0) || Input.anyKeyDown)
+        // if ((timer > timerTarget && frame > 0) || Input.anyKeyDown)
+        if ((timer > timerTarget && frame >= sprites.Length) || Input.anyKeyDown)
         // if (Input.anyKeyDown)
         {
             frame++;
@@ -53,10 +54,17 @@ public class IntroComicController : MonoBehaviour
             {
                 image.enabled = true;
                 settingText.enabled = false;
-                print("click");
+                // print("click");
             }
         }
-        
+        if (Input.anyKeyDown)
+        {
+            if (frame > sprites.Length + texts.Length)
+            {
+                // Load the school scene
+                SceneManager.LoadScene("SchoolScene");
+            }
+        }
 
         // If past the backstory text
         if (frame >= 0)
@@ -85,8 +93,8 @@ public class IntroComicController : MonoBehaviour
                 }
                 else
                 {
-                    // Load the school scene
-                    SceneManager.LoadScene("SchoolScene");
+                    // // Load the school scene
+                    // SceneManager.LoadScene("SchoolScene");
                 }
             }
 
