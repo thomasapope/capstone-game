@@ -99,14 +99,14 @@ MonoBehaviour:
     m_Bits: 2048
   MAX_HEALTH: 100
   hp: 0
-  attackRange: 2
+  attackRange: 1
   attackRate: 2
   nextAttackTime: 0
   attackDelay: 0
   currentWeapon: {fileID: 0}
   isCarryingItem: 0
   item: {fileID: 0}
-  pickupDistance: 4
+  pickupDistance: 1
   weaponPoint: {fileID: 583958578335881556}
   interactableLayer:
     serializedVersion: 2
@@ -3607,7 +3607,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8957916299819444721}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.72}
+  m_LocalPosition: {x: 0, y: 1, z: 1.125}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 904692277821601854}

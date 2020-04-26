@@ -12,7 +12,7 @@ public class Interactable : MonoBehaviour
     public string itemName;
     public string itemDescription;
 
-    public float radius = .5f;
+    public float radius = 1f;
 
 
     void Start()
@@ -25,7 +25,7 @@ public class Interactable : MonoBehaviour
     protected virtual void Update()
     {
         if(GameManager.playerRef){
-            if(Vector3.Distance(GameManager.playerRef.transform.position, transform.position) < 4f && !pickedUp){
+            if(Vector3.Distance(GameManager.playerRef.transform.position, transform.position) < 2f && !pickedUp){
                 objectUI.SetActive(true);
             }else{
                 objectUI.SetActive(false);
@@ -41,8 +41,11 @@ public class Interactable : MonoBehaviour
         pickedUp = true;
         if (rigidbody)
         {
+            rigidbody.isKinematic = true;
+            rigidbody.isKinematic = false;
             rigidbody.detectCollisions = false;
             rigidbody.useGravity = false;
+            // rigidbody.velocity = Vector3.zero;
         }
     }
 

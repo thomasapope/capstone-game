@@ -245,19 +245,27 @@ public class Player : Creature
             else
             {
                 Collider[] items = Physics.OverlapSphere(attackPoint.position, pickupDistance, interactableLayer);
-            
-                foreach (Collider c in items)
-                {
-                    Interactable interactable = c.GetComponent<Interactable>();
 
-                    if (interactable)
+                if (items.Length > 0)
+                {
+                    Collider closest = items[0];
+
+                    foreach (Collider c in items)
                     {
-                        if (!interactable.pickedUp)
+                        Interactable interactable = c.GetComponent<Interactable>();
+
+                        if (interactable && !interactable.pickedUp)
                         {
-                            PickUpObject(interactable);
-                            break;
+                            if ((c.transform.position - transform.position).magnitude < (closest.transform.position - transform.position).magnitude)
+                            {
+                                closest = c;
+                            }
+                            // PickUpObject(interactable);
+                            // break;
                         }
                     }
+
+                    PickUpObject(closest.GetComponent<Interactable>());
                 }
             }
         }
