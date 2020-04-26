@@ -90,7 +90,7 @@ public class Enemy : Creature
                 // Check if target is child and enemy is close enough to pick it up
                 if (target.CompareTag("Target") && HasReachedTarget())
                 {
-                    if (target.parent.gameObject.GetComponent<Interactable>().pickedUp || !target.gameObject.activeInHierarchy)
+                    if (target.parent.gameObject.GetComponentInChildren<Interactable>().pickedUp || !target.gameObject.activeInHierarchy)
                     {
                         Debug.Log("My target is already taken");
                         FindTarget();
@@ -99,7 +99,7 @@ public class Enemy : Creature
 
                     state = MindState.FLEEING;
 
-                    PickUpObject(target.parent.gameObject.GetComponent<Interactable>());
+                    PickUpObject(target.parent.gameObject.GetComponentInChildren<Interactable>());
                 } 
                 else if (HasReachedAttackTarget()) // If the enemy is close enough to attack
                 {

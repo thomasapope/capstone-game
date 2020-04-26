@@ -19,7 +19,7 @@ public class AlertArrowController : MonoBehaviour
     public enum AlertReason { Warning, Direction }
 
     public int numOfArrows = 0; // Number of arrows. Used for positioning
-    private float arrowDistance = 1f; // Distance
+    private float arrowDistance = .25f; // Distance
 
     public List<AlertArrow> arrows;
 

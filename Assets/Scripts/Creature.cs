@@ -122,8 +122,11 @@ public abstract class Creature : MonoBehaviour
     {
         item = obj;
         isCarryingItem = true;
-        obj.transform.SetParent(carryPoint);
-        obj.transform.position = carryPoint.position;
+        obj.transform.parent.SetParent(carryPoint);
+        obj.transform.parent.position = carryPoint.position;
+        // obj.transform.parent.rotation = carryPoint.rotation;
+        // obj.transform.SetParent(carryPoint);
+        // obj.transform.position = carryPoint.position;
         obj.OnPickUp();
     }
 
@@ -131,7 +134,7 @@ public abstract class Creature : MonoBehaviour
     protected virtual void DropObject()
     {
 
-        item.transform.SetParent(null);
+        item.transform.parent.SetParent(null);
         item.OnDrop();
 
         item = null;

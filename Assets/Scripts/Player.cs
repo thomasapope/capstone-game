@@ -124,6 +124,10 @@ public class Player : Creature
         {
             Move();
         }
+        else
+        {
+            animator.SetBool("Moving", false);
+        }
         
         if (usesGravity) 
         {
@@ -230,7 +234,6 @@ public class Player : Creature
         // if(Input.GetMouseButtonUp(1)){
         if(Input.GetButtonDown("Pickup")) 
         {
-            Debug.Log("Pickup key pressed");
             // Drop the carried item if there is one
             if (isCarryingItem)
             {
