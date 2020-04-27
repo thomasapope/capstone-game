@@ -31,7 +31,7 @@ Transform:
   - {fileID: 780140489922287746}
   - {fileID: 7081551033199711676}
   m_Father: {fileID: 8884782149665964843}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &6410756162693840502
 Animator:
@@ -340,7 +340,7 @@ GameObject:
   - component: {fileID: 4855831583739402650}
   m_Layer: 11
   m_Name: CarryPoint
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -353,11 +353,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2847761239872800444}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.208, z: 0.743}
+  m_LocalPosition: {x: 0.0082, y: 0.0209, z: 0.0214}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 8884782149665964843}
-  m_RootOrder: 0
+  m_Father: {fileID: 4736657717407481426}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2889660104183451951
 GameObject:
@@ -1039,6 +1039,7 @@ Transform:
   m_LocalScale: {x: 0.99973077, y: 1.0002363, z: 1.0000335}
   m_Children:
   - {fileID: 8545309082225599897}
+  - {fileID: 4855831583739402650}
   m_Father: {fileID: 8032557673006482011}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1524,7 +1525,7 @@ Transform:
   m_Children:
   - {fileID: 5304202777346347946}
   m_Father: {fileID: 8884782149665964843}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8674371007746580669
 GameObject:
@@ -1557,7 +1558,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8884782149665964843}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1003104639755468325
 AudioSource:
@@ -1709,7 +1710,6 @@ GameObject:
   - component: {fileID: 8265213076826178840}
   - component: {fileID: 2898317626315462914}
   - component: {fileID: 8884782149665964839}
-  - component: {fileID: 1898653712597130296}
   - component: {fileID: 3123313706899842940}
   m_Layer: 11
   m_Name: Mole Thrower
@@ -1729,7 +1729,6 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4855831583739402650}
   - {fileID: 5342567824454272231}
   - {fileID: 3926460485068100364}
   - {fileID: 6110263601618639839}
@@ -1805,19 +1804,6 @@ MonoBehaviour:
   attackDistance: 10
   weapon: 1
   attackTime: 2.8
---- !u!114 &1898653712597130296
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8884782149665964838}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66499ef30c264b34ba6376f21b9a1529, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemy: {fileID: 0}
 --- !u!95 &3123313706899842940
 Animator:
   serializedVersion: 3

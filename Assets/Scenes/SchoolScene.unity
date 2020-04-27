@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.0000508379, g: 0.00006613617, b: 0.14466785, a: 1}
+  m_IndirectSpecularColor: {r: 0.000054838245, g: 0.0000660327, b: 0.14467497, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7425,7 +7425,7 @@ PrefabInstance:
     - target: {fileID: 1401105404180031068, guid: aa15aac5534f3b143bf5e960c38c78ac,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.269
+      value: 3.374
       objectReference: {fileID: 0}
     - target: {fileID: 1401105404180031068, guid: aa15aac5534f3b143bf5e960c38c78ac,
         type: 3}
@@ -22005,7 +22005,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 7.9e-43, y: 7.1e-44, z: 0, w: -3.2944964e+10}
+  m_BoundingSphereOverride: {x: 5.703e-42, y: 1.04e-43, z: 8.14e-43, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -37144,7 +37144,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -61236,17 +61236,17 @@ PrefabInstance:
     - target: {fileID: 1187436673887120334, guid: 8be62efa601c7564692e3e5979c716af,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1187436673964896257, guid: 8be62efa601c7564692e3e5979c716af,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1187436674242443799, guid: 8be62efa601c7564692e3e5979c716af,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1187436674467347135, guid: 8be62efa601c7564692e3e5979c716af,
         type: 3}
@@ -61281,7 +61281,7 @@ PrefabInstance:
     - target: {fileID: 1187436674596670207, guid: 8be62efa601c7564692e3e5979c716af,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1187436674720228233, guid: 8be62efa601c7564692e3e5979c716af,
         type: 3}
@@ -61436,12 +61436,12 @@ PrefabInstance:
     - target: {fileID: 1187436674932654642, guid: 8be62efa601c7564692e3e5979c716af,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1187436675273498100, guid: 8be62efa601c7564692e3e5979c716af,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1187436675409839114, guid: 8be62efa601c7564692e3e5979c716af,
         type: 3}
@@ -61451,12 +61451,12 @@ PrefabInstance:
     - target: {fileID: 2806157561259815406, guid: 8be62efa601c7564692e3e5979c716af,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6257027302932008995, guid: 8be62efa601c7564692e3e5979c716af,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8be62efa601c7564692e3e5979c716af, type: 3}

@@ -38,9 +38,9 @@ public abstract class Creature : MonoBehaviour
     [HideInInspector] public Weapon currentWeapon;
 
     // Other Stats
-    [HideInInspector] public bool isCarryingItem = false;
+    /*[HideInInspector] */public bool isCarryingItem = false;
     [HideInInspector] public Interactable item;
-    public float pickupDistance = 2f;
+    public float pickupDistance = 1f;
     
     // Delegates
     public event System.Action OnAttack;
@@ -122,8 +122,11 @@ public abstract class Creature : MonoBehaviour
     {
         item = obj;
         isCarryingItem = true;
-        obj.transform.SetParent(carryPoint);
-        obj.transform.position = carryPoint.position;
+        obj.transform.parent.SetParent(carryPoint);
+        obj.transform.parent.position = carryPoint.position;
+        // obj.transform.parent.rotation = carryPoint.rotation;
+        // obj.transform.SetParent(carryPoint);
+        // obj.transform.position = carryPoint.position;
         obj.OnPickUp();
     }
 
@@ -131,7 +134,7 @@ public abstract class Creature : MonoBehaviour
     protected virtual void DropObject()
     {
 
-        item.transform.SetParent(null);
+        item.transform.parent.SetParent(null);
         item.OnDrop();
 
         item = null;

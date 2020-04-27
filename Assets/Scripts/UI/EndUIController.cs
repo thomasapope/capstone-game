@@ -47,6 +47,14 @@ public class EndUIController : MonoBehaviour
         HighScoreText.text = PlayerPrefs.GetInt("HighScore", 0).ToString();
         audio = GetComponent<AudioSource>();
         timer = 0;
+
+
+        // End the game if it hasn't already
+        if (!GameManager.instance.gameHasEnded)
+        {
+            GameManager.instance.gameHasEnded = true;
+        }
+
         FindObjectOfType<AudioManager>().Play("EndGame");
 
     }
@@ -58,7 +66,11 @@ public class EndUIController : MonoBehaviour
         {
             if (field == fields.Return) // If the score tally has been finished
             {
-                GameManager.instance.ReturnToMenu();
+                // Return to the menu, but only if the highscore prompt is not open
+                if(!highscorePrompt.gameObject.activeInHierarchy)
+                {
+                    GameManager.instance.ReturnToMenu();
+                }
             }
             else // Skip the tally
             {
@@ -159,7 +171,8 @@ public class EndUIController : MonoBehaviour
 
                 if (!HighScoreText.gameObject.activeInHierarchy)
                 {
-                    int pos = Highscores.CheckScore(score, list.scoreList);
+                    // int pos = Highscores.CheckScore(score, list.scoreList);
+                    int pos = Highscores.CheckScore(50000, list.scoreList);
                     if (pos != -1 && pos != 10)
                     {
                         // You made it to the highscore list!

@@ -44,6 +44,8 @@ public class Player : Creature
     private float x;
     private float z;
 
+    private bool alive = true;
+
     // Weapons
     // public Weapon currentWeapon;
     public static event Action<Transform, AlertArrowController.AlertReason> PartPickedUp = delegate {};
@@ -68,8 +70,8 @@ public class Player : Creature
         //Check for interactable
         CheckForInteractable();
 
-        if (!isCarryingItem) // Make sure the player can't attack while carrying an item
-            hitting = Input.GetMouseButton(0); // Get attack input
+        // if (!isCarryingItem) // Make sure the player can't attack while carrying an item
+        //     hitting = Input.GetMouseButton(0); // Get attack input
 
         // if (hitting)
         // {
@@ -81,36 +83,28 @@ public class Player : Creature
 
         if (Input.GetButtonDown("Attack"))
         {
-            if (!currentWeapon.isRanged)
+            // Make sure the game is not over and the player is not carrying an object
+            if (!GameManager.instance.gameHasEnded && !isCarryingItem)
             {
-                // if (animator.GetCurrentAnimatorStateInfo(1).IsName("Attack2"))
-                // {
-                //     animator.SetTrigger("attack3");
-                //     hitsQueued++;
-                // } else if (animator.GetCurrentAnimatorStateInfo(1).IsName("Attack1"))
-                // {
-                //     animator.SetTrigger("attack2");
-                //     hitsQueued++;
-                // } else
-                // {
-                //     animator.SetTrigger("attack1");
-                //     hitsQueued++;
-                // }
-                // animator.SetTrigger("AttackTrigger");
-                hitsQueued++;
-
-                // hitsQueued++;
-            }
-            else
-            {
-                RangedAttack();
+                hitting = true;
+                if (!currentWeapon.isRanged)
+                {
+                    hitsQueued++;
+                }
+                else
+                {
+                    RangedAttack();
+                }
             }
         }
         else if (Input.GetButton("Attack"))
         {
-            if (currentWeapon.isRanged)
+            if(!GameManager.instance.gameHasEnded && !isCarryingItem)
             {
-                RangedAttack();
+                if (currentWeapon.isRanged)
+                {
+                    RangedAttack();
+                }
             }
         }
 
@@ -125,8 +119,20 @@ public class Player : Creature
         movementInput.x = Input.GetAxisRaw("Horizontal");
         movementInput.z = Input.GetAxisRaw("Vertical");
 
-        Move();
+        // Move, but only if the game is still going
+        if (!GameManager.instance.gameHasEnded)
+        {
+            Move();
+        }
+        else
+        {
+            animator.SetBool("Moving", false);
+        }
         
+        if (usesGravity) 
+        {
+            Gravity();
+        }
     }
 
 
@@ -169,10 +175,6 @@ public class Player : Creature
         animator.SetFloat("Velocity X", x);
         animator.SetFloat("Velocity Z", z);
 
-        if (usesGravity) 
-        {
-            Gravity();
-        }
     }
 
 
@@ -232,7 +234,6 @@ public class Player : Creature
         // if(Input.GetMouseButtonUp(1)){
         if(Input.GetButtonDown("Pickup")) 
         {
-            Debug.Log("Pickup key pressed");
             // Drop the carried item if there is one
             if (isCarryingItem)
             {
@@ -244,19 +245,27 @@ public class Player : Creature
             else
             {
                 Collider[] items = Physics.OverlapSphere(attackPoint.position, pickupDistance, interactableLayer);
-            
-                foreach (Collider c in items)
-                {
-                    Interactable interactable = c.GetComponent<Interactable>();
 
-                    if (interactable)
+                if (items.Length > 0)
+                {
+                    Collider closest = items[0];
+
+                    foreach (Collider c in items)
                     {
-                        if (!interactable.pickedUp)
+                        Interactable interactable = c.GetComponent<Interactable>();
+
+                        if (interactable && !interactable.pickedUp)
                         {
-                            PickUpObject(interactable);
-                            break;
+                            if ((c.transform.position - transform.position).magnitude < (closest.transform.position - transform.position).magnitude)
+                            {
+                                closest = c;
+                            }
+                            // PickUpObject(interactable);
+                            // break;
                         }
                     }
+
+                    PickUpObject(closest.GetComponent<Interactable>());
                 }
             }
         }
@@ -288,10 +297,19 @@ public class Player : Creature
     protected override void OnDeath()
     {
         // You died. Game over.
-        Debug.Log("You Died");
+        // Debug.Log("You Died");
         GameManager.instance.EndGame(); 
+        cam.transform.parent = null;
+        if (alive == true)
+        {
+            animator.SetTrigger("Death1Trigger");
+            animator.SetInteger("Weapon", 0);
+            GameManager.targetRefs.Remove(this.gameObject);
+            alive = false;
+        }
 
-        Destroy(gameObject);
+
+        // Destroy(gameObject);
     }
 
 }

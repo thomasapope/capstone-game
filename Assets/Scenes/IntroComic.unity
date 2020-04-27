@@ -555,14 +555,11 @@ MonoBehaviour:
   m_Text: 'Humanity has fallen.
 
     The moles we once kicked out of our gardens
-    have now taken over.
+    have now kicked us out.
 
 
-    Few of us remain.
-
-
-    Those who do gather in small
-    camps and communities, constantly watching for the moles to return...'
+    Those remain gather in small camps and communities,
+    constantly watching for the moles to return...'
 --- !u!222 &1348967762
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -954,7 +951,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f1060b3c42492634aa678971cb0b46d5, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.698
+  m_Volume: 0.104
   m_Pitch: 1
   Loop: 0
   Mute: 0

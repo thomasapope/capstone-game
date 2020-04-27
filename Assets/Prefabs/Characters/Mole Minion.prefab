@@ -28,7 +28,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1971953128947703783}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1761277851804974193
 GameObject:
@@ -61,7 +61,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1971953128947703783}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &7925034604872606441
 AudioSource:
@@ -172,6 +172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 0}
+  target: {x: 0, y: 0, z: 0}
   name: Mole Claws
   isRanged: 0
   damage: 10
@@ -224,7 +225,6 @@ Transform:
   m_LocalPosition: {x: 9.37, y: 1, z: 11.62}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2554596244884243798}
   - {fileID: 3809160150637201171}
   - {fileID: 3041129898437564459}
   - {fileID: 6227714832206925760}
@@ -330,7 +330,7 @@ GameObject:
   - component: {fileID: 2554596244884243798}
   m_Layer: 11
   m_Name: CarryPoint
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -343,11 +343,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5158197605524118128}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.208, z: 0.743}
+  m_LocalPosition: {x: -0.0079, y: 0.0142, z: -0.0213}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1971953128947703783}
-  m_RootOrder: 0
+  m_Father: {fileID: 2426072131702416030}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1375846844532892890
 PrefabInstance:
@@ -399,7 +399,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 5f332e14902c5fb4e839e144754a9abf,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 5f332e14902c5fb4e839e144754a9abf,
         type: 3}
@@ -456,6 +456,12 @@ PrefabInstance:
 --- !u!4 &6227714832206925760 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 5f332e14902c5fb4e839e144754a9abf,
+    type: 3}
+  m_PrefabInstance: {fileID: 1375846844532892890}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2426072131702416030 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -5567330030375057852, guid: 5f332e14902c5fb4e839e144754a9abf,
     type: 3}
   m_PrefabInstance: {fileID: 1375846844532892890}
   m_PrefabAsset: {fileID: 0}

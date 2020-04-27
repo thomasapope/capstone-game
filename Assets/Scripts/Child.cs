@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent))]
+// [RequireComponent(typeof(NavMeshAgent))]
 public class Child : Interactable
 {
     // Component references
@@ -46,7 +46,7 @@ public class Child : Interactable
     // Use this for initialization
     void OnEnable () 
     {
-        agent = GetComponent<NavMeshAgent>();
+        agent = GetComponentInParent<NavMeshAgent>();
         // animator = GetComponentInChildren<Animator>();
         // animator.Play("Carrying");
 

@@ -21,7 +21,7 @@ public class Enemy : Creature
     public enum MindState { CHASING, ATTACKING, FLEEING }
     [SerializeField] private MindState state = MindState.CHASING;
 
-    [HideInInspector] public float refreshTime = 3f;
+    [HideInInspector] public float refreshTime = 2f;
     private float timeTilRefresh;
 
     public float attackDistance = 2f;
@@ -90,7 +90,7 @@ public class Enemy : Creature
                 // Check if target is child and enemy is close enough to pick it up
                 if (target.CompareTag("Target") && HasReachedTarget())
                 {
-                    if (target.parent.gameObject.GetComponent<Interactable>().pickedUp || !target.gameObject.activeInHierarchy)
+                    if (target.parent.gameObject.GetComponentInChildren<Interactable>().pickedUp || !target.gameObject.activeInHierarchy)
                     {
                         Debug.Log("My target is already taken");
                         FindTarget();
@@ -99,7 +99,7 @@ public class Enemy : Creature
 
                     state = MindState.FLEEING;
 
-                    PickUpObject(target.parent.gameObject.GetComponent<Interactable>());
+                    PickUpObject(target.parent.gameObject.GetComponentInChildren<Interactable>());
                 } 
                 else if (HasReachedAttackTarget()) // If the enemy is close enough to attack
                 {
@@ -163,6 +163,7 @@ public class Enemy : Creature
     bool HasReachedAttackTarget()
     {
         if (!target.CompareTag("Player")) return false;
+        if (target.GetComponent<Creature>().health < 0) return false; // Don't attack when the player is dead
         float distance = Vector3.Distance(target.position, transform.position);
         return distance <= attackDistance;
     }
@@ -181,6 +182,8 @@ public class Enemy : Creature
             {
                 if (!g) continue;
                 if (!g.gameObject.activeInHierarchy) continue;
+
+                // print("target: " + g.name);
 
                 float dist = Vector3.Distance(transform.position, g.transform.position);
                 if (dist < minDistance) 
