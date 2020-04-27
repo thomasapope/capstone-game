@@ -55,7 +55,8 @@ public class GameManager : MonoBehaviour
         numOfChildren = targetRefs.Count;
         foreach (GameObject child in targetRefs)
         {
-            child.GetComponentInParent<Child>().ChildTaken += OnChildTaken;
+            child.transform.parent.gameObject.GetComponentInChildren<Child>().ChildTaken += OnChildTaken;
+            // child.GetComponentInParent<Child>().ChildTaken += OnChildTaken;
         }
         targetRefs.Add(playerRef);
 
@@ -67,6 +68,10 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        foreach(GameObject g in targetRefs)
+        {
+            print("target " + g);
+        }
         // Play Music
         FindObjectOfType<AudioManager>().Play("School");
     }

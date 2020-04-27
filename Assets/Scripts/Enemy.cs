@@ -183,6 +183,8 @@ public class Enemy : Creature
                 if (!g) continue;
                 if (!g.gameObject.activeInHierarchy) continue;
 
+                // print("target: " + g.name);
+
                 float dist = Vector3.Distance(transform.position, g.transform.position);
                 if (dist < minDistance) 
                 {

@@ -304,10 +304,10 @@ public class Player : Creature
         {
             animator.SetTrigger("Death1Trigger");
             animator.SetInteger("Weapon", 0);
+            GameManager.targetRefs.Remove(this.gameObject);
             alive = false;
         }
 
-        GameManager.targetRefs.Remove(this.gameObject);
 
         // Destroy(gameObject);
     }

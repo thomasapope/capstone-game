@@ -22602,11 +22602,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 904692277821601987, guid: 13f8fb30e0c6b7a4cbf7630804f35286,
-        type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
     - target: {fileID: 1979969953140674658, guid: 13f8fb30e0c6b7a4cbf7630804f35286,
         type: 3}
       propertyPath: groundMask.m_Bits
