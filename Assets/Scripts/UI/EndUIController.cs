@@ -163,7 +163,7 @@ public class EndUIController : MonoBehaviour
                 break;
             case fields.Damage: // Damage
                 TallyField(GameManager.damage, damageText, "Damage Dealt: ", 1f);
-                score += scoreTally;
+                // score += scoreTally;
                 duration = .25f;
                 break;
             case fields.HighScore: // HighScore
@@ -171,8 +171,11 @@ public class EndUIController : MonoBehaviour
 
                 if (!HighScoreText.gameObject.activeInHierarchy)
                 {
-                    // int pos = Highscores.CheckScore(score, list.scoreList);
-                    int pos = Highscores.CheckScore(50000, list.scoreList);
+                    print(score);
+                    score += scoreTally;
+                    print (score);
+                    int pos = Highscores.CheckScore(score, list.scoreList);
+                    // int pos = Highscores.CheckScore(50000, list.scoreList);
                     if (pos != -1 && pos != 10)
                     {
                         // You made it to the highscore list!
@@ -189,7 +192,7 @@ public class EndUIController : MonoBehaviour
                         {
                             // You got 1st place!
                             HighScoreText.text = "You got 1st place!\n" + 
-                                                "You were ahead by " + list.scoreList[pos - 1].score + "points!";
+                                                "You were ahead by " + list.scoreList[pos + 1].score + "points!";
                         }
                         else
                         {
@@ -244,7 +247,7 @@ public class EndUIController : MonoBehaviour
             score += scoreTally; // One time update of base score
             if (target > 0 && !skipped)
             {
-                duration = Mathf.Min(DEFAULT_DURATION, target / 3.0f); // adjust duration to size of target
+                duration = Mathf.Min(DEFAULT_DURATION, target / 4.0f); // adjust duration to size of target
             }
             else
             {
@@ -258,8 +261,12 @@ public class EndUIController : MonoBehaviour
 
         int tally;
         // Tally score
-        tally = (int)Mathf.Ceil(((timer / duration) * target));
-        scoreTally = (int)Mathf.Ceil(((timer / duration) * target * multiplier * GameStats.difficultyMultiplier));
+        tally = (int)(Mathf.Ceil(((timer / duration) * target)));
+        scoreTally = (int)(Mathf.Ceil(((timer / duration) * target * multiplier * GameStats.difficultyMultiplier)));
+        if (tally > target - multiplier * GameStats.difficultyMultiplier)
+        {
+            tally = target;
+        }
         if (target > 0 && !skipped)
         {
             audio.clip = tallySound;

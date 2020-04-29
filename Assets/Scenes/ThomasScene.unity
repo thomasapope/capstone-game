@@ -22540,17 +22540,17 @@ PrefabInstance:
     - target: {fileID: 904692277821601854, guid: 13f8fb30e0c6b7a4cbf7630804f35286,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.68
+      value: -29.1
       objectReference: {fileID: 0}
     - target: {fileID: 904692277821601854, guid: 13f8fb30e0c6b7a4cbf7630804f35286,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.96
+      value: 8.73
       objectReference: {fileID: 0}
     - target: {fileID: 904692277821601854, guid: 13f8fb30e0c6b7a4cbf7630804f35286,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -14.93
+      value: -26.15
       objectReference: {fileID: 0}
     - target: {fileID: 904692277821601854, guid: 13f8fb30e0c6b7a4cbf7630804f35286,
         type: 3}
@@ -27745,7 +27745,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1357476787}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 29.7, y: 3.56, z: -4.75}
+  m_LocalPosition: {x: -15.55, y: 9.92, z: -19.94}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2675064167623713347}
@@ -36815,18 +36815,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1657499781}
   m_Mesh: {fileID: 1978796879}
---- !u!114 &1684236946 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1156603644890359630, guid: 8be62efa601c7564692e3e5979c716af,
-    type: 3}
-  m_PrefabInstance: {fileID: 2066890124}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2da0c512f12947e489f739169773d7ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1685196334
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42799,7 +42787,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1941975809}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -35.1, y: 7.09, z: 1.11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7202816763737043909}
@@ -47434,11 +47422,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 5612656973834880254, guid: 8be62efa601c7564692e3e5979c716af,
-        type: 3}
-      propertyPath: nameField
-      value: 
-      objectReference: {fileID: 1684236946}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8be62efa601c7564692e3e5979c716af, type: 3}
 --- !u!114 &2066890125 stripped

@@ -66,6 +66,7 @@ public class Helicopter : MonoBehaviour
     void AddInteractable(GameObject item)
     {
         interactablesNear.Add(item);
+        item.GetComponent<Interactable>().objectUI.SetActive(false);
         GameObject.Destroy(item);
     }
 }
