@@ -43,6 +43,21 @@ public class HighscoreTable : MonoBehaviour
 
 
         highscoreList = highscores.scoreList;
+        if (highscoreList.Count == 0)
+        {
+            AddHighScoreEntry(25000, "President Josephy");
+            AddHighScoreEntry(15000, "Rosko");
+            AddHighScoreEntry(10000, "Josh");
+            AddHighScoreEntry(9000, "Billy");
+            AddHighScoreEntry(8000, "Mole man");
+            AddHighScoreEntry(7000, "A cheater");
+            AddHighScoreEntry(6000, "Josh again");
+            AddHighScoreEntry(5000, "Gun is OP");
+            AddHighScoreEntry(3000, "A bush");
+            AddHighScoreEntry(1000, "One of the babies");
+            highscores = Highscores.LoadScores();
+            highscoreList = highscores.scoreList;
+        }
 
         highscoreEntryTransformList = new List<Transform>();
 
