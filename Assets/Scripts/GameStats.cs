@@ -19,8 +19,8 @@ public static class GameStats
     public const float HARD_MULTIPLIER = 2f;
     public const float IMPOSSIBLE_MULTIPLIER = 5f;
 
-    public const int KILL_SCORE = 10;
-    public const int CHILD_SCORE = 150;
+    public const int KILL_SCORE = 25;
+    public const int CHILD_SCORE = 250;
     public const int WAVE_SCORE = 50;
 
     
