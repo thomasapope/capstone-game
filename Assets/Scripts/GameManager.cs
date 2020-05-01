@@ -153,6 +153,10 @@ public class GameManager : MonoBehaviour
 
         // Debug.Log("Showing end UI");
         completeLevelUI.gameObject.SetActive(true);
+        // Play Music
+        // Play Music
+        FindObjectOfType<AudioManager>().Stop("School");
+        FindObjectOfType<AudioManager>().Play("EndGame");
     }
 
 
