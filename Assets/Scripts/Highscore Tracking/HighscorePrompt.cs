@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class HighscorePrompt : MonoBehaviour
 {
@@ -18,7 +19,33 @@ public class HighscorePrompt : MonoBehaviour
 
     private void OnEnable()
     {
+        // nameField.Select();
+        StartCoroutine(SelectInputField());
+    }
+
+    IEnumerator SelectInputField()
+    {
+        yield return new WaitForEndOfFrame();
+        nameField.ActivateInputField();
+        // nameField.Select();
+
+        // EventSystemManager.currentSystem.SetSelectedGameObject(nameField.gameObject, null);
+        // nameField.OnPointerClick (null);
+        // EventSystem.current.SetSelectedGameObject(nameField.gameObject, null);
+        // nameField.OnPointerClick(new PointerEventData(EventSystem.current));
+
+    }
+    
+
+    void Update()
+    {
+        // nameField.ActivateInputField();
         nameField.Select();
+
+        if (Input.GetButtonDown("Submit"))
+        {
+            SubmitScore();
+        }
     }
 
     public void SubmitScore()

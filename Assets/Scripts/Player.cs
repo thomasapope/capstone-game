@@ -299,7 +299,8 @@ public class Player : Creature
         // You died. Game over.
         // Debug.Log("You Died");
         GameManager.instance.EndGame(); 
-        cam.transform.parent = null;
+        // cam.transform.parent = null;
+        cam.transform.parent.parent = null;
         if (alive == true)
         {
             animator.SetTrigger("Death1Trigger");

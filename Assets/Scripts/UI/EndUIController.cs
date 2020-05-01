@@ -55,7 +55,9 @@ public class EndUIController : MonoBehaviour
             GameManager.instance.gameHasEnded = true;
         }
 
-        FindObjectOfType<AudioManager>().Play("EndGame");
+        AudioManager audioManager = FindObjectOfType<AudioManager>();
+        audioManager.Stop("School");
+        audioManager.Play("EndGame");
 
     }
 
@@ -128,6 +130,7 @@ public class EndUIController : MonoBehaviour
                         if (isHighScore)
                         {
                             Cursor.lockState = CursorLockMode.None;
+                            // Cursor.visible = false;
 
                             highscorePrompt.gameObject.SetActive(true);
                             highscorePrompt.score = score;
@@ -171,11 +174,11 @@ public class EndUIController : MonoBehaviour
 
                 if (!HighScoreText.gameObject.activeInHierarchy)
                 {
-                    print(score);
+                    // print(score);
                     score += scoreTally;
-                    print (score);
+                    // print (score);
                     int pos = Highscores.CheckScore(score, list.scoreList);
-                    // int pos = Highscores.CheckScore(50000, list.scoreList);
+                    // int pos = Highscores.CheckScore(50001, list.scoreList);
                     if (pos != -1 && pos != 10)
                     {
                         // You made it to the highscore list!
@@ -256,7 +259,7 @@ public class EndUIController : MonoBehaviour
                 audio.Play();
             }
             field.gameObject.SetActive(true);
-            Debug.Log("Target: " + target + " Duration: " + duration);
+            // Debug.Log("Target: " + target + " Duration: " + duration);
         }
 
         int tally;
