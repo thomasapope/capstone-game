@@ -228,8 +228,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 212.1, y: 0}
-  m_SizeDelta: {x: 300.7, y: 57.8}
+  m_AnchoredPosition: {x: 179.83, y: 0}
+  m_SizeDelta: {x: 391.75, y: 57.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &16903485
 MonoBehaviour:
@@ -262,7 +262,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Josephy
+  m_Text: President Josephy
 --- !u!222 &16903486
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -932,7 +932,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -121.46617, y: -66.47742}
+  m_AnchoredPosition: {x: -179, y: -66.47742}
   m_SizeDelta: {x: 168.2, y: 55.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &168339028
@@ -2603,7 +2603,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -303.3911, y: -66.47742}
+  m_AnchoredPosition: {x: -342, y: -66.47742}
   m_SizeDelta: {x: 166.8, y: 55.85}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1396436776
@@ -3940,7 +3940,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -84, y: 0}
+  m_AnchoredPosition: {x: -131, y: 0}
   m_SizeDelta: {x: 166.8, y: 57.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1950807635
@@ -3968,7 +3968,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 3
     m_MaxSize: 48
-    m_Alignment: 0
+    m_Alignment: 2
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 1

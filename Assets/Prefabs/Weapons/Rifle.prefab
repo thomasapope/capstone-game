@@ -81,9 +81,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86abf38817964ff429e768a8ab67eb95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 0}
+  target: {x: 0, y: 0, z: 0}
   name: Rifle
   isRanged: 1
-  damage: 25
+  damage: 4
   attackRange: 0.5
   projectilePrefab: {fileID: 5797147044338505056, guid: bf6dca774514cbb469aa1852bd2c5cf3,
     type: 3}

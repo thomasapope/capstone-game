@@ -2207,7 +2207,7 @@ MonoBehaviour:
   m_CharacterValidation: 0
   m_RegexValue: 
   m_GlobalPointSize: 14
-  m_CharacterLimit: 0
+  m_CharacterLimit: 18
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls: []
@@ -2339,7 +2339,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pos: 0
   score: 0
-  nameField: {fileID: 0}
+  nameField: {fileID: 1156603644890359630}
 --- !u!1 &5928865861121745719
 GameObject:
   m_ObjectHideFlags: 0

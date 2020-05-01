@@ -14,6 +14,28 @@ public class HighscoreTable : MonoBehaviour
 
     public float templateHeight = 80f;
 
+    // void Start()
+    // {
+    //     HighscoreList highscores = Highscores.LoadScores();
+
+    //     highscoreList = highscores.scoreList;
+    //     if (highscoreList.Count == 0)
+    //     {
+    //         AddHighScoreEntry(25000, "President Josephy");
+    //         AddHighScoreEntry(15000, "Rosko");
+    //         AddHighScoreEntry(10000, "Josh");
+    //         AddHighScoreEntry(9000, "Billy");
+    //         AddHighScoreEntry(8000, "Mole man");
+    //         AddHighScoreEntry(7000, "A cheater");
+    //         AddHighScoreEntry(6000, "Josh again");
+    //         AddHighScoreEntry(5000, "Gun is OP");
+    //         AddHighScoreEntry(3000, "A bush");
+    //         AddHighScoreEntry(1000, "One of the babies");
+    //         // highscores = Highscores.LoadScores();
+    //         // highscoreList = highscores.scoreList;
+    //     }
+    // }
+
     void Awake() 
     {
         entryContainer = transform.Find("highscoreEntryContainer");
@@ -31,7 +53,6 @@ public class HighscoreTable : MonoBehaviour
         // AddHighScoreEntry(4, "Still Josh");
         // AddHighScoreEntry(3, "Not Josh");
         // AddHighScoreEntry(2, "Ok, it's josh");
-
         
         // AddHighScoreEntry(3, "This really isn't josh");
         // AddHighScoreEntry(3, "Josh returns");
@@ -39,10 +60,22 @@ public class HighscoreTable : MonoBehaviour
 
         HighscoreList highscores = Highscores.LoadScores();
 
-
-
-
         highscoreList = highscores.scoreList;
+        if (highscoreList.Count == 0)
+        {
+            AddHighScoreEntry(25000, "President Josephy");
+            AddHighScoreEntry(15000, "Rosko");
+            AddHighScoreEntry(10000, "Josh");
+            AddHighScoreEntry(9000, "Billy");
+            AddHighScoreEntry(8000, "Mole man");
+            AddHighScoreEntry(7000, "A cheater");
+            AddHighScoreEntry(6000, "Josh again");
+            AddHighScoreEntry(5000, "Gun is OP");
+            AddHighScoreEntry(3000, "A bush");
+            AddHighScoreEntry(1000, "One of the babies");
+            highscores = Highscores.LoadScores();
+            highscoreList = highscores.scoreList;
+        }
 
         highscoreEntryTransformList = new List<Transform>();
 

@@ -1787,7 +1787,7 @@ MonoBehaviour:
   attackLayers:
     serializedVersion: 2
     m_Bits: 512
-  MAX_HEALTH: 100
+  MAX_HEALTH: 25
   hp: 0
   attackRange: 0.5
   attackRate: 0.25
