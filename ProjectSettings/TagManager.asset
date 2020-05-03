@@ -9,6 +9,8 @@ TagManager:
   - holdable
   - SpawnPoint
   - vehicle
+  - EscapeCam
+  - HelicopterEscape
   layers:
   - Default
   - TransparentFX

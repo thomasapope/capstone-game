@@ -55,8 +55,6 @@ public class EndUIController : MonoBehaviour
             GameManager.instance.gameHasEnded = true;
         }
 
-        FindObjectOfType<AudioManager>().Play("EndGame");
-
     }
 
 

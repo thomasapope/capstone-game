@@ -153,10 +153,16 @@ public class GameManager : MonoBehaviour
 
         // Debug.Log("Showing end UI");
         completeLevelUI.gameObject.SetActive(true);
-        // Play Music
-        // Play Music
+        // Stop currently playing music and play endgame song
         FindObjectOfType<AudioManager>().Stop("School");
         FindObjectOfType<AudioManager>().Play("EndGame");
+
+        // Change camera to endscene camera position
+        GameObject escapeCam = GameObject.FindWithTag("EscapeCam");
+        Camera.main.transform.SetPositionAndRotation(escapeCam.transform.position, escapeCam.transform.rotation);
+
+        // Enable HelicopterEscape Object
+        GameObject.FindGameObjectWithTag("HelicopterEscape").SetActive(true);
     }
 
 
