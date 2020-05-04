@@ -40,6 +40,9 @@ public class GameManager : MonoBehaviour
     // public enum CauseOfDefeat {DEAD, CHILDRENSTOLEN}
     // private reasonForDeath
 
+    // Camera
+    public Camera escapeCamera;
+    public GameObject escapeObject;
 
     private void Awake()
     {
@@ -150,19 +153,21 @@ public class GameManager : MonoBehaviour
     {
         // Debug.Log("Hiding game UI");
         gameUI.SetActive(false);
+        
+        // Change camera to endscene camera position
+        // Enable HelicopterEscape Object
+        if(isVictory){
+            escapeObject.SetActive(true);
+            Camera.main.gameObject.SetActive(false);
+        }
 
+        
         // Debug.Log("Showing end UI");
         completeLevelUI.gameObject.SetActive(true);
         // Stop currently playing music and play endgame song
         FindObjectOfType<AudioManager>().Stop("School");
         FindObjectOfType<AudioManager>().Play("EndGame");
 
-        // Change camera to endscene camera position
-        GameObject escapeCam = GameObject.FindWithTag("EscapeCam");
-        Camera.main.transform.SetPositionAndRotation(escapeCam.transform.position, escapeCam.transform.rotation);
-
-        // Enable HelicopterEscape Object
-        GameObject.FindGameObjectWithTag("HelicopterEscape").SetActive(true);
     }
 
 

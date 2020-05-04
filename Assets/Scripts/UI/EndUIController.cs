@@ -55,13 +55,6 @@ public class EndUIController : MonoBehaviour
             GameManager.instance.gameHasEnded = true;
         }
 
-<<<<<<< HEAD
-=======
-        AudioManager audioManager = FindObjectOfType<AudioManager>();
-        audioManager.Stop("School");
-        audioManager.Play("EndGame");
-
->>>>>>> 1443d0c8ff096905efb7600fb219aa26e7b38d46
     }
 
 
