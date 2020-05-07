@@ -17,7 +17,7 @@ This project involves the character and camera controllers, user interfaces, fig
 
 
 ## Instructions to run:
-1. On the repository home page, click "Clone or download" and select "Download ZIP." Download to the desired directory.
+1. Go to the submission branch of the GitHub repository which can be found at https://github.com/thomasapope/capstone-game/tree/submission. Click "Clone or download" and select "Download ZIP." Download to the desired directory.
 1. Download and install Unity Hub from https://unity3d.com/get-unity/download. 
 2. Open Unity Hub and download a version of Unity. We used version 2019.3.0f6, but similar versions (2019.3.x) should work.
 3. From the projects tab in Unity Hub, add a new project and locate downloaded project folder. You will want to have the "Program" folder selected.
