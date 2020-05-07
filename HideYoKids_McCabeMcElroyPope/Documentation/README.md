@@ -1,6 +1,5 @@
 # Hide Yo Kids
-#### By Joshua McCabe, Wilbur McElroy, and Thomas Pope
-3D hack and slash game about protecting kids and finding a way to escape.
+3D hack and slash game about protecting kids and finding a way to escape. Made by Joshua McCabe, Wilbur McElroy, and Thomas Pope as a computer science capstone project for Washburn University.
 
 ## Setting / Story:
 
@@ -21,5 +20,5 @@ This project involves the character and camera controllers, user interfaces, fig
 1. On the repository home page, click "Clone or download" and select "Download ZIP." Download to the desired directory.
 1. Download and install Unity Hub from https://unity3d.com/get-unity/download. 
 2. Open Unity Hub and download a version of Unity. We used version 2019.3.0f6, but similar versions (2019.3.x) should work.
-3. From the projects tab in Unity Hub, add a new project and locate the project folder.
-4. Once that is done, you should be able to open and view the project in Unity. To run the game from the beginning, open the menu scene from the project window. The menu scene is located at Assets/Scenes/Menu.
+3. From the projects tab in Unity Hub, add a new project and locate downloaded project folder. You will want to have the "Program" folder selected.
+4. Once that is done, you should be able to open and view the project in Unity. It may take a few minutes for Unity to import all the assets the first time. To run the game from the beginning, open the menu scene from the project window. The menu scene is located at Assets/Scenes/Menu.
