@@ -1,4 +1,5 @@
 # Hide Yo Kids
+### By Joshua McCabe, Wilbur McElroy, and Thomas Pope
 3D hack and slash game about protecting kids and finding a way to escape.
 
 ## Setting / Story:
