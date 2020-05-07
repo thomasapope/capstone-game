@@ -71,10 +71,13 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        foreach(GameObject g in targetRefs)
-        {
-            print("target " + g);
-        }
+        gameHasEnded = false;
+        isVictory = false;
+
+        // foreach(GameObject g in targetRefs)
+        // {
+        //     print("target " + g);
+        // }
         // Play Music
         FindObjectOfType<AudioManager>().Play("School");
     }

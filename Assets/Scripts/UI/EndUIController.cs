@@ -122,10 +122,11 @@ public class EndUIController : MonoBehaviour
                         audio.clip = returnSound;
                         audio.Play();
 
+                        Cursor.lockState = CursorLockMode.None;
+
                         // If score is a highscore, prompt for name and save score
                         if (isHighScore)
                         {
-                            Cursor.lockState = CursorLockMode.None;
                             // Cursor.visible = false;
 
                             highscorePrompt.gameObject.SetActive(true);

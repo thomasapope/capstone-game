@@ -37,6 +37,11 @@ public class WaveSpawner : MonoBehaviour
         public float timeAfterWave = 15f;
     }
 
+    void Start()
+    {
+        nextWave = 0;
+        waveCountdown = timeBeforeFirstWave;
+    }
 
     void Awake() 
     {
@@ -48,7 +53,7 @@ public class WaveSpawner : MonoBehaviour
             Debug.Log("Error: No spawn points referenced.");
         }
 
-        waveCountdown = timeBeforeFirstWave;
+        // waveCountdown = timeBeforeFirstWave;
     }
 
 
@@ -136,8 +141,10 @@ public class WaveSpawner : MonoBehaviour
         for (int i = 0; i < _wave.enemies.Length; i++) // for each type of enemy
         // foreach ( Enemy enemy in _wave.enemies)
         {
+            print("for each type");
             for (int j = 0; j < _wave.counts[i] * GameStats.difficulty; j++) // for each enemy of that type
             {
+                print("for each enemy");
                 // SpawnEnemy(_wave.enemy);
                 SpawnEnemy(_wave.enemies[i]);
                 yield return new WaitForSeconds(1f/_wave.rate);
@@ -154,6 +161,7 @@ public class WaveSpawner : MonoBehaviour
     {
         if (GameManager.playerRef.GetComponent<Creature>().health > 0)
         {
+            print("player has some health");
             // Choose a random spawn point to spawn the enemy at.
             Transform _sp = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length)];
 
